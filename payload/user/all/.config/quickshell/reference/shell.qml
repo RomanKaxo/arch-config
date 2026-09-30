@@ -18,13 +18,10 @@ ShellRoot {
         id: dockVisibilitySync
         interval: 30
         onTriggered: Quickshell.execDetached([
-            'systemctl', '--user', 'kill', '--kill-whom=main',
-            root.view !== '' ? '--signal=RTMIN+3' : '--signal=RTMIN+2',
-            'desktop-dock.service'
+            Quickshell.env('HOME') + '/.local/bin/desktop-dock', 'overlay', root.view
         ])
     }
     property var targetScreen: Quickshell.screens.find(s => s.name === "@PRIMARY_MONITOR@") || Quickshell.screens[0]
-    readonly property real uiScale:Math.max(1,Math.min(1.25,(targetScreen?.height || 1080)/1080))
     property string query: ""
     property string category: "All Apps"
     property date now: new Date()
@@ -84,6 +81,7 @@ ShellRoot {
         function toggleControl() { root.toggle('control') }
         function toggleWallpapers() { root.toggle('wallpapers') }
         function closeAll() { root.view='' }
+        function toggleDock() { Quickshell.execDetached([Quickshell.env('HOME') + '/.local/bin/desktop-dock', 'toggle']) }
     }
     component Label: Text {
         color:Design.text; font.family:Design.font; font.pixelSize:14; font.weight:Font.Normal
@@ -172,8 +170,8 @@ ShellRoot {
         id:launcher; name:'launcher'
         onOpenedChanged: if (opened) { search.forceActiveFocus(); appList.currentIndex=0 }
         Glass {
-            width:Math.min((parent.width-96)/root.uiScale,1280); height:Math.min((parent.height-120)/root.uiScale,820)
-            anchors.centerIn:parent; opacity:launcher.progress; scale:root.uiScale*(.98+.02*launcher.progress)
+            width:Math.min(parent.width-96,1280); height:Math.min(parent.height-120,820)
+            anchors.centerIn:parent; anchors.verticalCenterOffset:Math.round(10*(1-launcher.progress)); opacity:launcher.progress
             ColumnLayout {
                 anchors.fill:parent; anchors.margins:Design.large; spacing:Design.medium
                 Card {
@@ -181,7 +179,7 @@ ShellRoot {
                     Label { x:20; anchors.verticalCenter:parent.verticalCenter; text:'⌕'; font.pixelSize:26; color:Design.muted }
                     TextInput {
                         id:search; anchors.fill:parent; anchors.leftMargin:62; anchors.rightMargin:96
-                        verticalAlignment:TextInput.AlignVCenter; font.family:Design.font; font.pixelSize:16; color:Design.text
+                        verticalAlignment:TextInput.AlignVCenter; renderType:Text.NativeRendering; font.family:Design.font; font.pixelSize:16; color:Design.text
                         selectByMouse:true; clip:true; onTextChanged: { root.query=text; appList.currentIndex=0 }
                         Keys.onEscapePressed:root.view=''
                         Keys.onDownPressed:appList.incrementCurrentIndex()
@@ -228,7 +226,7 @@ ShellRoot {
                                 color:appRow.ListView.isCurrentItem ? Design.alpha(Design.selection,.65) : appHit.containsMouse ? Design.alpha(Design.surface,.9) : 'transparent'
                                 border.width:1; border.color:appRow.ListView.isCurrentItem ? Design.alpha(Design.blue,.9) : 'transparent'
                                 Behavior on color { ColorAnimation { duration:Design.fast } }
-                                Image { x:16; anchors.verticalCenter:parent.verticalCenter; width:38; height:38; source:root.appIcon(modelData); fillMode:Image.PreserveAspectFit }
+                                Image { x:16; anchors.verticalCenter:parent.verticalCenter; width:38; height:38; source:root.appIcon(modelData); sourceSize:Qt.size(Math.round(38*(root.targetScreen?.devicePixelRatio || 1)),Math.round(38*(root.targetScreen?.devicePixelRatio || 1))); fillMode:Image.PreserveAspectFit }
                                 Column { x:72; anchors.verticalCenter:parent.verticalCenter; width:parent.width-230; spacing:6
                                     Label { text:modelData.name; width:parent.width; font.weight:Font.Medium }
                                     Label { text:modelData.comment || modelData.genericName || 'Application'; width:parent.width; color:Design.muted; font.pixelSize:11 }
@@ -255,8 +253,8 @@ ShellRoot {
     Overlay {
         id:dashboard; name:'dashboard'
         Glass {
-            width:Math.min((parent.width-96)/root.uiScale,1040); height:Math.min((parent.height-130)/root.uiScale,600)
-            anchors.centerIn:parent; opacity:dashboard.progress; scale:root.uiScale*(.98+.02*dashboard.progress)
+            width:Math.min(parent.width-96,1040); height:Math.min(parent.height-130,600)
+            anchors.centerIn:parent; anchors.verticalCenterOffset:Math.round(10*(1-dashboard.progress)); opacity:dashboard.progress
             ColumnLayout {
                 anchors.fill:parent; anchors.margins:Design.large; spacing:Design.medium
                 RowLayout { Layout.fillWidth:true; Layout.preferredHeight:28

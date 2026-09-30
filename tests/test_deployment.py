@@ -137,6 +137,13 @@ class DeploymentTests(unittest.TestCase):
         self.run_silently(module.sync)
         self.assertEqual(json.loads((self.repo/'manifest.json').read_text())['entries'][-1]['link'],'new-choice')
 
+    def test_generic_dock_roundtrip_preserves_output_placeholder(self):
+        target='.config/systemd/user/desktop-dock.service'
+        self.add(target,'ExecStart=/usr/bin/nwg-dock-hyprland -i 32 -mb 14@DOCK_OUTPUT@ -s style.css\n');self.save_manifest()
+        expected=(self.repo/('payload/'+target)).read_text()
+        self.run_silently(module.install);self.run_silently(module.sync)
+        self.assertEqual((self.repo/('payload/'+target)).read_text(),expected)
+
     def test_corrupt_backup_is_rejected(self):
         old=self.home/'settings/config';old.parent.mkdir();old.write_text('old')
         self.run_silently(module.install)

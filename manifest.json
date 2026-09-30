@@ -384789,6 +384789,15 @@
       "profile": "generic",
       "mode": 420,
       "text": true
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-dock",
+      "target": ".local/bin/desktop-dock",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "text": true,
+      "capture": ".local/bin/desktop-dock"
     }
   ]
 }

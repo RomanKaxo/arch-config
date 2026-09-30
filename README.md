@@ -40,6 +40,12 @@ Klávesnice zůstává česká/US, motiv a zkratky stejné.
 nestartuje služby a nepoužívá sudo. Profil je výchozí `generic`, proto na původním
 stroji výslovně uváděj `--profile current-pc`.
 
+## Dock a launcher
+
+Launcher se vykresluje bez dodatečného zvětšování na 1440p monitoru. Skleněný dock
+se po přihlášení zobrazí; **Super + Ctrl + D** ho skryje/zobrazí. Otevření panelu
+nezruší ruční skrytí docku. Podrobnosti jsou v [DESKTOP.md](docs/DESKTOP.md).
+
 ## Běžné změny
 
 Upravuj konfiguraci jako dosud v `~/.config` nebo vlastní skripty v `~/.local/bin`.

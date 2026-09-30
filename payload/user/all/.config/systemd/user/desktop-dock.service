@@ -1,11 +1,14 @@
 [Unit]
-Description=Graphite application dock (below fullscreen windows)
+Description=Compact dock with remembered manual visibility
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/nwg-dock-hyprland -r -l top -i 38 -p bottom -mb 10@DOCK_OUTPUT@ -s style.css -ico view-app-grid-symbolic -c "@HOME@/.local/bin/desktop-panel toggleLauncher"
+ExecStart=/usr/bin/nwg-dock-hyprland -r -l top -i 32 -p bottom -mb 14@DOCK_OUTPUT@ -s style.css -ico view-app-grid-symbolic -c "@HOME@/.local/bin/desktop-panel toggleLauncher"
+ExecStartPost=%h/.local/bin/desktop-dock sync --settle
+# Dock-launched applications survive dock restarts.
+KillMode=process
 Restart=on-failure
 RestartSec=2
 TimeoutStopSec=5

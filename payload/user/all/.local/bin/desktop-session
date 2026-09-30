@@ -4,6 +4,8 @@ export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct QT_STYLE_OVERRIDE=kvantum
 export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
 export XCURSOR_THEME=Adwaita XCURSOR_SIZE=24
 dbus-update-activation-environment --systemd XDG_DATA_DIRS WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE QT_QPA_PLATFORMTHEME QT_STYLE_OVERRIDE XCURSOR_THEME XCURSOR_SIZE
+# A new login starts with the dock visible; in-session restarts preserve toggles.
+"$HOME/.local/bin/desktop-dock" session --no-signal >/dev/null
 systemctl --user start desktop-session.target
 systemctl --user start pipewire.socket pipewire-pulse.socket wireplumber.service hyprpolkitagent.service
 systemctl --user start desktop-shell.service desktop-dock.service waybar.service swaync.service hyprpaper.service hypridle.service desktop-clipboard-text.service desktop-clipboard-image.service desktop-network.service desktop-bluetooth.service desktop-files.service

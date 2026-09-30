@@ -50,3 +50,23 @@ distribuci podle APPLICATIONS.md; soukromé účty a projekty nejsou součástí
 
 C++ kompilátor vypsal upstream varování o narrowing a deprecated API; build skončil
 úspěšně. Budoucí rolling aktualizace mohou vyžadovat úpravu pluginového zdroje.
+
+## Nativní launcher a skleněný dock — 30. září 2026
+
+- Oba konfigurační profily prošly kontrolou; sada má nově 18 behaviorálních testů.
+- Na skutečném DP-2 2560×1440 / scale 1 ověřeno ruční show/hide/toggle přes dock
+  layer v Hyprlandu, dočasné skrytí pod launcherem a návrat původního ručního stavu.
+- Nový loginový stav je viditelný; testy ověřují reset skryté volby při nové relaci,
+  její zachování při restartu a přepnutí během otevřeného panelu.
+- Quickshell konfigurace načtená bez chyby; launcher nemá UI scale transform,
+  ikony používají sourceSize podle pixelového poměru obrazovky. Náhledy launcheru
+  a docku vizuálně zkontrolované na skutečném monitoru; osobní screenshoty nejsou v Gitu.
+- Hyprland hlásí prázdný configerrors; binding Super + Ctrl + D registrovaný.
+- Systemd jednotka docku používá KillMode=process pro zachování spuštěných aplikací
+  a po startu synchronizuje ruční volbu. Případné hlášení o zbylých procesech v její
+  skupině odpovídá těmto zachovaným aplikacím, nikoli novému procesu docku.
+
+- Alt + Tab a Alt + Shift + Tab doplněny jako nativní cycling tiled i floating oken
+  na aktuální ploše, s vytažením zvoleného okna dopředu. Oba bindingy registrované;
+  na skutečné ploše se dvěma okny ověřen přechod focusu v obou směrech a návrat
+  původního zaměření. API odpovídá [Hyprland dispatcherům](https://wiki.hypr.land/configuring/core/dispatchers/).

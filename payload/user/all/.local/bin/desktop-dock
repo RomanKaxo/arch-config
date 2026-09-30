@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Remember manual dock visibility while temporarily hiding it under panels."""
+import argparse
+import fcntl
+import json
+import os
+from pathlib import Path
+import subprocess
+import tempfile
+import time
+
+
+def read(path, default):
+    try:
+        value=json.loads(path.read_text())
+        return value if isinstance(value,dict) else default.copy()
+    except (OSError,ValueError):
+        return default.copy()
+
+
+def write(path, value):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    fd,name=tempfile.mkstemp(prefix='.dock-',dir=path.parent)
+    try:
+        with os.fdopen(fd,'w') as out:
+            json.dump(value,out);out.write('\n')
+        os.replace(name,path)
+    finally:
+        if os.path.exists(name):os.unlink(name)
+
+
+def signal_dock(visible):
+    result=subprocess.run(['systemctl','--user','show','--property=MainPID','--value','desktop-dock.service'],capture_output=True,text=True)
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip() or 'Cannot contact the desktop service manager')
+    if result.stdout.strip() in ('','0'):
+        if visible:
+            subprocess.run(['systemctl','--user','start','--no-block','desktop-dock.service'],check=True)
+        return
+    subprocess.run(['systemctl','--user','kill','--kill-whom=main',
+                    '--signal=RTMIN+2' if visible else '--signal=RTMIN+3',
+                    'desktop-dock.service'],check=True,stdout=subprocess.DEVNULL)
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('action',choices=['toggle','show','hide','sync','session','overlay','status'])
+    parser.add_argument('panel',nargs='?',default='')
+    parser.add_argument('--no-signal',action='store_true',help='Update state without contacting the running dock')
+    parser.add_argument('--settle',action='store_true',help='Allow dock startup to install its signal handlers')
+    args=parser.parse_args()
+    if args.settle:time.sleep(0.35)
+    state_dir=Path.home()/'.local/state/desktop'
+    runtime=Path(os.environ.get('XDG_RUNTIME_DIR',str(Path.home()/'.cache')))
+    state_dir.mkdir(parents=True,exist_ok=True)
+    runtime.mkdir(parents=True,exist_ok=True)
+    with (state_dir/'dock.lock').open('w') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX)
+        settings=read(state_dir/'dock.json',{'enabled':True})
+        panel=read(runtime/'desktop-dock-overlay.json',{'panel':''})
+        enabled=settings.get('enabled') is True
+        if args.action=='session':
+            enabled=True
+            write(state_dir/'dock.json',{'enabled':True})
+            panel={'panel':''}
+            write(runtime/'desktop-dock-overlay.json',panel)
+        if args.action in ('show','hide','toggle'):
+            enabled=not enabled if args.action=='toggle' else args.action=='show'
+            write(state_dir/'dock.json',{'enabled':enabled})
+        if args.action=='overlay':
+            panel={'panel':args.panel};write(runtime/'desktop-dock-overlay.json',panel)
+        visible=enabled and not bool(panel.get('panel'))
+        if args.action!='status' and not args.no_signal:signal_dock(visible)
+        print(json.dumps({'enabled':enabled,'visible':visible,'panel':panel.get('panel','')}))
+
+
+if __name__=='__main__':
+    try:main()
+    except (OSError,ValueError,RuntimeError,subprocess.CalledProcessError) as error:
+        raise SystemExit(str(error))

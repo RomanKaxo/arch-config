@@ -255,7 +255,7 @@ def normalize(text, target, args):
         if output:
             text = text.replace(output, '@DOCK_OUTPUT@')
         else:
-            text = text.replace(' -mb 10 -s ', ' -mb 10@DOCK_OUTPUT@ -s ')
+            text = re.sub(r'(-mb\s+\d+)(?=\s+-s\s)', r'\1@DOCK_OUTPUT@', text)
     if target.endswith('desktop-session.target') and 'DefaultDependencies=no' not in text:
         text = text.replace('[Unit]\n', '[Unit]\nDefaultDependencies=no\n')
     return text

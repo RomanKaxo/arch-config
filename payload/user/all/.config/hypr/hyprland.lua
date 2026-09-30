@@ -65,6 +65,7 @@ launch("SUPER + E", "thunar")
 launch("SUPER + L", "$HOME/.local/bin/desktop-lock")
 launch("SUPER + N", "@HOME@/.local/bin/desktop-panel toggleControl")
 launch("SUPER + D", "@HOME@/.local/bin/desktop-panel toggleDashboard")
+launch("SUPER + CTRL + D", "$HOME/.local/bin/desktop-dock toggle")
 launch("SUPER + SHIFT + V", "$HOME/.local/bin/desktop-clipboard")
 launch("SUPER + SHIFT + W", "@HOME@/.local/bin/waypaper")
 launch("SUPER + SHIFT + E", "$HOME/.local/bin/desktop-power")
@@ -74,6 +75,15 @@ launch("SHIFT + Print", "$HOME/.local/bin/desktop-screenshot full")
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + V", hl.dsp.window.float({action = "toggle"}))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
+
+-- Native window cycling also raises overlapping floating windows.
+local function cycleWindow(forward)
+    hl.dispatch(hl.dsp.window.cycle_next({next = forward, tiled = true, floating = true}))
+    hl.dispatch(hl.dsp.window.bring_to_top())
+end
+hl.bind("ALT + Tab", function() cycleWindow(true) end, {repeating = true, description = "Next window"})
+hl.bind("ALT + SHIFT + Tab", function() cycleWindow(false) end, {repeating = true, description = "Previous window"})
+
 for _, direction in ipairs({"left", "right", "up", "down"}) do
     hl.bind("SUPER + " .. direction, hl.dsp.focus({direction = direction}))
 end
