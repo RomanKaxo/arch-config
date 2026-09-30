@@ -35,9 +35,9 @@ hl.animation({leaf = "fade", enabled = true, speed = 1.8, bezier = "desktop"})
 hl.animation({leaf = "border", enabled = true, speed = 1.6, bezier = "desktop"})
 hl.animation({leaf = "workspaces", enabled = true, speed = 2.6, bezier = "desktop", style = "slidefade 12%"})
 hl.animation({leaf = "layers", enabled = true, speed = 2.2, bezier = "desktop", style = "fade"})
-hl.layer_rule({name = "desktop-panel-blur", match = {namespace = "^(waybar|nwg-drawer|launcher|desktop-launcher|desktop-dashboard|desktop-control|desktop-wallpapers|nwg-dock|swaync-control-center|swaync-notification-window)$"}, blur = true, ignore_alpha = 0.2})
+hl.layer_rule({name = "desktop-panel-blur", match = {namespace = "^(waybar|nwg-drawer|launcher|desktop-launcher|desktop-dashboard|desktop-control|desktop-wallpapers|desktop-switcher|nwg-dock|swaync-control-center|swaync-notification-window)$"}, blur = true, ignore_alpha = 0.2})
 -- Custom panels animate their own geometry; avoid applying two fades at once.
-hl.layer_rule({name = "desktop-native-motion", match = {namespace = "^desktop-(launcher|dashboard|control|wallpapers)$"}, no_anim = true})
+hl.layer_rule({name = "desktop-native-motion", match = {namespace = "^desktop-(launcher|dashboard|control|wallpapers|switcher)$"}, no_anim = true})
 hl.layer_rule({name = "notification-motion", match = {namespace = "^swaync-notification-window$"}, animation = "slide top"})
 hl.layer_rule({name = "history-motion", match = {namespace = "^swaync-control-center$"}, animation = "slide right"})
 
@@ -76,13 +76,43 @@ hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + V", hl.dsp.window.float({action = "toggle"}))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
 
--- Native window cycling also raises overlapping floating windows.
-local function cycleWindow(forward)
-    hl.dispatch(hl.dsp.window.cycle_next({next = forward, tiled = true, floating = true}))
-    hl.dispatch(hl.dsp.window.bring_to_top())
+-- The release carries the final offset, even if IPC arrives before the first Tab.
+local switchHeld, switchUsed, switchSession, switchOffset, switchRevision = false, false, 0, 0, 0
+local switchEpoch = tostring(os.time()) .. "-" .. tostring({}):gsub("table: ", "")
+local function switchCommand(commit)
+    hl.exec_cmd("$HOME/.local/bin/desktop-panel updateSwitch " .. switchSession .. " " .. switchOffset .. " " .. switchEpoch .. " " .. switchRevision .. " " .. tostring(commit))
 end
-hl.bind("ALT + Tab", function() cycleWindow(true) end, {repeating = true, description = "Next window"})
-hl.bind("ALT + SHIFT + Tab", function() cycleWindow(false) end, {repeating = true, description = "Previous window"})
+local function switchStep(direction)
+    if not switchHeld then
+        switchHeld = true
+        switchSession = switchSession + 1
+        switchOffset = 0
+    end
+    switchUsed = true
+    switchRevision = switchRevision + 1
+    switchOffset = switchOffset + direction
+    switchCommand(false)
+end
+hl.bind("ALT + Tab", function() switchStep(1) end, {repeating = true})
+hl.bind("ALT + SHIFT + Tab", function() switchStep(-1) end, {repeating = true})
+for _, key in ipairs({"Alt_L", "Alt_R"}) do
+    -- An exclusive layer can receive Alt release directly. Always reset on press.
+    hl.bind(key, function()
+        switchSession = switchSession + 1
+        switchOffset = 0
+        switchHeld, switchUsed = true, false
+    end, {ignore_mods = true, transparent = true, non_consuming = true})
+    hl.bind(key, function()
+        if switchHeld and switchUsed then
+            switchRevision = switchRevision + 1
+            switchCommand(true)
+            switchHeld = false
+        end
+    end, {
+        release = true, ignore_mods = true, transparent = true,
+        non_consuming = true, description = "Confirm Alt-Tab selection",
+    })
+end
 
 for _, direction in ipairs({"left", "right", "up", "down"}) do
     hl.bind("SUPER + " .. direction, hl.dsp.focus({direction = direction}))

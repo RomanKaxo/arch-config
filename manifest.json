@@ -384798,6 +384798,24 @@
       "mode": 493,
       "text": true,
       "capture": ".local/bin/desktop-dock"
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-switcher",
+      "target": ".local/bin/desktop-switcher",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "text": true,
+      "capture": ".local/bin/desktop-switcher"
+    },
+    {
+      "source": "payload/user/all/.config/quickshell/reference/WindowSwitcher.qml",
+      "target": ".config/quickshell/reference/WindowSwitcher.qml",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "text": true,
+      "capture": ".config/quickshell/reference/WindowSwitcher.qml"
     }
   ]
 }

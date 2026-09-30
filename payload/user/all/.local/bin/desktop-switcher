@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+"""Frozen MRU snapshots and explicit, idempotent Alt-Tab activation."""
+import json
+import re
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+
+def snapshot(clients):
+    windows = [w for w in clients if w.get('mapped', True)
+               and (not w.get('workspace', {}).get('name', '').startswith('special:')
+                    or w['workspace']['name'] == 'special:minimized')]
+    windows.sort(key=lambda w: (w.get('focusHistoryID', -1) < 0,
+                               w.get('focusHistoryID', -1), w['address']))
+    return [{'address': w['address'], 'pid': w['pid'], 'title': w.get('title', ''),
+             'app': w.get('class', ''), 'minimized': w.get('workspace', {}).get('name') == 'special:minimized'}
+            for w in windows]
+
+
+def clients():
+    return json.loads(subprocess.check_output(['hyprctl', '-j', 'clients'], text=True))
+
+
+def activate(address, pid):
+    if not re.fullmatch(r'0x[0-9a-fA-F]+', address):
+        raise ValueError('Invalid window address')
+    # The layer shell restores focus when it unmaps. Activate only afterwards.
+    for _ in range(60):
+        layers = json.loads(subprocess.check_output(['hyprctl', '-j', 'layers'], text=True))
+        if 'desktop-switcher' not in json.dumps(layers):
+            break
+        time.sleep(0.005)
+    else:
+        return False
+    chosen = next((w for w in clients() if w['address'] == address and w['pid'] == pid), None)
+    if chosen is None:
+        return False  # Closed windows and recycled addresses must not activate another app.
+    if chosen['workspace']['name'] == 'special:minimized':
+        subprocess.run([str(Path.home() / '.local/bin/desktop-window'), 'restore', address], check=True)
+    sel = json.dumps('address:' + address)
+    # One compositor transaction prevents pointer refocus between activation and resize.
+    expressions = [
+        'hl.dsp.focus({window=' + sel + '})',
+        'hl.dsp.window.alter_zorder({window=' + sel + ',mode="top"})',
+        'hl.dsp.window.fullscreen_state({window=' + sel + ',internal=1,client=1,action="set",layout_aware=false})',
+    ]
+    result = subprocess.check_output(
+        ['hyprctl', 'eval', '\n'.join('hl.dispatch(' + expr + ')' for expr in expressions)], text=True
+    ).strip()
+    if result != 'ok':
+        raise RuntimeError(result)
+    return True
+
+
+def main():
+    if len(sys.argv) == 2 and sys.argv[1] == 'list':
+        print(json.dumps(snapshot(clients())))
+    elif len(sys.argv) == 4 and sys.argv[1] == 'activate':
+        activate(sys.argv[2], int(sys.argv[3]))
+    else:
+        raise SystemExit('Usage: desktop-switcher list | activate ADDRESS PID')
+
+
+if __name__ == '__main__':
+    main()

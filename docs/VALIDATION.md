@@ -66,7 +66,20 @@ C++ kompilátor vypsal upstream varování o narrowing a deprecated API; build s
   a po startu synchronizuje ruční volbu. Případné hlášení o zbylých procesech v její
   skupině odpovídá těmto zachovaným aplikacím, nikoli novému procesu docku.
 
-- Alt + Tab a Alt + Shift + Tab doplněny jako nativní cycling tiled i floating oken
-  na aktuální ploše, s vytažením zvoleného okna dopředu. Oba bindingy registrované;
-  na skutečné ploše se dvěma okny ověřen přechod focusu v obou směrech a návrat
-  původního zaměření. API odpovídá [Hyprland dispatcherům](https://wiki.hypr.land/configuring/core/dispatchers/).
+- Alt-Tab nyní používá vlastní Quickshell přehled s živými náhledy, zmrazeným MRU
+  pořadím a potvrzením při puštění Altu. Alt + Shift + Tab vybírá opačně, Esc ruší.
+  Potvrzení obnoví případně minimalizované okno, aktivuje jej a nastaví explicitní
+  maximalizaci (opakování maximalizaci nevypne). Kontrola PID chrání před aktivací
+  jiného okna po zavření/recyklaci adresy.
+- Nových 24 testů prošlo včetně MRU pořadí, odložených oken, zaniklého/recyklovaného
+  handle a opakovaného PrintScreenu s procesem schránky běžícím na pozadí.
+- Virtuální Wayland klávesnice se skutečnými kódy Alt/Tab ověřila náhledy na
+  aktivním monitoru, nezměněný focus při držení Altu, potvrzení a maximalizaci,
+  opačný výběr, zrušení a rychlý Alt-Tab bez čekání na načtení panelu.
+  Test používal dočasná okna a obnovil původní focus i nastavení myši.
+- Opravený screenshot helper uvolňuje zámek před spuštěním wl-copy. Dřívější
+  zdánlivý cooldown způsoboval zděděný descriptor zámku v procesu schránky.
+- Více fyzických Tabů v jednom držení Altu ověřeno samostatně: výběr postupoval
+  1 → 2 → 3 bez přepnutí zaměření. Události nesou session, revision a konečný
+  offset; pozdě doručené starší zprávy nezmění novější nebo potvrzený výběr.
+  Aktivace čeká na skutečné odmapování layeru, aby compositor nevrátil starý focus.

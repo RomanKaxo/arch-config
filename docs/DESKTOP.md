@@ -9,7 +9,7 @@
 | Super + N | Ovládací centrum |
 | Super + D | Dashboard |
 | Super + Ctrl + D | Zobrazit / skrýt dock |
-| Alt + Tab / Alt + Shift + Tab | Další / předchozí okno na aktuální ploše |
+| Alt + Tab / Alt + Shift + Tab | Náhledy oken podle posledního použití; puštění Altu potvrdí a maximalizuje výběr |
 | Super + L | Zamknutí |
 | Super + Q | Zavření okna |
 | Super + V | Plovoucí okno |
@@ -58,3 +58,13 @@ o otevřeném panelu v XDG_RUNTIME_DIR; tato data nejsou v Gitu.
 
 Dock zůstává ve vrstvě top bez vyhrazeného místa, takže nepřesouvá pracovní okna
 a fullscreen je nad ním. Restart jeho služby zachová aplikace spuštěné z docku.
+
+Alt-Tab drží pořadí oken po celou dobu výběru. První Tab vybere poslední použité
+okno, další Taby pokračují seznamem, Shift + Tab jde opačně. Výběr zahrnuje okna
+z ostatních ploch a minimalizovaná okna; odložené okno se při potvrzení obnoví.
+Esc zavře přepínač bez změny zaměření. Maximalizace zachovává horní panel
+a není fullscreen. Náhledy se snímají jen při otevřeném přepínači.
+
+PrintScreen nemá čekací dobu mezi hotovými snímky. Zámek existuje pouze během
+interaktivního výběru oblasti, aby se nepřekrývalo více výběrových kurzorů.
+Shift + PrintScreen fotí okamžitě celou plochu. Proces schránky tento zámek nedědí.

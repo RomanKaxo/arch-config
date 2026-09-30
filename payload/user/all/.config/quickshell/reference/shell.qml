@@ -51,6 +51,7 @@ ShellRoot {
         return Quickshell.iconPath(a.icon, 'application-x-executable')
     }
     function toggle(name) {
+        switcher.cancel()
         // Tapety spravuje samostatný Waypaper; panel už nevytváří vlastní galerii.
         if (name === "wallpapers") {
             view = ''
@@ -76,12 +77,22 @@ ShellRoot {
     Process { id:weatherProcess; command:['@HOME@/.local/bin/desktop-weather']; stdout:StdioCollector { onStreamFinished: { try { root.weather=JSON.parse(text) } catch(e) {} } } }
     Timer { interval:900000; running:root.view==='control'; repeat:true; onTriggered:weatherProcess.running=true }
     IpcHandler { target:'desktop'
+        function updateSwitch(session: int, offset: int, epoch: string, revision: int, commit: bool) { switcher.updateSession(session, offset, epoch, revision, commit) }
+        function switchNext() { switcher.step(1) }
+        function switchPrevious() { switcher.step(-1) }
+        function finishSwitch() { switcher.finish() }
+        function cancelSwitch() { switcher.cancel() }
+        function switchStatus(): string { return switcher.status() }
         function toggleLauncher() { root.toggle('launcher') }
         function toggleDashboard() { root.toggle('dashboard') }
         function toggleControl() { root.toggle('control') }
         function toggleWallpapers() { root.toggle('wallpapers') }
-        function closeAll() { root.view='' }
+        function closeAll() { switcher.cancel(); root.view='' }
         function toggleDock() { Quickshell.execDetached([Quickshell.env('HOME') + '/.local/bin/desktop-dock', 'toggle']) }
+    }
+    WindowSwitcher {
+        id: switcher
+        shell: root
     }
     component Label: Text {
         color:Design.text; font.family:Design.font; font.pixelSize:14; font.weight:Font.Normal
