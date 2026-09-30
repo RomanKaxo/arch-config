@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Editor zdrojového kódu
+Exec=@HOME@/.local/opt/vscode/bin/code --ozone-platform=wayland %F
+Icon=@HOME@/.local/opt/vscode/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=Code
+MimeType=text/plain;inode/directory;
+Actions=new-empty-window;
+
+[Desktop Action new-empty-window]
+Name=Nové okno
+Exec=@HOME@/.local/opt/vscode/bin/code --ozone-platform=wayland --new-window
+Icon=@HOME@/.local/opt/vscode/resources/app/resources/linux/code.png

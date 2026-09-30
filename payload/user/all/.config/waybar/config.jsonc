@@ -1,0 +1,180 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 40,
+  "margin-top": 8,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 2,
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "custom/minimized"
+  ],
+  "modules-center": [
+    "custom/audiowaves"
+  ],
+  "modules-right": [
+    "clock",
+    "memory",
+    "custom/gpu",
+    "custom/package-updates",
+    "hyprland/language",
+    "network",
+    "bluetooth",
+    "wireplumber",
+    "tray",
+    "idle_inhibitor",
+    "custom/notification",
+    "custom/lock",
+    "custom/power"
+  ],
+  "custom/launcher": {
+    "format": "  Hyprland",
+    "tooltip-format": "Applications · Super+Space",
+    "on-click": "@HOME@/.local/bin/desktop-panel toggleLauncher"
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "all-outputs": true,
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "clock": {
+    "format": "{:%a %d %b  ·  %H:%M}",
+    "format-alt": "{:%A, %d %B %Y  ·  %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "hyprland/language": {
+    "format": "{}",
+    "format-cs": "CZ",
+    "format-en": "US",
+    "on-click": "hyprctl switchxkblayout all next",
+    "keyboard-name": "logitech-g515-tkl"
+  },
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip-format": "{ifname} · {ipaddr}\nClick to edit connections; right-click for network selection",
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}",
+    "on-click": "nm-connection-editor",
+    "on-click-right": "kitty -e nmtui"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-connected": " {num_connections}",
+    "format-disabled": "󰂲",
+    "tooltip-format": "Bluetooth · {status}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "on-click": "blueman-manager"
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "max-volume": 100,
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "@HOME@/.local/bin/desktop-audio mute",
+    "tooltip-format": "{node_name}",
+    "on-scroll-up": "@HOME@/.local/bin/desktop-audio up",
+    "on-scroll-down": "@HOME@/.local/bin/desktop-audio down"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip-format-activated": "Stay awake enabled · click to restore idle locking",
+    "tooltip-format-deactivated": "Idle locking enabled · click to stay awake"
+  },
+  "custom/notification": {
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "@HOME@/.local/bin/desktop-panel toggleControl",
+    "on-click-right": "swaync-client -d -sw",
+    "tooltip": false,
+    "on-click-middle": "swaync-client -t -sw"
+  },
+  "custom/lock": {
+    "format": "",
+    "tooltip-format": "Lock · Super+L",
+    "on-click": "~/.local/bin/desktop-lock"
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip-format": "Power options",
+    "on-click": "~/.local/bin/desktop-power"
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+  "custom/microphone": {
+    "exec": "@HOME@/.local/bin/desktop-audio mic-status",
+    "return-type": "json",
+    "interval": 3,
+    "on-click": "@HOME@/.local/bin/desktop-audio mic-mute",
+    "on-click-right": "pavucontrol -t 4"
+  },
+  "memory": {
+    "format": "RAM {avail:0.1f}G",
+    "tooltip-format": "Dostupná RAM: {avail:0.1f} GiB\nVyužitá RAM: {used:0.1f} / {total:0.1f} GiB",
+    "interval": 3
+  },
+  "custom/minimized": {
+    "exec": "@HOME@/.local/bin/desktop-window status",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "@HOME@/.local/bin/desktop-window restore",
+    "escape": true
+  },
+  "custom/audiowaves": {
+    "exec": "@HOME@/.local/bin/desktop-audiowaves",
+    "return-type": "json",
+    "format": "{}",
+    "restart-interval": 3,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "pavucontrol",
+    "exec-on-event": false,
+    "expand": true,
+    "align": 0.5,
+    "tooltip": false
+  },
+  "custom/package-updates": {
+    "exec": "@HOME@/.local/bin/desktop-package-updates status",
+    "return-type": "json",
+    "interval": 30,
+    "format": "{}",
+    "on-click": "@HOME@/.local/bin/desktop-package-updates show",
+    "on-click-right": "systemctl --user start --no-block desktop-package-updates.service",
+    "exec-on-event": true
+  },
+  "fixed-center": false,
+  "custom/gpu": {
+    "exec": "@HOME@/.local/bin/desktop-gpu",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 3
+  }
+}

@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+"""WirePlumber controls with a replaceable, short-lived volume OSD."""
+import subprocess, sys, re, json
+action=sys.argv[1] if len(sys.argv)>1 else 'status'
+mic=action.startswith('mic')
+node='@DEFAULT_AUDIO_SOURCE@' if mic else '@DEFAULT_AUDIO_SINK@'
+if action in ('up','down'):
+    subprocess.run(['wpctl','set-volume','-l','1',node,'5%+' if action=='up' else '5%-'],check=True)
+elif action in ('mute','mic-mute'):
+    subprocess.run(['wpctl','set-mute',node,'toggle'],check=True)
+status=subprocess.check_output(['wpctl','get-volume',node],text=True).strip()
+volume=round(float(re.search(r'[\d.]+',status)[0])*100)
+muted='MUTED' in status
+if action=='mic-status':
+    print(json.dumps({'text':'󰍭' if muted else '󰍬','class':'muted' if muted else 'active','tooltip':f'Microphone: {"muted" if muted else str(volume)+"%"}\nClick: mute · Right-click: input devices'}))
+else:
+    title='Microphone' if mic else 'Volume'
+    subprocess.run(['notify-send','-a','Desktop audio','-h','string:x-canonical-private-synchronous:desktop-audio','-h','boolean:transient:true','-h',f'int:value:{0 if muted else volume}','-t','1200',title,'Muted' if muted else f'{volume}%'])

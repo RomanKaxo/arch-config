@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Desktop Themes
+Exec=@HOME@/.local/bin/desktop-theme
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Settings;

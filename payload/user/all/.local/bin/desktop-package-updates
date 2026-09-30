@@ -1,0 +1,187 @@
+#!/usr/bin/env python
+"""Kontrola balíčků bez změny systémové databáze; cache pro Waybar a oznámení."""
+
+import fcntl
+import hashlib
+import html
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path.home() / ".cache/desktop-package-updates"
+STATE = ROOT / "status.json"
+
+
+def read_state():
+    try:
+        return json.loads(STATE.read_text())
+    except (OSError, ValueError):
+        return {"packages": [], "errors": [], "checked_at": None}
+
+
+def collect():
+    packages = []
+    errors = []
+    # checkupdates synchronizuje vlastní databázi. Nepoužíváme pacman -Sy.
+    env = {**os.environ, "CHECKUPDATES_DB": str(ROOT / "pacman-db"), "LC_ALL": "C"}
+    try:
+        result = subprocess.run(
+            ["checkupdates", "--nocolor"],
+            env=env,
+            text=True,
+            capture_output=True,
+            timeout=100,
+        )
+        if result.returncode in (0, 2):
+            packages.extend(
+                "Arch · " + line for line in result.stdout.splitlines() if line.strip()
+            )
+        else:
+            errors.append("Arch: kontrola selhala, zkus ji zopakovat.")
+    except (OSError, subprocess.TimeoutExpired):
+        errors.append("Arch: kontrola není dostupná nebo vypršel čas.")
+    # Flatpak je na tomto počítači používaný pro aplikace; zahrnujeme obě instalace.
+    for scope in ("user", "system"):
+        try:
+            result = subprocess.run(
+                [
+                    "flatpak",
+                    "remote-ls",
+                    "--updates",
+                    "--columns=application,branch,version",
+                    "--" + scope,
+                ],
+                env={**os.environ, "LC_ALL": "C"},
+                text=True,
+                capture_output=True,
+                timeout=40,
+            )
+            if result.returncode == 0:
+                packages.extend(
+                    "Flatpak · " + " ".join(line.split())
+                    for line in result.stdout.splitlines()
+                    if line.strip()
+                )
+            else:
+                errors.append("Flatpak (" + scope + "): kontrola selhala.")
+        except (OSError, subprocess.TimeoutExpired):
+            errors.append("Flatpak (" + scope + "): kontrola není dostupná.")
+    return sorted(set(packages)), errors
+
+
+def check():
+    ROOT.mkdir(parents=True, exist_ok=True)
+    with (ROOT / "check.lock").open("w") as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return
+        previous = read_state()
+        packages, errors = collect()
+        # Při výpadku ponecháme poslední seznam; chyba se v liště výslovně ukáže.
+        state = {
+            "packages": previous.get("packages", []) if errors else packages,
+            "errors": errors,
+            "checked_at": datetime.now().astimezone().isoformat(),
+            "last_success": previous.get("last_success"),
+        }
+        signature = hashlib.sha256("\n".join(packages).encode()).hexdigest()
+        state["notified"] = previous.get("notified", "")
+        if not errors:
+            state["last_success"] = state["checked_at"]
+            if packages and signature != state["notified"]:
+                subprocess.run(
+                    [
+                        "notify-send",
+                        "--app-name=Aktualizace balíčků",
+                        "--icon=software-update-available",
+                        "--expire-time=9000",
+                        "Jsou dostupné aktualizace balíčků",
+                        f"{len(packages)} aktualizací. Seznam otevřeš kliknutím na ↑ ve Waybaru.",
+                    ],
+                    check=False,
+                )
+            state["notified"] = signature if packages else ""
+        temporary = STATE.with_suffix(".tmp")
+        temporary.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n")
+        temporary.replace(STATE)
+
+
+def status():
+    state = read_state()
+    packages = state["packages"]
+    errors = state["errors"]
+    timestamp = state.get("last_success")
+    lines = ["Aktualizace balíčků"]
+    if timestamp:
+        lines.append(
+            "Poslední kontrola: "
+            + datetime.fromisoformat(timestamp).strftime("%d. %m. %H:%M")
+        )
+    lines += errors
+    if not timestamp and not errors:
+        lines.append("Čekám na první kontrolu.")
+    elif not packages and not errors:
+        lines.append("Balíčky Arch a Flatpak jsou aktuální.")
+    lines += packages[:14]
+    if len(packages) > 14:
+        lines.append(f"… a dalších {len(packages) - 14}")
+    lines += ["", "Klik: úplný seznam", "Pravé tlačítko: zkontrolovat nyní"]
+    print(
+        json.dumps(
+            {
+                "text": (
+                    "↑ !" if errors else f"↑ {len(packages)}" if timestamp else "↑ …"
+                ),
+                "class": "error" if errors else "available" if packages else "current",
+                "tooltip": html.escape("\n".join(lines)),
+            },
+            ensure_ascii=False,
+        )
+    )
+
+
+def show_list():
+    state = read_state()
+    print("AKTUALIZACE BALÍČKŮ\n")
+    print("\n".join(state["errors"]))
+    print(
+        "\n".join(state["packages"])
+        or (
+            "Zatím není dostupný výsledek kontroly."
+            if not state.get("last_success")
+            else "Žádné dostupné aktualizace."
+        )
+    )
+    print("\nPro instalaci systémových aktualizací: sudo pacman -Syu")
+    print("Pro aplikace Flatpak: flatpak update")
+    print(
+        "\nToto okno pouze zobrazuje seznam. Znovu zkontrolovat: pravé tlačítko na ↑ ve Waybaru."
+    )
+
+
+if __name__ == "__main__":
+    action = sys.argv[1] if len(sys.argv) > 1 else "status"
+    if action == "check":
+        check()
+    elif action == "list":
+        show_list()
+    elif action == "show":
+        subprocess.Popen(
+            [
+                "kitty",
+                "--title",
+                "Aktualizace balíčků",
+                "--hold",
+                str(Path(__file__).resolve()),
+                "list",
+            ],
+            start_new_session=True,
+        )
+    elif action == "status":
+        status()
+    else:
+        raise SystemExit("Použití: desktop-package-updates [check|status|show|list]")

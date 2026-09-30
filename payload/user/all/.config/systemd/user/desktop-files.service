@@ -1,0 +1,10 @@
+[Unit]
+Description=Desktop files
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+ExecStart=/usr/bin/thunar --daemon
+Restart=on-failure
+RestartSec=3

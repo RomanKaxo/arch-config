@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+"""Read desktop status without scanning networks or changing devices."""
+import json
+import re
+import subprocess
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+
+def cmd(args):
+    try:
+        return subprocess.run(args, capture_output=True, text=True, timeout=2).stdout.strip()
+    except (OSError, subprocess.TimeoutExpired):
+        return ''
+
+
+commands = {
+    'wifi': ['nmcli', 'radio', 'wifi'],
+    'devices': ['nmcli', '-t', '-f', 'TYPE,STATE,CONNECTION', 'device', 'status'],
+    'bluetooth': ['bluetoothctl', 'show'],
+    'caffeine': ['systemctl', '--user', 'is-active', 'hypridle.service'],
+    'night': ['systemctl', '--user', 'is-active', 'desktop-nightlight.service'],
+    'dnd': ['swaync-client', '-D', '-sw'],
+    'notifications': ['swaync-client', '-c', '-sw'],
+    'volume': ['wpctl', 'get-volume', '@DEFAULT_AUDIO_SINK@'],
+    'microphone': ['wpctl', 'get-volume', '@DEFAULT_AUDIO_SOURCE@'],
+    'pipewire': ['pw-dump'],
+}
+with ThreadPoolExecutor(max_workers=len(commands)) as pool:
+    values = dict(zip(commands, pool.map(cmd, commands.values())))
+wifi_rows = [line.split(':', 2) for line in values['devices'].splitlines() if line.startswith('wifi:')]
+connected = next((row[2].replace('\\:', ':').replace('\\\\', '\\') for row in wifi_rows if row[1] == 'connected'), '')
+volume = re.search(r'Volume:\s*([\d.]+)', values['volume'])
+# PipeWire IDs can be reused; pass the serial along when selecting a device.
+outputs = []
+default_sink = ''
+try:
+    objects = json.loads(values['pipewire'])
+    for obj in objects:
+        if obj.get('props', {}).get('metadata.name') == 'default':
+            for entry in obj.get('metadata', []):
+                if entry.get('key') == 'default.audio.sink':
+                    value = entry.get('value', {})
+                    if isinstance(value, str):
+                        value = json.loads(value)
+                    default_sink = value.get('name', '')
+    for obj in objects:
+        props = obj.get('info', {}).get('props', {})
+        if props.get('media.class') == 'Audio/Sink':
+            outputs.append(dict(id=obj['id'], serial=props.get('object.serial'),
+                name=props.get('node.name', ''),
+                description=props.get('node.description') or props.get('node.nick') or 'Audio output',
+                active=props.get('node.name') == default_sink))
+except (ValueError, TypeError, AttributeError, KeyError):
+    outputs = []
+outputs.sort(key=lambda item: (not item['active'], item['description'].lower()))
+uptime = int(float(Path('/proc/uptime').read_text().split()[0]))
+print(json.dumps(dict(
+    wifi=values['wifi'] == 'enabled',
+    wifiAvailable=bool(wifi_rows),
+    wifiConnected=bool(connected),
+    wifiName=connected,
+    ethernet=any(line.startswith('ethernet:connected:') for line in values['devices'].splitlines()),
+    bluetooth='Powered: yes' in values['bluetooth'],
+    bluetoothAvailable='Controller ' in values['bluetooth'],
+    caffeine=values['caffeine'] == 'inactive',
+    night=values['night'] == 'active',
+    dnd=values['dnd'].lower() == 'true',
+    uptime=f'{uptime // 3600}h {(uptime // 60) % 60}m',
+    notifications=int(values['notifications']) if values['notifications'].isdigit() else 0,
+    volume=round(float(volume[1]) * 100) if volume else 0,
+    audioAvailable=volume is not None,
+    muted='MUTED' in values['volume'],
+    outputs=outputs,
+    outputName=next((o['description'] for o in outputs if o['active']), ''),
+    micAvailable='Volume:' in values['microphone'],
+    micMuted='MUTED' in values['microphone'],
+)))

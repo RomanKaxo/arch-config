@@ -1,0 +1,162 @@
+#!/usr/bin/env python
+"""Window buttons and recoverable minimization for Hyprland's Lua dispatchers."""
+
+import fcntl, json, os, re, subprocess, sys
+from pathlib import Path
+
+runtime = Path(os.environ["XDG_RUNTIME_DIR"])
+state = runtime / "midnight-minimized.json"
+action = sys.argv[1] if len(sys.argv) > 1 else "restore"
+
+
+def get(kind):
+    return json.loads(subprocess.check_output(["hyprctl", "-j", kind], text=True))
+
+
+def dispatch(expression):
+    result = subprocess.check_output(
+        ["hyprctl", "dispatch", expression], text=True
+    ).strip()
+    if result != "ok":
+        raise RuntimeError(result)
+
+
+def selector(w):
+    return json.dumps("address:" + w["address"])
+
+
+def clean(text):
+    return re.sub(r"[\x00-\x1f\x7f]", " ", text)
+
+
+def save(data):
+    tmp = state.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data))
+    tmp.chmod(0o600)
+    tmp.replace(state)
+
+
+def hide_minimized():
+    """Dock může otevřít odkládací plochu. Žluté tlačítko ji musí znovu skrýt."""
+    monitors = get("monitors")
+    previous = next((m for m in monitors if m.get("focused")), None)
+    for monitor in monitors:
+        if monitor.get("specialWorkspace", {}).get("name") != "special:minimized":
+            continue
+        dispatch("hl.dsp.focus({monitor=" + json.dumps(monitor["name"]) + "})")
+        dispatch('hl.dsp.workspace.toggle_special("minimized")')
+    if previous and any(
+        m.get("focused") != bool(m["name"] == previous["name"]) for m in get("monitors")
+    ):
+        dispatch("hl.dsp.focus({monitor=" + json.dumps(previous["name"]) + "})")
+
+
+clients = get("clients")
+parked = [w for w in clients if w["workspace"]["name"] == "special:minimized"]
+if action == "status":
+    print(
+        json.dumps(
+            {
+                "text": ("󰖰 " + str(len(parked))) if parked else "",
+                "tooltip": "Minimized windows — click to restore\nSuper+Shift+M",
+                "class": "active" if parked else "empty",
+            }
+        )
+    )
+    raise SystemExit
+if action == "restore" and not parked:
+    raise SystemExit
+if action == "restore":
+    if len(sys.argv) > 2:
+        chosen = next((w for w in parked if w["address"] == sys.argv[2]), None)
+    else:
+        options = "\n".join(clean(w["class"] + " — " + w["title"]) for w in parked)
+        result = subprocess.run(
+            ["fuzzel", "--dmenu", "--index", "--prompt", "Restore window ❯ "],
+            input=options,
+            text=True,
+            capture_output=True,
+        )
+        if result.returncode:
+            raise SystemExit
+        try:
+            chosen = parked[int(result.stdout.strip())]
+        except (ValueError, IndexError):
+            raise SystemExit(1)
+    if chosen is None:
+        raise SystemExit(1)
+else:
+    chosen = (
+        get("activewindow")
+        if len(sys.argv) < 3
+        else next((w for w in clients if w["address"] == sys.argv[2]), None)
+    )
+    if not chosen:
+        raise SystemExit
+sel = selector(chosen)
+if action in ("close", "maximize", "fullscreen"):
+    expr = (
+        "hl.dsp.window.close({window=" + sel + "})"
+        if action == "close"
+        else "hl.dsp.window.fullscreen({window="
+        + sel
+        + ",mode="
+        + json.dumps("maximized" if action == "maximize" else "fullscreen")
+        + ',layout_aware=false,action="toggle"})'
+    )
+    dispatch(expr)
+    raise SystemExit
+with (runtime / "midnight-minimized.lock").open("w") as lock:
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    try:
+        data = json.loads(state.read_text())
+    except (OSError, ValueError):
+        data = {}
+    data = {
+        k: v
+        for k, v in data.items()
+        if any(w["address"] == k and w["pid"] == v["pid"] for w in clients)
+    }
+    if action == "minimize":
+        # Okno už může být odložené, ale stále viditelné po aktivaci z docku.
+        # Původní návrat zde nechával žluté tlačítko bez jakéhokoli účinku.
+        if chosen["workspace"]["name"] == "special:minimized":
+            hide_minimized()
+            raise SystemExit
+        if chosen["workspace"]["name"].startswith("special:"):
+            raise SystemExit
+        data[chosen["address"]] = {
+            "workspace": chosen["workspace"]["name"],
+            "pid": chosen["pid"],
+            "pinned": chosen["pinned"],
+        }
+        if chosen["pinned"]:
+            dispatch("hl.dsp.window.pin({window=" + sel + ',action="disable"})')
+        dispatch(
+            'hl.dsp.window.move({workspace="special:minimized",follow=false,window='
+            + sel
+            + "})"
+        )
+        hide_minimized()
+    elif action == "restore":
+        record = data.pop(chosen["address"], {})
+        workspace = (
+            record.get("workspace")
+            if record.get("pid") == chosen["pid"]
+            else get("activeworkspace")["name"]
+        )
+        if not workspace or workspace.startswith("special:"):
+            workspace = "1"
+        dispatch(
+            "hl.dsp.window.move({workspace="
+            + json.dumps(workspace)
+            + ",follow=true,window="
+            + sel
+            + "})"
+        )
+        dispatch("hl.dsp.focus({window=" + sel + "})")
+        if record.get("pinned"):
+            dispatch("hl.dsp.window.pin({window=" + sel + ',action="enable"})')
+    else:
+        raise SystemExit("Unknown action")
+    save(data)

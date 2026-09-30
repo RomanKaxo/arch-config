@@ -1,0 +1,24 @@
+/* Zvukové spektrum a aktualizace balíčků. */
+/* Font kreslí tečky přímo v textovém modulu, bez překryvného okna. */
+#custom-audiowaves {
+    font-family: "Desktop Waves";
+    font-size: 36px;
+    letter-spacing: 0;
+    color: #c5c5c5;
+    padding: 0 4px;
+    margin: 0;
+}
+#custom-audiowaves.silent { padding: 0; }
+#custom-package-updates { padding: 0 10px; margin: 5px 0; border-radius: 8px; }
+#custom-package-updates.available { color: #e2e2e2; }
+#custom-package-updates.current { color: #929292; }
+#custom-package-updates.error { color: #ededed; }
+#custom-package-updates:hover { background: #2a2a2a; }
+
+/* Přehled hardwaru používá stejnou šedou jako ostatní stavové moduly. */
+#memory, #custom-gpu {
+    color: #c5c5c5;
+    padding: 0 8px;
+    margin: 5px 0;
+}
+#custom-gpu.unavailable { color: #929292; }

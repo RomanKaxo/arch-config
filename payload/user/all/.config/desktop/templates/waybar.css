@@ -1,0 +1,42 @@
+/* Černá a šedá jsou záměrně stálé i při změně palety ostatních aplikací. */
+@import url("@HOME@/.config/waybar/extras.css");
+* {
+    font-family: "Inter Variable", "JetBrainsMono Nerd Font", "Noto Color Emoji";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+window#waybar {
+    background: rgba(13, 13, 13, 0.91);
+    color: #d4d4d4;
+    border: 1px solid rgba(160, 160, 160, 0.18);
+    border-radius: 14px;
+}
+tooltip { background: #171717; border: 1px solid #353535; border-radius: 10px; }
+tooltip label { color: #d4d4d4; }
+#workspaces { margin: 4px 6px; }
+#workspaces button { padding: 0 8px; margin: 1px 2px; color: #959595; border-radius: 8px; }
+#workspaces button.active { background: #303030; color: #f2f2f2; }
+#workspaces button.urgent { background: #aaaaaa; color: #171717; }
+#workspaces button:hover { background: #353535; box-shadow: none; }
+#custom-launcher { color: #bcbcbc; font-size: 13px; padding: 0 14px; }
+#clock { font-weight: 500; padding: 0 10px; }
+#tray, #network, #wireplumber, #bluetooth, #language, #idle_inhibitor, #custom-notification, #custom-lock {
+    padding: 0 8px; margin: 5px 0; border-radius: 8px;
+}
+#custom-lock { margin-right: 8px; color: #bcbcbc; }
+#language { color: #959595; font-weight: 500; }
+#network.disconnected, #wireplumber.muted { color: #959595; }
+#idle_inhibitor.activated { color: #dedede; }
+#bluetooth.connected { color: #bcbcbc; }
+#custom-notification:hover, #custom-lock:hover, #network:hover, #wireplumber:hover, #bluetooth:hover, #language:hover, #idle_inhibitor:hover { background: #303030; }
+
+#custom-microphone, #memory { padding: 0 10px; margin: 5px 0; border-radius: 8px; }
+#custom-microphone.muted { color: #959595; }
+
+#custom-power { padding: 0 12px; margin-right: 6px; color: #959595; }
+#workspaces button.active { box-shadow: inset 0 0 0 1px rgba(160, 160, 160, .4); }
+
+#custom-minimized { color: #959595; padding: 0 10px; }
+#custom-minimized.empty { padding: 0; margin: 0; }

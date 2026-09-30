@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+"""Brno current weather; Open-Meteo, cached for 15 minutes in user runtime RAM."""
+import json
+import os
+import time
+import urllib.request
+from pathlib import Path
+
+cache = Path(os.environ.get('XDG_RUNTIME_DIR', '/tmp')) / 'midnight-weather.json'
+try:
+    saved = json.loads(cache.read_text())
+except (OSError, ValueError):
+    saved = {}
+if time.time() - saved.get('fetched', 0) < 900:
+    print(json.dumps(saved))
+    raise SystemExit
+url = ('https://api.open-meteo.com/v1/forecast?latitude=49.1951&longitude=16.6068'
+       '&current=temperature_2m,weather_code,is_day&timezone=Europe%2FPrague')
+try:
+    req = urllib.request.Request(url, headers={'User-Agent': 'MidnightDesktop/1.0'})
+    with urllib.request.urlopen(req, timeout=8) as response:
+        current = json.load(response)['current']
+    code = current['weather_code']
+    if code == 0: label, icon = 'Clear sky', 'sun' if current['is_day'] else 'moon'
+    elif code in (1, 2): label, icon = 'Partly cloudy', 'weather'
+    elif code == 3: label, icon = 'Overcast', 'cloud'
+    elif code in (45, 48): label, icon = 'Fog', 'cloud'
+    elif code in (71, 73, 75, 77, 85, 86): label, icon = 'Snow', 'snow'
+    elif code >= 95: label, icon = 'Thunderstorm', 'storm'
+    else: label, icon = 'Rain', 'rain'
+    saved = dict(city='Brno, CZ', temperature=round(current['temperature_2m']),
+                 description=label, icon=icon, fetched=int(time.time()), available=True)
+    fd = os.open(cache, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, 'w') as output:
+        json.dump(saved, output)
+except Exception:
+    if not saved or time.time() - saved.get('fetched', 0) > 21600:
+        saved = dict(city='Brno, CZ', description='Weather unavailable', available=False)
+    else:
+        saved['stale'] = True
+print(json.dumps(saved))

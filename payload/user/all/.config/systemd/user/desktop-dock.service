@@ -1,0 +1,14 @@
+[Unit]
+Description=Graphite application dock (below fullscreen windows)
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/nwg-dock-hyprland -r -l top -i 38 -p bottom -mb 10@DOCK_OUTPUT@ -s style.css -ico view-app-grid-symbolic -c "@HOME@/.local/bin/desktop-panel toggleLauncher"
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=5
+
+[Install]
+WantedBy=graphical-session.target

@@ -1,0 +1,15 @@
+[SddmGreeterTheme]
+Name=Nocturne
+Description=Midnight glass Hyprland login
+Author=Local configuration
+Copyright=2026
+License=CC-BY-SA-4.0
+Type=sddm-theme
+Version=1.0
+Website=
+Screenshot=
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Theme-Id=nocturne
+Theme-API=2.0

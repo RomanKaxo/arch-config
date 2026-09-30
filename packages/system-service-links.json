@@ -1,0 +1,15 @@
+{
+  "display-manager.service": "/usr/lib/systemd/system/sddm.service",
+  "dbus-org.freedesktop.nm-dispatcher.service": "/usr/lib/systemd/system/NetworkManager-dispatcher.service",
+  "dbus-org.bluez.service": "/usr/lib/systemd/system/bluetooth.service",
+  "autovt@.service": "/usr/lib/systemd/system/getty@.service",
+  "dbus-org.freedesktop.timesync1.service": "/usr/lib/systemd/system/systemd-timesyncd.service",
+  "bluetooth.target.wants/bluetooth.service": "/usr/lib/systemd/system/bluetooth.service",
+  "multi-user.target.wants/remote-fs.target": "/usr/lib/systemd/system/remote-fs.target",
+  "multi-user.target.wants/NetworkManager.service": "/usr/lib/systemd/system/NetworkManager.service",
+  "sysinit.target.wants/systemd-timesyncd.service": "/usr/lib/systemd/system/systemd-timesyncd.service",
+  "network-online.target.wants/NetworkManager-wait-online.service": "/usr/lib/systemd/system/NetworkManager-wait-online.service",
+  "sockets.target.wants/systemd-userdbd.socket": "/usr/lib/systemd/system/systemd-userdbd.socket",
+  "timers.target.wants/fstrim.timer": "/usr/lib/systemd/system/fstrim.timer",
+  "getty.target.wants/getty@tty1.service": "/usr/lib/systemd/system/getty@.service"
+}

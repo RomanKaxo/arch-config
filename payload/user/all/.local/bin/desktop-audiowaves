@@ -1,0 +1,181 @@
+#!/usr/bin/env python
+"""Živé zvukové spektrum pro Waybar, včetně přehrávání do Bluetooth sluchátek."""
+
+import json
+import os
+import re
+import selectors
+import signal
+import subprocess
+import tempfile
+import time
+from pathlib import Path
+
+# Vlastní font obsahuje souměrné sloupce z teček, nikoliv plné bloky.
+BARS = "".join(chr(0xE000 + level) for level in range(8))
+
+
+def frame(line, columns=130):
+    samples = [max(0, min(1000, int(item))) for item in line.strip().split(";") if item]
+    playing = bool(samples and max(samples) > 0)
+    values = []
+    # Roztažení skutečného spektra zachová širší špičky i na dlouhém panelu.
+    # Mírné zvýraznění nízké amplitudy nemění hlasitost přehrávání.
+    if playing:
+        peak = max(25, max(samples))
+        for column in range(columns):
+            position = column * (len(samples) - 1) / max(1, columns - 1)
+            left = int(position)
+            fraction = position - left
+            # Zaoblené přechody mezi pásmy dodají vlně plynulý tvar.
+            fraction = fraction * fraction * (3 - 2 * fraction)
+            sample = (
+                samples[left] * (1 - fraction)
+                + samples[min(left + 1, len(samples) - 1)] * fraction
+            )
+            values.append(min(7, round(7 * (sample / peak) ** 0.6)))
+    return {
+        "text": "".join(BARS[value] for value in values) if playing else "",
+        "class": "playing" if playing else "silent",
+        "tooltip": (
+            "Zvukové spektrum · kliknutím přehrát / pozastavit" if playing else ""
+        ),
+    }
+
+
+def playback_source():
+    """Sledujeme monitor výstupu, do kterého aplikace hraje; nikdy mikrofon."""
+    try:
+        streams = json.loads(
+            subprocess.check_output(
+                ["pactl", "--format=json", "list", "sink-inputs"], text=True, timeout=2
+            )
+        )
+        active = [
+            stream
+            for stream in streams
+            if not stream.get("corked") and not stream.get("mute")
+        ]
+        if not active:
+            return "auto"
+        # Hudba má přednost před krátkým upozorněním z jiné aplikace.
+        active.sort(
+            key=lambda stream: stream.get("properties", {}).get("media.role") != "music"
+        )
+        sinks = json.loads(
+            subprocess.check_output(
+                ["pactl", "--format=json", "list", "sinks"], text=True, timeout=2
+            )
+        )
+        sink = next(
+            (item for item in sinks if item["index"] == active[0]["sink"]), None
+        )
+        source = sink.get("monitor_source") if sink else None
+        if isinstance(source, str) and re.fullmatch(r"[\w.:@-]+", source):
+            return source
+    except (OSError, ValueError, subprocess.SubprocessError):
+        pass
+    return "auto"
+
+
+def column_count():
+    """Šířka podle monitoru; ponecháme místo pracovním plochám, hodinám a stavům."""
+    try:
+        monitors = json.loads(
+            subprocess.check_output(["hyprctl", "monitors", "-j"], text=True, timeout=2)
+        )
+        monitor = next(
+            (m for m in monitors if m["name"] == os.environ.get("WAYBAR_OUTPUT_NAME")),
+            None,
+        )
+        if monitor:
+            width = monitor["width"] / monitor.get("scale", 1)
+            # Sloupec má při velikosti fontu 36 px šířku 7.2 px.
+            return max(32, min(360, int((width - 1280) / 7.2)))
+    except (OSError, ValueError, subprocess.SubprocessError):
+        pass
+    return 88
+
+
+def main():
+    base = (Path.home() / ".config/cava/waybar.conf").read_text()
+    columns = column_count()
+    # Každý snímek vykreslí aktuální spektrum. Sloupce reagují na místě,
+    # neskládáme z minulých snímků posouvající se časovou stopu.
+    stopping = False
+    process = None
+    previous = None
+    source = None
+    next_source_check = 0
+    pending = b""
+    selector = selectors.DefaultSelector()
+
+    def stop(*_):
+        nonlocal stopping
+        stopping = True
+
+    def stop_cava():
+        if process:
+            selector.unregister(process.stdout)
+            process.terminate()
+            try:
+                process.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+            process.stdout.close()
+
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGINT, stop)
+    print(json.dumps(frame("0;")), flush=True)
+    # Každá instance má vlastní konfiguraci. Změna zdroje nemění směrování zvuku.
+    with tempfile.TemporaryDirectory(
+        prefix="waybar-spectrum-", dir=os.environ.get("XDG_RUNTIME_DIR")
+    ) as folder:
+        config = Path(folder) / "cava.conf"
+        try:
+            while not stopping:
+                if time.monotonic() >= next_source_check:
+                    selected = playback_source()
+                    next_source_check = time.monotonic() + 2
+                    if selected != source:
+                        stop_cava()
+                        source = selected
+                        config.write_text(
+                            re.sub(
+                                r"^source\s*=.*$",
+                                "source = " + source,
+                                base,
+                                flags=re.M,
+                            )
+                        )
+                        process = subprocess.Popen(
+                            ["cava", "-p", str(config)], stdout=subprocess.PIPE
+                        )
+                        selector.register(process.stdout, selectors.EVENT_READ)
+                        pending = b""
+                for key, _ in selector.select(timeout=0.5):
+                    chunk = os.read(key.fileobj.fileno(), 65536)
+                    if not chunk:
+                        stopping = True
+                        break
+                    pending += chunk
+                    lines = pending.split(b"\n")
+                    pending = lines.pop()
+                    for line in lines:
+                        try:
+                            value = frame(line.decode("ascii"), columns)
+                        except (ValueError, UnicodeDecodeError):
+                            continue
+                        if value != previous:
+                            print(json.dumps(value), flush=True)
+                            previous = value
+        except BrokenPipeError:
+            pass
+        finally:
+            stop_cava()
+            selector.close()
+
+
+if __name__ == "__main__":
+    main()

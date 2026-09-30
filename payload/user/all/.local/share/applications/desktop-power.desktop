@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Session and Power
+Exec=@HOME@/.local/bin/desktop-power
+Icon=system-shutdown
+Terminal=false
+Categories=Settings;

@@ -1,0 +1,12 @@
+[Unit]
+Description=Desktop clipboard-image
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+ExecStart=/usr/bin/wl-paste --type image --watch cliphist store
+Environment=CLIPHIST_MAX_ITEMS=300
+UMask=0077
+Restart=on-failure
+RestartSec=3

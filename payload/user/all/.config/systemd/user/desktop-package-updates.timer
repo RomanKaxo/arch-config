@@ -1,0 +1,10 @@
+[Unit]
+Description=Check package updates every two hours
+
+[Timer]
+OnStartupSec=2min
+OnUnitActiveSec=2h
+RandomizedDelaySec=3min
+
+[Install]
+WantedBy=timers.target

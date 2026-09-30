@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/qs --path @HOME@/.config/quickshell/reference ipc call desktop "$@"

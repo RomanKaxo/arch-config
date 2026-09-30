@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Spotify Web
+Comment=Open Spotify in Firefox
+Exec=firefox --new-window https://open.spotify.com/
+Icon=spotify
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Player;
+StartupWMClass=firefox
+
+NoDisplay=true

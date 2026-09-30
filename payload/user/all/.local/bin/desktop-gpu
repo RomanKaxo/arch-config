@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+"""Vytížení NVIDIA GPU pro Waybar; při nedostupnosti neukazujeme falešnou nulu."""
+
+import csv
+import html
+import json
+import subprocess
+
+
+def status():
+    try:
+        result = subprocess.run(
+            [
+                "nvidia-smi",
+                "--id=0",
+                "--query-gpu=name,utilization.gpu,memory.used,memory.total,temperature.gpu",
+                "--format=csv,noheader,nounits",
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=2,
+        )
+        name, load, used, total, temperature = next(
+            csv.reader(result.stdout.splitlines())
+        )
+        # nvidia-smi vrací paměť v MiB; tooltip ji převede na GiB.
+        load = int(load.strip())
+        if not 0 <= load <= 100:
+            raise ValueError("Invalid GPU utilization")
+        tooltip = (
+            f"{name.strip()}\nVytížení: {load} %\n"
+            f"Paměť grafiky: {float(used) / 1024:.1f} / {float(total) / 1024:.1f} GiB\n"
+            f"Teplota: {temperature.strip()} °C"
+        )
+        return {
+            "text": f"GPU {load}%",
+            "tooltip": html.escape(tooltip),
+            "class": "available",
+        }
+    except (OSError, ValueError, StopIteration, csv.Error, subprocess.SubprocessError):
+        return {
+            "text": "GPU —",
+            "tooltip": "Údaj o vytížení grafiky není právě dostupný.",
+            "class": "unavailable",
+        }
+
+
+if __name__ == "__main__":
+    print(json.dumps(status(), ensure_ascii=False))

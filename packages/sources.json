@@ -1,0 +1,24 @@
+{
+  "hyprbars": {
+    "url": "https://github.com/hyprwm/hyprland-plugins",
+    "commit": "7644cecdb947060682891a0db2a0cdc5c0b9e704",
+    "hyprland": "0.56.2",
+    "vendored": true
+  },
+  "colloid": {
+    "url": "https://github.com/vinceliuice/Colloid-icon-theme",
+    "commit": "ceac6608ecd0e40025cbc2ebbd32bf0e0f4ebc6a",
+    "installed_assets": true
+  },
+  "waypaper": {
+    "version": "2.8",
+    "patched_app": true
+  },
+  "external_apps": [
+    "Visual Studio Code 1.139.1 (local official tarball)",
+    "ChatGPT 26.928.20755 (local vendor distribution)",
+    "Codex standalone (managed installer)",
+    "OmniRoute npm module (optional workspace)",
+    "Elaris-Harness project (optional workspace)"
+  ]
+}

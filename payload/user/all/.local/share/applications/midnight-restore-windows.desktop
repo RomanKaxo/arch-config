@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Restore Minimized Windows
+Name[cs]=Obnovit minimalizovaná okna
+Comment=Show windows hidden with the yellow title bar button
+Exec=@HOME@/.local/bin/desktop-window restore
+Icon=preferences-system-windows
+Categories=Utility;System;
+Terminal=false

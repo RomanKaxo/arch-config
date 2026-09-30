@@ -1,0 +1,16 @@
+[Unit]
+Description=OmniRoute local model gateway for Elaris
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+Environment=OMNIROUTE_SERVER_HOST=127.0.0.1
+Environment=OMNIROUTE_NO_UPDATE_NOTIFIER=1
+ExecStart=%h/.local/bin/omniroute serve --no-open --no-tray --port 20128
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

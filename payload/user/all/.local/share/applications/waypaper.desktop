@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Waypaper
+Comment=Správce tapet
+Exec=@HOME@/.local/bin/waypaper
+Icon=@HOME@/.local/share/waypaper-venv/share/icons/hicolor/scalable/apps/waypaper.svg
+Terminal=false
+Categories=Settings;DesktopSettings;
+StartupNotify=true

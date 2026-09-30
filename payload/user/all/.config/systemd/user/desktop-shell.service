@@ -1,0 +1,13 @@
+[Unit]
+Description=Reference-matched Quickshell desktop panels
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/qs --no-duplicate --path %h/.config/quickshell/reference
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

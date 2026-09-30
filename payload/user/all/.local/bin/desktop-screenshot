@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+exec 9>"${XDG_RUNTIME_DIR:?}/desktop-screenshot.lock"
+flock -n 9 || exit 0
+directory="$(xdg-user-dir PICTURES)/Screenshots"
+mkdir -p "$directory"
+file="$directory/Screenshot-$(date +%Y-%m-%d_%H-%M-%S-%N).png"
+case "${1:-region}" in
+    region)
+        geometry=$(slurp -b 11182788 -c 89b4faff -w 2) || exit 0
+        [[ -n $geometry ]] || exit 0
+        grim -g "$geometry" "$file"
+        ;;
+    full) grim "$file" ;;
+    *) exit 2 ;;
+esac
+wl-copy --type image/png < "$file"
+notify-send -a Screenshot -i camera-photo 'Screenshot saved and copied' "$file"

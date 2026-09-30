@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+import subprocess
+def choose(prompt, choices):
+    r = subprocess.run(['fuzzel','--dmenu','--prompt='+prompt],input='\n'.join(choices),text=True,capture_output=True)
+    return r.stdout.strip() if r.returncode == 0 else ''
+action=choose('Session ❯ ', ['Lock','Log out','Suspend','Restart','Shut down'])
+if action == 'Lock': subprocess.Popen(['@HOME@/.local/bin/desktop-lock'])
+elif action in ['Log out','Suspend','Restart','Shut down']:
+    if choose(action+'? ❯ ', ['Cancel','Confirm '+action]) != 'Confirm '+action: raise SystemExit(0)
+    commands={'Log out':['hyprshutdown'], 'Suspend':['systemctl','suspend'], 'Restart':['hyprshutdown','--post-cmd','systemctl reboot'], 'Shut down':['hyprshutdown','--post-cmd','systemctl poweroff']}
+    subprocess.Popen(commands[action])

@@ -1,0 +1,38 @@
+/* Generated desktop palette. */
+@define-color theme_bg_color #{{surface}};
+@define-color theme_fg_color #{{text}};
+@define-color theme_base_color #{{bg}};
+@define-color theme_text_color #{{text}};
+@define-color theme_selected_bg_color #{{selection}};
+@define-color theme_selected_fg_color #{{text}};
+@define-color selected_bg_color #{{selection}};
+@define-color selected_fg_color #{{text}};
+@define-color accent_color #{{accent}};
+@define-color accent_bg_color #{{accent}};
+@define-color accent_fg_color #{{bg}};
+
+@define-color window_bg_color #{{bg}};
+@define-color headerbar_bg_color #{{surface}};
+@define-color view_bg_color #{{bg}};
+@define-color borders #{{border}};
+window.background { background-color: #{{bg}}; color: #{{text}}; }
+headerbar, menubar, toolbar { background-color: #{{surface}}; color: #{{text}}; }
+.thunar .view, .thunar treeview.view { background-color: #{{bg}}; color: #{{text}}; }
+.thunar .sidebar { background-color: #{{surface}}; }
+.view:selected, treeview.view:selected { background-color: #{{selection}}; color: #{{text}}; }
+button { border-radius: 8px; }
+entry { border-radius: 12px; }
+@define-color window_fg_color #{{text}};
+@define-color view_fg_color #{{text}};
+@define-color headerbar_fg_color #{{text}};
+@define-color sidebar_bg_color #{{surface}};
+@define-color sidebar_fg_color #{{text}};
+@define-color sidebar_backdrop_color #{{surface}};
+@define-color headerbar_backdrop_color #{{surface}};
+@define-color dialog_bg_color #{{surface}};
+@define-color popover_bg_color #{{surface}};
+@define-color popover_fg_color #{{text}};
+@define-color card_bg_color #{{surface}};
+@define-color card_fg_color #{{text}};
+@define-color accent_bg_color #{{selection}};
+@define-color accent_fg_color #{{text}};

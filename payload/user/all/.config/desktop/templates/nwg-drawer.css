@@ -1,0 +1,75 @@
+/* The application's icon grid is the primary launcher. Keep the whole screen
+ * quiet, with a restrained palette card grid and clearly focused selection. */
+window {
+    background-color: rgba({{bg_rgb}}, 0.96);
+    color: #{{text}};
+    border: 1px solid rgba({{accent_rgb}}, 0.28);
+    border-radius: 20px;
+}
+
+entry {
+    color: #{{text}};
+    caret-color: #{{accent}};
+    background-color: rgba({{surface_rgb}}, 0.98);
+    border: 1px solid #{{border}};
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin: 12px 12px 16px;
+    font-size: 17px;
+    box-shadow: none;
+}
+
+entry:focus {
+    border-color: #{{accent}};
+}
+
+button {
+    color: #{{text}};
+    background-color: rgba({{surface_rgb}}, 0.48);
+    border: 1px solid rgba({{border_rgb}}, 0.55);
+    border-radius: 14px;
+    padding: 10px 8px;
+    margin: 4px;
+    box-shadow: none;
+    transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+button:hover, button:focus {
+    color: #{{text}};
+    background-color: rgba({{selection_rgb}}, 0.94);
+    border-color: rgba({{accent_rgb}}, 0.62);
+    outline: none;
+}
+
+#category-button {
+    color: #{{muted}};
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 9px;
+    margin: 2px;
+    padding: 8px 12px;
+}
+
+#category-button:hover, #category-button:focus {
+    color: #{{text}};
+    background-color: #{{selection}};
+}
+
+#pinned-box {
+    border-bottom: 1px solid rgba({{border_rgb}}, 0.58);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+#files-box {
+    background-color: #{{surface}};
+    border: 1px solid #{{border}};
+    border-radius: 12px;
+    padding: 10px;
+}
+
+#math-label {
+    color: #{{accent}};
+    font-weight: 600;
+    font-size: 16px;
+}

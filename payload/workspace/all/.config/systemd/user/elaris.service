@@ -1,0 +1,14 @@
+[Unit]
+Description=Elaris personal AI workspace
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Desktop/Elaris-Harness
+ExecStart=/usr/bin/node %h/Desktop/Elaris-Harness/server.mjs
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,17 @@
+base-devel
+cmake
+meson
+ninja
+pkgconf
+python
+python-pip
+python-gobject
+python-cairo
+python-pillow
+python-platformdirs
+python-fonttools
+python-imageio
+playerctl
+xorg-xrandr
+qt6-svg
+qt6-declarative

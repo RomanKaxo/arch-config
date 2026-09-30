@@ -1,0 +1,10 @@
+base
+efibootmgr
+egl-wayland
+intel-ucode
+lib32-nvidia-utils
+linux
+linux-firmware
+mkinitcpio
+nvidia-open
+nvidia-utils

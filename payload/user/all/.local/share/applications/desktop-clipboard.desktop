@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Clipboard History
+Exec=@HOME@/.local/bin/desktop-clipboard
+Icon=edit-paste
+Terminal=false
+Categories=Settings;

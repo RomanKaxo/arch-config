@@ -1,0 +1,88 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "overlay",
+  "control-center-margin-top": 64,
+  "control-center-margin-right": 16,
+  "control-center-margin-bottom": 16,
+  "control-center-width": 510,
+  "notification-window-width": 410,
+  "timeout": 7,
+  "timeout-low": 4,
+  "timeout-critical": 0,
+  "transition-time": 220,
+  "keyboard-shortcuts": true,
+  "notification-grouping": true,
+  "image-visibility": "when-available",
+  "widgets": [
+    "title",
+    "dnd",
+    "notifications"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear"
+    },
+    "dnd": {
+      "text": "Do not disturb"
+    },
+    "mpris": {
+      "autohide": true
+    },
+    "notifications": {
+      "vexpand": true
+    },
+    "buttons-grid": {
+      "buttons-per-row": 3,
+      "actions": [
+        {
+          "label": "\udb82\udd28  Network",
+          "command": "swaync-client -cp -sw; nm-connection-editor"
+        },
+        {
+          "label": "\uf294  Bluetooth",
+          "command": "swaync-client -cp -sw; blueman-manager"
+        },
+        {
+          "label": "\udb81\udcc3  Output",
+          "command": "swaync-client -cp -sw; pavucontrol -t 3"
+        },
+        {
+          "label": "\udb80\udf6c  Input",
+          "command": "swaync-client -cp -sw; pavucontrol -t 4"
+        },
+        {
+          "label": "\udb80\udfd8  Themes",
+          "command": "swaync-client -cp -sw; @HOME@/.local/bin/desktop-theme"
+        },
+        {
+          "label": "\udb81\udc25  Session",
+          "command": "swaync-client -cp -sw; @HOME@/.local/bin/desktop-power"
+        },
+        {
+          "label": "\udb83\ude09  Wallpaper",
+          "command": "swaync-client -cp -sw; @HOME@/.local/bin/desktop-wallpaper"
+        },
+        {
+          "label": "\udb80\udd4d  Clipboard",
+          "command": "swaync-client -cp -sw; @HOME@/.local/bin/desktop-clipboard"
+        },
+        {
+          "label": "\udb80\udefc  System",
+          "command": "swaync-client -cp -sw; kitty --hold fastfetch"
+        }
+      ]
+    },
+    "volume": {
+      "label": "\udb81\udd7e",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": true,
+      "expand-per-app": false
+    }
+  }
+}

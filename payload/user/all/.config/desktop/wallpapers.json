@@ -1,0 +1,34 @@
+[
+  {
+    "file": "moonlit-lake.png",
+    "name": "Moonlit lake",
+    "author": "Local creation",
+    "tags": [
+      "nature",
+      "space",
+      "purple"
+    ],
+    "category": "Nature"
+  },
+  {
+    "file": "aurora-lake.png",
+    "name": "Violet aurora",
+    "author": "Local creation",
+    "tags": [
+      "nature",
+      "aurora",
+      "night"
+    ],
+    "category": "Nature"
+  },
+  {
+    "file": "graphite.png",
+    "name": "Graphite",
+    "author": "Local creation",
+    "tags": [
+      "minimal",
+      "dark"
+    ],
+    "category": "Minimal"
+  }
+]

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=ChatGPT
+Comment=ChatGPT by OpenAI
+Comment[cs]=Oficiální desktopová aplikace ChatGPT
+GenericName=AI assistant
+Exec=@HOME@/.local/bin/chatgpt %U
+Icon=@HOME@/.local/opt/chatgpt/usr/share/pixmaps/chatgpt.png
+Type=Application
+StartupNotify=true
+Categories=Utility;Development;
+MimeType=x-scheme-handler/codex;text/csv;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.openxmlformats-officedocument.presentationml.presentation;text/tab-separated-values;application/vnd.ms-excel;application/vnd.ms-excel.sheet.macroEnabled.12;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+
