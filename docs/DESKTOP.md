@@ -37,7 +37,10 @@ Počasí používá Brno a časové pásmo Europe/Prague; noční filtr má pův
 Prahy. Tyto osobní výchozí hodnoty lze upravit v `desktop-weather` a
 `desktop-nightlight.service`. Noční filtr se pouze zachovává jako volitelná služba.
 
-Hlasitost a zařízení spravuje PipeWire/WirePlumber a Pavucontrol. Párování Bluetooth,
+Klik na hlasitost ve Waybaru otevře panel `desktop-sound-control`: výstupy,
+mikrofon, hlasitost a směrování jednotlivých aplikací a profily zařízení.
+Panel používá PipeWire/WirePlumber přes `pactl`; Pavucontrol zůstává dostupný
+jako samostatná aplikace. Párování Bluetooth,
 Wi-Fi hesla, účty Spotify/Discord/Steam/Sober a reálné herní testy se řeší po přihlášení.
 
 ## Launcher a skleněný dock
@@ -64,6 +67,27 @@ okno, další Taby pokračují seznamem, Shift + Tab jde opačně. Výběr zahrn
 z ostatních ploch a minimalizovaná okna; odložené okno se při potvrzení obnoví.
 Esc zavře přepínač bez změny zaměření. Maximalizace zachovává horní panel
 a není fullscreen. Náhledy se snímají jen při otevřeném přepínači.
+Křížek v pravém horním rohu karty nebo Delete požádá aplikaci o zavření okna.
+Před zavřením se kontroluje adresa i PID; zbývající karty lze dál přepínat.
+Dialog pro neuložené změny případně zobrazí samotná aplikace.
+
+## Jas monitorů a noční režim
+
+Dvě ikonky slunce ve Waybaru ovládají hardwarový jas AOC a MSI přes DDC/CI.
+Klik otevře okno se slidery, kolečko mění jas po 5 %. Noční režim pod slidery
+přepíná teplotu obou monitorů na přibližně 4000 K; vypnutí obnoví běžné barvy.
+Filtr se zapíná ručně, funguje i přes den a při spuštění desktopu je vypnutý.
+
+`ddcutil` a modul `i2c-dev` jsou součástí instalace. V menu monitoru musí být
+povolené DDC/CI. Skript při změnách používá zapamatovanou sběrnici, slučuje
+požadavky ze slideru a po dokončení posunu ověřuje skutečný jas. Průběžné
+hodnoty a přiřazení sběrnic jsou jen v XDG_RUNTIME_DIR, nejsou součástí Gitu.
+
+Sériová čísla jsou v `~/.config/desktop/brightness-monitors.json`, například
+`{"aoc": "SERIAL_PRVNIHO_MONITORU", "msi": "SERIAL_DRUHEHO_MONITORU"}`.
+Profil `current-pc` obsahuje původní AOC a MSI. Profil `generic` je prázdný;
+po doplnění sériových čísel z `ddcutil detect --terse` restartuj Waybar.
+Ikonky nenakonfigurovaných monitorů jsou skryté.
 
 PrintScreen nemá čekací dobu mezi hotovými snímky. Zámek existuje pouze během
 interaktivního výběru oblasti, aby se nepřekrývalo více výběrových kurzorů.

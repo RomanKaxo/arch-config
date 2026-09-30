@@ -54,13 +54,27 @@ def activate(address, pid):
     return True
 
 
+def close(address, pid):
+    if not re.fullmatch(r'0x[0-9a-fA-F]+', address):
+        raise ValueError('Invalid window address')
+    if not any(w['address'] == address and w['pid'] == pid for w in clients()):
+        return False
+    expression = 'hl.dispatch(hl.dsp.window.close({window=' + json.dumps('address:' + address) + '}))'
+    result = subprocess.check_output(['hyprctl', 'eval', expression], text=True).strip()
+    if result != 'ok':
+        raise RuntimeError(result)
+    return True
+
+
 def main():
     if len(sys.argv) == 2 and sys.argv[1] == 'list':
         print(json.dumps(snapshot(clients())))
     elif len(sys.argv) == 4 and sys.argv[1] == 'activate':
         activate(sys.argv[2], int(sys.argv[3]))
+    elif len(sys.argv) == 4 and sys.argv[1] == 'close':
+        close(sys.argv[2], int(sys.argv[3]))
     else:
-        raise SystemExit('Usage: desktop-switcher list | activate ADDRESS PID')
+        raise SystemExit('Usage: desktop-switcher list | activate ADDRESS PID | close ADDRESS PID')
 
 
 if __name__ == '__main__':

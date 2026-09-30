@@ -384816,6 +384816,68 @@
       "mode": 420,
       "text": true,
       "capture": ".config/quickshell/reference/WindowSwitcher.qml"
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-brightness",
+      "target": ".local/bin/desktop-brightness",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "capture": ".local/bin/desktop-brightness",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-brightness-popup",
+      "target": ".local/bin/desktop-brightness-popup",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "capture": ".local/bin/desktop-brightness-popup",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-brightness-setup",
+      "target": ".local/bin/desktop-brightness-setup",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "capture": ".local/bin/desktop-brightness-setup",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.local/bin/desktop-sound-control",
+      "target": ".local/bin/desktop-sound-control",
+      "component": "user",
+      "profile": "all",
+      "mode": 493,
+      "capture": ".local/bin/desktop-sound-control",
+      "text": true
+    },
+    {
+      "source": "payload/user/current-pc/.config/desktop/brightness-monitors.json",
+      "target": ".config/desktop/brightness-monitors.json",
+      "component": "user",
+      "profile": "current-pc",
+      "mode": 420,
+      "text": true,
+      "capture": ".config/desktop/brightness-monitors.json"
+    },
+    {
+      "source": "payload/user/generic/.config/desktop/brightness-monitors.json",
+      "target": ".config/desktop/brightness-monitors.json",
+      "component": "user",
+      "profile": "generic",
+      "mode": 420,
+      "text": true
+    },
+    {
+      "source": "payload/system/all/etc/modules-load.d/desktop-brightness.conf",
+      "target": "etc/modules-load.d/desktop-brightness.conf",
+      "component": "system",
+      "profile": "all",
+      "mode": 420,
+      "text": true,
+      "capture": "/etc/modules-load.d/desktop-brightness.conf"
     }
   ]
 }

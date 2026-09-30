@@ -82,6 +82,7 @@ ShellRoot {
         function switchPrevious() { switcher.step(-1) }
         function finishSwitch() { switcher.finish() }
         function cancelSwitch() { switcher.cancel() }
+        function closeSwitchSelected() { switcher.closeWindow(switcher.selected) }
         function switchStatus(): string { return switcher.status() }
         function toggleLauncher() { root.toggle('launcher') }
         function toggleDashboard() { root.toggle('dashboard') }

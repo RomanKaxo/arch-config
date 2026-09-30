@@ -55,3 +55,21 @@ class SwitcherTests(unittest.TestCase):
         self.assertLess(args[2].index('hl.dsp.focus'), args[2].index('fullscreen_state'))
         self.assertIn('internal=1,client=1,action="set"', args[2])
         self.assertNotIn('toggle', args[2])
+
+    @patch.object(switcher.subprocess, 'check_output')
+    @patch.object(switcher, 'clients', return_value=[client(pid=20)])
+    def test_recycled_address_is_not_closed(self, clients, command):
+        self.assertFalse(switcher.close('0xabc', 10))
+        command.assert_not_called()
+
+    @patch.object(switcher, 'clients')
+    def test_invalid_close_address_is_rejected_before_accessing_compositor(self, clients):
+        with self.assertRaises(ValueError):
+            switcher.close('bad Lua injection', 10)
+        clients.assert_not_called()
+
+    @patch.object(switcher.subprocess, 'check_output', return_value='ok\n')
+    @patch.object(switcher, 'clients', return_value=[client()])
+    def test_close_targets_only_the_verified_window(self, clients, command):
+        self.assertTrue(switcher.close('0xabc', 10))
+        self.assertEqual(command.call_args.args[0], ['hyprctl', 'eval', 'hl.dispatch(hl.dsp.window.close({window="address:0xabc"}))'])

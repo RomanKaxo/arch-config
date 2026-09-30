@@ -22,3 +22,9 @@
     margin: 5px 0;
 }
 #custom-gpu.unavailable { color: #929292; }
+
+#custom-brightness-aoc, #custom-brightness-msi { color: #c5c5c5; padding: 0 8px; margin: 5px 0; border-radius: 8px; }
+#custom-brightness-aoc:hover, #custom-brightness-msi:hover { background: #303030; }
+#custom-brightness-aoc.unavailable, #custom-brightness-msi.unavailable { color: #929292; }
+
+#custom-brightness-aoc, #custom-brightness-msi { font-size: 11px; padding: 0 4px; }

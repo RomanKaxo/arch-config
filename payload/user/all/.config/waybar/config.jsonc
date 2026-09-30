@@ -22,6 +22,8 @@
     "hyprland/language",
     "network",
     "bluetooth",
+    "custom/brightness-aoc",
+    "custom/brightness-msi",
     "wireplumber",
     "tray",
     "idle_inhibitor",
@@ -82,7 +84,7 @@
     ],
     "max-volume": 100,
     "scroll-step": 5,
-    "on-click": "pavucontrol",
+    "on-click": "@HOME@/.local/bin/desktop-sound-control",
     "on-click-right": "@HOME@/.local/bin/desktop-audio mute",
     "tooltip-format": "{node_name}",
     "on-scroll-up": "@HOME@/.local/bin/desktop-audio up",
@@ -135,7 +137,7 @@
     "return-type": "json",
     "interval": 3,
     "on-click": "@HOME@/.local/bin/desktop-audio mic-mute",
-    "on-click-right": "pavucontrol -t 4"
+    "on-click-right": "@HOME@/.local/bin/desktop-sound-control"
   },
   "memory": {
     "format": "RAM {avail:0.1f}G",
@@ -155,7 +157,7 @@
     "format": "{}",
     "restart-interval": 3,
     "on-click": "playerctl play-pause",
-    "on-click-right": "pavucontrol",
+    "on-click-right": "@HOME@/.local/bin/desktop-sound-control",
     "exec-on-event": false,
     "expand": true,
     "align": 0.5,
@@ -176,5 +178,31 @@
     "return-type": "json",
     "format": "{}",
     "interval": 3
+  },
+  "custom/brightness-aoc": {
+    "exec": "@HOME@/.local/bin/desktop-brightness aoc status",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 15,
+    "on-scroll-up": "@HOME@/.local/bin/desktop-brightness aoc up",
+    "on-scroll-down": "@HOME@/.local/bin/desktop-brightness aoc down",
+    "on-click": "@HOME@/.local/bin/desktop-brightness-popup",
+    "on-click-right": "@HOME@/.local/bin/desktop-brightness-popup",
+    "exec-on-event": true,
+    "smooth-scrolling-threshold": 1,
+    "exec-if": "@HOME@/.local/bin/desktop-brightness aoc configured"
+  },
+  "custom/brightness-msi": {
+    "exec": "@HOME@/.local/bin/desktop-brightness msi status",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 15,
+    "on-scroll-up": "@HOME@/.local/bin/desktop-brightness msi up",
+    "on-scroll-down": "@HOME@/.local/bin/desktop-brightness msi down",
+    "on-click": "@HOME@/.local/bin/desktop-brightness-popup",
+    "on-click-right": "@HOME@/.local/bin/desktop-brightness-popup",
+    "exec-on-event": true,
+    "smooth-scrolling-threshold": 1,
+    "exec-if": "@HOME@/.local/bin/desktop-brightness msi configured"
   }
 }

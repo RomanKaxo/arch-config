@@ -18,6 +18,8 @@ PanelWindow {
     property int completedSession: -1
     property bool loading: false
     property bool commitPending: false
+    property string closingAddress: ''
+    property int closingSession: -1
     property bool opened: shell.view === 'switcher'
     visible: opened && windows.length > 0
     screen: shell.targetScreen
@@ -52,6 +54,7 @@ PanelWindow {
         listing.running = true
     }
     function finish() {
+        if (closing.running) { commitPending = true; return }
         if (loading) { commitPending = true; return }
         if (!opened) return
         completedSession = Math.max(completedSession, session)
@@ -68,6 +71,29 @@ PanelWindow {
         windows = []
     }
     function status() { return JSON.stringify({loading: loading, opened: opened, selected: selected, session: session, revision: revision, completed: completedSession, pending: pendingSteps, windows: windows}) }
+    function closeWindow(index) {
+        if (closing.running || !windows[index]) return
+        const chosen = windows[index]
+        closingAddress = chosen.address
+        closingSession = session
+        closing.command = [Quickshell.env('HOME') + '/.local/bin/desktop-switcher', 'close', chosen.address, String(chosen.pid)]
+        closing.running = true
+    }
+    Process {
+        id: closing
+        onExited: (code, status) => {
+            if (code === 0 && win.session === win.closingSession && win.opened) {
+                const selectedAddress = win.windows[win.selected]?.address
+                win.windows = win.windows.filter(w => w.address !== win.closingAddress)
+                const retained = win.windows.findIndex(w => w.address === selectedAddress)
+                win.selected = retained >= 0 ? retained : Math.min(win.selected, Math.max(0, win.windows.length - 1))
+            }
+            win.closingAddress = ''
+            if (!win.windows.length && win.opened) win.cancel()
+            else if (win.commitPending) { win.commitPending = false; win.finish() }
+            else Qt.callLater(() => keyboard.forceActiveFocus())
+        }
+    }
     function toplevel(address) {
         return Hyprland.toplevels.values.find(t => t.address.replace(/^0x/, '') === address.replace(/^0x/, ''))?.wayland || null
     }
@@ -99,6 +125,7 @@ PanelWindow {
             else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) { win.finish(); event.accepted = true }
             else if (event.key === Qt.Key_Right) { win.step(1); event.accepted = true }
             else if (event.key === Qt.Key_Left) { win.step(-1); event.accepted = true }
+            else if (event.key === Qt.Key_Delete) { win.closeWindow(win.selected); event.accepted = true }
         }
         Keys.onReleased: event => {
             if (event.key === Qt.Key_Alt && !event.isAutoRepeat) { win.finish(); event.accepted = true }
@@ -116,7 +143,7 @@ PanelWindow {
             }
             Text {
                 anchors.right: parent.right; anchors.rightMargin: 24; y: 20
-                text: 'Tab → další   ·   Shift + Tab ← zpět   ·   pusť Alt pro výběr'
+                text: 'Tab: další   ·   Delete / ×: zavřít   ·   pusť Alt pro výběr'
                 color: Design.muted; font.family: Design.font; font.pixelSize: 12; renderType: Text.NativeRendering
             }
             Flickable {
@@ -145,7 +172,7 @@ PanelWindow {
                             border.width: win.selected === index ? 2 : 1
                             border.color: win.selected === index ? Design.accent : Design.alpha(Design.border, 0.6)
                             Text {
-                                x: 12; y: 10; width: parent.width - 24; elide: Text.ElideRight
+                                x: 12; y: 10; width: parent.width - 52; elide: Text.ElideRight
                                 text: card.modelData.title || card.modelData.app
                                 color: Design.text; font.family: Design.font; font.pixelSize: 12; renderType: Text.NativeRendering
                             }
@@ -166,6 +193,18 @@ PanelWindow {
                                 color: Design.muted; font.family: Design.font; font.pixelSize: 10; renderType: Text.NativeRendering
                             }
                             MouseArea { anchors.fill: parent; onClicked: { win.selected = card.index; win.finish() } }
+                            Rectangle {
+                                anchors.right: parent.right; anchors.rightMargin: 7; y: 6
+                                width: 26; height: 26; radius: 8; z: 10
+                                color: closeMouse.containsMouse ? '#a93838' : Design.alpha(Design.selection, 0.85)
+                                opacity: win.closingAddress === card.modelData.address ? 0.45 : 1
+                                Text { anchors.centerIn: parent; text: '×'; color: Design.text; font.pixelSize: 19 }
+                                MouseArea {
+                                    id: closeMouse; anchors.fill: parent; hoverEnabled: true
+                                    enabled: !closing.running; cursorShape: Qt.PointingHandCursor
+                                    onClicked: win.closeWindow(card.index)
+                                }
+                            }
                         }
                     }
                 }

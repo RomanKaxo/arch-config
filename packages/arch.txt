@@ -6,6 +6,7 @@ bluez
 bluez-utils
 cava
 cliphist
+ddcutil
 discord
 evince
 fastfetch
@@ -21,6 +22,7 @@ github-cli
 grim
 gst-plugin-pipewire
 gst-plugins-base
+gtk3
 gvfs
 gvfs-mtp
 gvfs-smb
@@ -39,6 +41,7 @@ kvantum-qt5
 lib32-libpulse
 lib32-vulkan-icd-loader
 libnotify
+libpulse
 loupe
 mousepad
 mpv
@@ -57,6 +60,7 @@ pavucontrol
 pipewire
 pipewire-alsa
 pipewire-pulse
+python-gobject
 qt5-wayland
 qt5ct
 qt6ct

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo 'Instalace ovládání hardwarového jasu monitorů. Zadej své sudo heslo.'
+sudo pacman -S --needed --noconfirm ddcutil
+sudo modprobe i2c-dev
+echo i2c-dev | sudo tee /etc/modules-load.d/desktop-brightness.conf >/dev/null
+sudo udevadm trigger --subsystem-match=i2c-dev
+sudo udevadm settle
+ddcutil detect
+systemctl --user restart waybar.service
+echo 'Hotovo. Jas AOC a MSI měníš kolečkem nad ikonami slunce ve Waybaru.'

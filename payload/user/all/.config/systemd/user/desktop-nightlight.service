@@ -3,5 +3,5 @@ Description=Warm evening display color temperature
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/wlsunset -l 50.0755 -L 14.4375 -t 4000 -T 6500
+ExecStart=/usr/bin/wlsunset -l 50.0755 -L 14.4375 -t 4000 -T 4001
 Restart=on-failure

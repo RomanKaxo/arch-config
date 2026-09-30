@@ -40,6 +40,7 @@ hl.layer_rule({name = "desktop-panel-blur", match = {namespace = "^(waybar|nwg-d
 hl.layer_rule({name = "desktop-native-motion", match = {namespace = "^desktop-(launcher|dashboard|control|wallpapers|switcher)$"}, no_anim = true})
 hl.layer_rule({name = "notification-motion", match = {namespace = "^swaync-notification-window$"}, animation = "slide top"})
 hl.layer_rule({name = "history-motion", match = {namespace = "^swaync-control-center$"}, animation = "slide right"})
+hl.window_rule({name = "desktop-controls-float", match = {class = "^desktop-(sound-control|brightness-popup)$"}, float = true, center = true})
 
 hl.on("hyprland.start", function()
     if desktopPrimaryMonitor then
