@@ -1,4 +1,20 @@
-# Arch config — Roman
+<p align="center">
+  <img src="docs/assets/arch-desktop.svg" alt="Arch. Po svém. — Romanův desktop" width="1000">
+</p>
+
+<h1 align="center">Desktop, který sedí mému workflow.</h1>
+
+<p align="center">Arch Linux · Hyprland · Quickshell · Waybar<br>
+Vlastní panely, skleněný dock a konfigurace, ke které se dá vrátit.</p>
+
+<p align="center">
+  <a href="#co-je-uvnitř">Co je uvnitř</a> ·
+  <a href="#obnova">Obnova</a> ·
+  <a href="docs/DESKTOP.md">Ovládání</a> ·
+  <a href="docs/MAINTENANCE.md">Správa</a>
+</p>
+
+---
 
 Kompletní konfigurace současného Arch Linux desktopu: Hyprland, Quickshell,
 Waybar, dock, témata, tapety, audio, schránka, zamykání, vlastní skripty,
@@ -8,6 +24,38 @@ systemd služby, SDDM a seznam aplikací. Soukromý repozitář pro obnovu a spr
 `sudo`, Git a Pythonem.** Instalace disků a bootloaderu je mimo rozsah.
 Nejde o image disku ani zálohu osobních dat. Arch je rolling release; seznam
 pozorovaných verzí zachycuje původní stav, nevynucuje nebezpečný downgrade.
+
+## Co je uvnitř
+
+| Součást | Jak ji používám |
+| --- | --- |
+| **Hyprland** | Plochy, správa oken, náhledy Alt-Tab a vlastní klávesové zkratky. |
+| **Quickshell a Waybar** | Launcher, dashboard, ovládací centrum a stavový panel. |
+| **Skleněný dock** | Rychlé spuštění aplikací a ruční skrytí jednou zkratkou. |
+| **Společná paleta** | Sladěné GTK, Qt, Kitty, Fuzzel, Waybar a Hyprlock. |
+| **Každodenní nástroje** | Tapety, schránka, screenshoty, audio a jas podporovaných monitorů. |
+| **Obnova z repozitáře** | Manifest souborů, hardwarové profily, seznamy balíčků a zálohy před přepsáním. |
+
+### Pár zkratek, které stačí na začátek
+
+| Zkratka | Akce |
+| --- | --- |
+| `Super + Enter` | Terminál Kitty |
+| `Super + Space` | Launcher |
+| `Super + N` | Ovládací centrum |
+| `Super + D` | Dashboard |
+| `Super + Ctrl + D` | Zobrazit / skrýt dock |
+| `Super + L` | Zamknout desktop |
+| `Print` / `Shift + Print` | Výřez / celá plocha |
+
+[Úplný seznam zkratek a chování desktopu →](docs/DESKTOP.md)
+
+## Vyber profil
+
+| Profil | Použití |
+| --- | --- |
+| `generic` | Jiný počítač. Společný vzhled a ovládání; ovladač, kernel a mikrokód připravíš v základním Archu. |
+| `current-pc` | Původní sestava. Zahrnuje její systémové balíčky a konfiguraci monitorů. |
 
 ## Obnova
 
@@ -84,6 +132,17 @@ python -m unittest discover -s tests -v
 Rozsah a výjimky: [INVENTORY.md](docs/INVENTORY.md).
 Výsledky skutečných testů: [VALIDATION.md](docs/VALIDATION.md).
 Ovládání: [DESKTOP.md](docs/DESKTOP.md).
+
+## Dokumentace
+
+| Chci… | Otevřít |
+| --- | --- |
+| Obnovit desktop a případně vrátit instalaci | [RESTORE.md](docs/RESTORE.md) |
+| Nastavit aplikace a přihlášení | [APPLICATIONS.md](docs/APPLICATIONS.md) |
+| Zjistit, co se zálohuje | [INVENTORY.md](docs/INVENTORY.md) |
+| Spravovat konfiguraci a balíčky | [MAINTENANCE.md](docs/MAINTENANCE.md) |
+| Projít výsledky ověření | [VALIDATION.md](docs/VALIDATION.md) |
+| Dohledat původ prostředků a licence | [SOURCES.md](docs/SOURCES.md) |
 
 ## Struktura
 
