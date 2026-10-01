@@ -327,6 +327,7 @@ def packages(args):
                     for line in (ROOT / 'packages' / f).read_text().splitlines()
                     if line.strip() and not line.startswith('#')})
     command(['sudo', 'pacman', '-Syu', '--needed', *names], args.dry_run)
+    command([sys.executable, ROOT / 'tools/install_deepfilter.py'], args.dry_run)
     command(['flatpak', 'remote-add', '--user', '--if-not-exists', 'flathub',
              'https://dl.flathub.org/repo/flathub.flatpakrepo'], args.dry_run)
     for line in (ROOT / 'packages/flatpak.tsv').read_text().splitlines():

@@ -4,6 +4,7 @@ base-devel
 blueman
 bluez
 bluez-utils
+calf
 cava
 cliphist
 ddcutil
@@ -44,6 +45,8 @@ lib32-vulkan-icd-loader
 libnotify
 libpulse
 loupe
+lsp-plugins-lv2
+mda.lv2
 mousepad
 mpv
 network-manager-applet
@@ -85,8 +88,11 @@ wireplumber
 wl-clipboard
 wlsunset
 wpa_supplicant
+x42-plugins-lv2
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xdg-user-dirs
 xdg-utils
+yelp
+zam-plugins-lv2
 zram-generator

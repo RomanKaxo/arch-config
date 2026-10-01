@@ -20,5 +20,12 @@
     "Codex standalone (managed installer)",
     "OmniRoute npm module (optional workspace)",
     "Elaris-Harness project (optional workspace)"
-  ]
+  ],
+  "deepfilter": {
+    "url": "https://github.com/Rikorose/DeepFilterNet",
+    "version": "0.5.6",
+    "aur": "https://aur.archlinux.org/libdeep_filter_ladspa-bin.git",
+    "sha256": "2ca3205c2911d389604a826a240e745597d50252b5cab81c8248252b335e2236",
+    "recipe_vendored": true
+  }
 }

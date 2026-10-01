@@ -43,6 +43,12 @@ Panel používá PipeWire/WirePlumber přes `pactl`; Pavucontrol zůstává dost
 jako samostatná aplikace. Párování Bluetooth,
 Wi-Fi hesla, účty Spotify/Discord/Steam/Sober a reálné herní testy se řeší po přihlášení.
 
+EasyEffects obsahuje i všechny volitelné pluginy z Arch repozitáře: Calf, LSP,
+MDA, x42 a ZAM; Yelp poskytuje nápovědu. DeepFilterNet LADSPA se instaluje přes
+`tools/install_deepfilter.py` ze zachovaného AUR předpisu a binárky autora,
+ověřené připnutým SHA-256. Krok `packages` ho zahrnuje automaticky.
+Nastavení efektů a mikrofonu si uživatel volí sám; jeho presety nejsou v Gitu.
+
 ## Launcher a skleněný dock
 
 Launcher a dashboard se vykreslují v nativní velikosti bez dodatečného 125% zvětšení
