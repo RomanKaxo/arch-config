@@ -384878,6 +384878,15 @@
       "mode": 420,
       "text": true,
       "capture": "/etc/modules-load.d/desktop-brightness.conf"
+    },
+    {
+      "source": "payload/user/all/.config/easyeffectsrc",
+      "target": ".config/easyeffectsrc",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "text": true,
+      "capture": ".config/easyeffectsrc"
     }
   ]
 }
