@@ -180,7 +180,7 @@ ShellRoot {
 
     Overlay {
         id:launcher; name:'launcher'
-        onOpenedChanged: if (opened) { search.forceActiveFocus(); appList.currentIndex=0 }
+        onOpenedChanged: if (opened) { search.text=''; root.query=''; search.forceActiveFocus(); appList.currentIndex=0 }
         Glass {
             width:Math.min(parent.width-96,1280); height:Math.min(parent.height-120,820)
             anchors.centerIn:parent; anchors.verticalCenterOffset:Math.round(10*(1-launcher.progress)); opacity:launcher.progress
