@@ -1,4 +1,6 @@
 /* Zvukové spektrum a aktualizace balíčků. */
+/* The main top bar joins the vertical taskbar at their shared left edge. */
+window#waybar.DP-2:not(.taskbar) { border-bottom-left-radius: 0; }
 /* Font kreslí tečky přímo v textovém modulu, bez překryvného okna. */
 #custom-audiowaves {
     font-family: "Desktop Waves";

@@ -41,6 +41,9 @@ systémového Pythonu nebo cesty z build serverů.
 
 ## Kontroly před publikováním
 
+Prezentace `README.md` a `read.md` mají shodný obsah; při úpravě udržuj oba soubory
+sladěné. Banner je vlastní SVG v `docs/assets/arch-desktop.svg`.
+
 ```bash
 python -m unittest discover -s tests -v
 ./arch-config check --profile current-pc

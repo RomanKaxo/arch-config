@@ -27,6 +27,19 @@ class SwitcherTests(unittest.TestCase):
         self.assertEqual([w['address'] for w in result], ['0xdef', '0xaaa', '0xabc', '0xddd'])
         self.assertTrue(result[1]['minimized'])
 
+    def test_mru_includes_individually_minimized_windows(self):
+        result = switcher.snapshot([client(workspace='special:minimized-0xabc-1'),
+                                    client('0xdef', workspace='special:minimized-other')])
+        self.assertEqual([w['address'] for w in result], ['0xabc', '0xdef'])
+        self.assertTrue(all(w['minimized'] for w in result))
+
+    @patch.object(switcher.subprocess, 'check_output', side_effect=['{}', 'ok\n'])
+    @patch.object(switcher.subprocess, 'run')
+    @patch.object(switcher, 'clients', return_value=[client(workspace='special:minimized-0xabc-1')])
+    def test_individual_minimized_window_is_restored_before_focus(self, clients, restore, command):
+        self.assertTrue(switcher.activate('0xabc', 10))
+        self.assertEqual(restore.call_args.args[0][-2:], ['restore', '0xabc'])
+
     @patch.object(switcher.subprocess, 'check_output', return_value='{}')
     @patch.object(switcher, 'clients', return_value=[client(pid=20)])
     def test_recycled_address_does_not_activate_another_process(self, clients, command):

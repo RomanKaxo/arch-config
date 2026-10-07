@@ -1,5 +1,28 @@
 # Skutečně provedené ověření
 
+## Levý taskbar a grafitová prezentace — 7. října 2026
+
+- Prošlo všech 46 testů správy oken, minimalizace, přepínače, screenshotů,
+  obnovy a viditelnosti taskbaru. Nové testy ověřují odlišné signály show/hide
+  pouze hlavnímu procesu služby, čekání na správný PID horního panelu,
+  nehotové povrchy a časový limit. Obecný profil čeká na všechny výstupy.
+- `check` prošel pro `generic` i `current-pc`: každý má 42 757 uživatelských
+  položek a 36 kontrol syntaxe skriptů/JSON.
+- Na živé relaci původního stroje ověřeno opakované show/hide, překrytí
+  launcherem a návrat bez restartu procesů. Horní panel začíná x=8, y=8;
+  levý x=8, y=48. Vyhrazené místo je 68 px vlevo a 48 px nahoře.
+- Fullscreen video na HDMI-A-1 překrylo horní panel; screenshot zkontrolovaný.
+  Hyprland nehlásil chyby konfigurace. Po opravě `interval: "once"` zmizelo
+  trvalé vytížení způsobené opakovaným načítáním SVG launcheru.
+- Banner README skutečně vyrenderovaný pomocí `rsvg-convert` a vizuálně
+  zkontrolovaný. Používá vlastní schematický náhled bez osobního obsahu oken.
+- Audit celého payloadu a manifestu skončil bez nálezů. Ověřené také místní
+  odkazy README a vykreslení konfigurace taskbaru pro jiné HOME v obou profilech.
+- Nový obecný profil ověřený v testech a kontrolách konfigurace; na jiném
+  fyzickém počítači se tento profil zatím nespouštěl.
+
+## Původní ověření obnovy
+
 Ověřeno 30. září 2026 na současném Arch Linuxu s Hyprlandem 0.56.2.
 Všechny zápisové zkoušky konfigurací proběhly v `/tmp/arch-config-validation`;
 aktivní konfigurace uživatele roman nebyla nasazovaná ani restartovaná.

@@ -8,7 +8,7 @@
 | Super + Space / samotný Super | Launcher |
 | Super + N | Ovládací centrum |
 | Super + D | Dashboard |
-| Super + Ctrl + D | Zobrazit / skrýt dock |
+| Super + Ctrl + D | Zobrazit / skrýt levý taskbar |
 | Alt + Tab / Alt + Shift + Tab | Náhledy oken podle posledního použití; puštění Altu potvrdí a maximalizuje výběr |
 | Super + L | Zamknutí |
 | Super + Q | Zavření okna |
@@ -49,24 +49,47 @@ MDA, x42 a ZAM; Yelp poskytuje nápovědu. DeepFilterNet LADSPA se instaluje př
 ověřené připnutým SHA-256. Krok `packages` ho zahrnuje automaticky.
 Nastavení efektů a mikrofonu si uživatel volí sám; jeho presety nejsou v Gitu.
 
-## Launcher a skleněný dock
+## Launcher, Waybar a levý taskbar
 
 Launcher a dashboard se vykreslují v nativní velikosti bez dodatečného 125% zvětšení
 na 1440p monitoru. Animace používá průhlednost a malý posun, nikoli škálování textu.
 Ikony se rasterizují pro skutečné pixelové měřítko cílového monitoru.
 
-Dock má průhledné skleněné pozadí s compositorovým blur a ikony 32 px bez zvětšení
-při hoveru. Po novém přihlášení je viditelný. `Super + Ctrl + D` ho přepne;
+Levý taskbar je druhý Waybar se společným černošedým stylem. Na původním stroji
+je široký 60 px a navazuje na horní panel na DP-2: horní začíná na x=8, y=8,
+levý na x=8, y=48. Profil `generic` zobrazuje taskbar na každém monitoru bez
+pevného názvu výstupu. Horní panel se musí vykreslit první; hlídá to
+`desktop-taskbar-ready` v příslušném hardwarovém profilu.
+
+Nahoře jsou launcher, pracovní plochy, počítadlo minimalizovaných oken a aplikace
+s ikonami 28 px. Dole bdělý režim, oznámení, zámek a napájení. Horní panel drží
+čas, audiovlny a systémové ukazatele. SVG launcheru se načítá jednou přes
+`interval: "once"`, aby se obrázek neobnovoval každou milisekundu.
+
+Oba panely mají průhlednost 0,62 a compositorový blur velikosti 10 se dvěma průchody.
+Používají vrstvu `bottom`: běžná dlaždicová okna respektují vyhrazené místo,
+fullscreen video nebo hra panely překryje. Vnitřní odsazení (`gaps_in`) je 4 px,
+vnější (`gaps_out`) 8 px. Tapeta Black Waves je uložená jako SVG i PNG a přes
+`current.png` se použije také při přihlášení a zamykání.
+
+Taskbar po novém přihlášení zůstává viditelný. `Super + Ctrl + D` ho přepne;
 `desktop-dock show` a `desktop-dock hide` nastaví stav přímo.
 
-Při otevření launcheru, dashboardu nebo ovládacího centra se dock dočasně skryje.
+Při otevření launcheru, dashboardu nebo ovládacího centra se taskbar dočasně skryje.
 Po jejich zavření se vrátí pouze tehdy, pokud nebyl ručně skrytý. Změna motivu nebo
-restart docku zachová ruční volbu v aktuální relaci. Nové přihlášení ji vrátí na
-viditelný dock. Stav se uchovává v `~/.local/state/desktop/dock.json`, informace
+restart taskbaru zachová ruční volbu v aktuální relaci. Nové přihlášení ji vrátí na
+viditelný taskbar. Stav se uchovává v `~/.local/state/desktop/dock.json`, informace
 o otevřeném panelu v XDG_RUNTIME_DIR; tato data nejsou v Gitu.
 
-Dock zůstává ve vrstvě top bez vyhrazeného místa, takže nepřesouvá pracovní okna
-a fullscreen je nad ním. Restart jeho služby zachová aplikace spuštěné z docku.
+Názvy `desktop-dock.service` a `desktop-dock` zůstávají kvůli návaznosti na relaci
+a přepínání motivů. Služba spouští Waybar s `taskbar.jsonc` a `taskbar.css`;
+USR1 panel zobrazí, USR2 skryje. Signál míří pouze na hlavní proces této služby,
+nikoli na horní Waybar. Restart horní služby obnoví oba panely v tomto pořadí.
+`KillMode=process` zachová dříve spuštěné aplikace.
+
+Nová a obnovená okna se skládají vedle ostatních;
+maximalizace pracovních oken se při aktivaci druhého okna zruší. Plovoucí dialogy
+a výslovný fullscreen videa nebo hry si zachovají svůj režim.
 
 Alt-Tab drží pořadí oken po celou dobu výběru. První Tab vybere poslední použité
 okno, další Taby pokračují seznamem, Shift + Tab jde opačně. Výběr zahrnuje okna
@@ -76,6 +99,11 @@ a není fullscreen. Náhledy se snímají jen při otevřeném přepínači.
 Křížek v pravém horním rohu karty nebo Delete požádá aplikaci o zavření okna.
 Před zavřením se kontroluje adresa i PID; zbývající karty lze dál přepínat.
 Dialog pro neuložené změny případně zobrazí samotná aplikace.
+
+Žluté tlačítko v titulku minimalizuje pouze dané okno. Každé okno se odkládá
+samostatně, takže opakovaná minimalizace neskryje další okna
+ani celou plochu. Obnovení funguje přes Alt-Tab, počítadlo v levém panelu
+nebo Super + Shift + M; obnovit lze i okna odložená starší konfigurací.
 
 ## Jas monitorů a noční režim
 

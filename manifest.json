@@ -56,6 +56,15 @@
       "text": true
     },
     {
+      "source": "payload/user/all/.config/hypr/tiling.lua",
+      "target": ".config/hypr/tiling.lua",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "capture": ".config/hypr/tiling.lua",
+      "text": true
+    },
+    {
       "source": "payload/user/all/.config/quickshell/reference/ControlCenter.qml",
       "target": ".config/quickshell/reference/ControlCenter.qml",
       "component": "user",
@@ -659,10 +668,10 @@
       "text": true
     },
     {
-      "source": "payload/user/all/.config/waybar/extras.css",
+      "source": "payload/user/current-pc/.config/waybar/extras.css",
       "target": ".config/waybar/extras.css",
       "component": "user",
-      "profile": "all",
+      "profile": "current-pc",
       "mode": 420,
       "capture": ".config/waybar/extras.css",
       "text": true
@@ -1527,7 +1536,7 @@
       "profile": "all",
       "mode": 511,
       "capture": ".local/share/wallpapers/current.png",
-      "link": "@HOME@/.local/share/wallpapers/moonlit-lake.png"
+      "link": "@HOME@/.local/share/wallpapers/black-waves.png"
     },
     {
       "source": "payload/user/all/.local/share/wallpapers/graphite.png",
@@ -384887,6 +384896,87 @@
       "mode": 420,
       "text": true,
       "capture": ".config/easyeffectsrc"
+    },
+    {
+      "source": "payload/user/all/.config/waybar/taskbar.css",
+      "target": ".config/waybar/taskbar.css",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "capture": ".config/waybar/taskbar.css",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.config/waybar/arch-launcher.svg",
+      "target": ".config/waybar/arch-launcher.svg",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "capture": ".config/waybar/arch-launcher.svg",
+      "text": true
+    },
+    {
+      "source": "payload/user/current-pc/.local/bin/desktop-taskbar-ready",
+      "target": ".local/bin/desktop-taskbar-ready",
+      "component": "user",
+      "profile": "current-pc",
+      "mode": 420,
+      "capture": ".local/bin/desktop-taskbar-ready",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.local/share/wallpapers/black-waves.svg",
+      "target": ".local/share/wallpapers/black-waves.svg",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "capture": ".local/share/wallpapers/black-waves.svg",
+      "text": true
+    },
+    {
+      "source": "payload/user/all/.local/share/wallpapers/black-waves.png",
+      "target": ".local/share/wallpapers/black-waves.png",
+      "component": "user",
+      "profile": "all",
+      "mode": 420,
+      "capture": ".local/share/wallpapers/black-waves.png",
+      "text": false
+    },
+    {
+      "source": "payload/user/current-pc/.config/waybar/taskbar.jsonc",
+      "target": ".config/waybar/taskbar.jsonc",
+      "component": "user",
+      "profile": "current-pc",
+      "mode": 420,
+      "capture": ".config/waybar/taskbar.jsonc",
+      "text": true
+    },
+    {
+      "source": "payload/user/generic/.config/waybar/taskbar.jsonc",
+      "target": ".config/waybar/taskbar.jsonc",
+      "component": "user",
+      "profile": "generic",
+      "mode": 420,
+      "capture": ".config/waybar/taskbar.jsonc",
+      "text": true
+    },
+    {
+      "source": "payload/user/generic/.config/waybar/extras.css",
+      "target": ".config/waybar/extras.css",
+      "component": "user",
+      "profile": "generic",
+      "mode": 420,
+      "capture": ".config/waybar/extras.css",
+      "text": true
+    },
+    {
+      "source": "payload/user/generic/.local/bin/desktop-taskbar-ready",
+      "target": ".local/bin/desktop-taskbar-ready",
+      "component": "user",
+      "profile": "generic",
+      "mode": 420,
+      "capture": ".local/bin/desktop-taskbar-ready",
+      "text": true
     }
   ]
 }

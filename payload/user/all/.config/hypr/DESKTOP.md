@@ -27,6 +27,7 @@ For the seven palettes, added daily/gaming apps and current validation, see
 | Super+Shift+V | Clipboard history |
 | Super+Shift+W | Wallpaper picker |
 | Super+Shift+T | Seven-palette theme selector |
+| Super+Ctrl+D | Show / hide the left taskbar |
 | Super+V | Toggle floating, preserved from original configuration |
 | Super+F | Toggle fullscreen |
 | Super+arrows | Focus adjacent window |
@@ -47,14 +48,29 @@ Click notifications to open history; right-click to toggle Do Not Disturb.
 
 ## Appearance and wallpaper
 
-Graphite surfaces, neutral gray accents, 12px window corners, 2px borders, 5/10px gaps,
-lightweight animations, two-pass blur and subtle terminal transparency.
+Graphite surfaces, neutral gray accents, 12px window corners, 2px borders, 4/8px gaps,
+lightweight animations, two-pass blur (size 10) and subtle terminal transparency.
 GTK uses adw-gtk3-dark / the dark preference; Qt 5/6 uses the palette-generated Kvantum Desktop theme.
 Icons: Graphite-Dark (neutral folder variants over Colloid). Text: Inter Variable. Terminal: JetBrainsMono Nerd Font.
 
 Tapety spravuje **Waypaper**: otevři jej přes **Super+Shift+W** nebo spouštěč aplikací. Soubory zůstávají v `~/.local/share/wallpapers`; výběr se obnoví při přihlášení. Tapeta hlavního monitoru se synchronizuje také pro Hyprlock.
 
 Waybar používá černou a šedou, dlouhé tečkované audio vlny a indikátor aktualizací balíčků **↑**. Klik na indikátor otevře seznam, pravé tlačítko spustí kontrolu.
+
+Taskbar je od 7. října 2026 podél levého okraje hlavního monitoru DP-2.
+Je to samostatný Waybar se stejným průhledným černošedým stylem jako horní panel.
+Oba panely tvoří spojené L: horní začíná na x=8, y=8, levý na x=8, y=48.
+Spouštěč používá vystředěné SVG, načtené jednou (`interval: "once"`).
+Nahoře má spouštěč, pracovní plochy a otevřená okna; dole bdělý režim,
+notifikace, zámek a napájení. Tyto moduly byly přesunuty z horního panelu.
+Vyplňuje dostupnou výšku a vyhrazuje si místo vedle oken. Používá službu
+`desktop-dock.service` a `~/.config/waybar/taskbar.jsonc` / `taskbar.css`.
+**Super+Ctrl+D** jej ručně skryje/zobrazí; pomocný skript posílá USR1 (show)
+a USR2 (hide) pouze této službě. Pozadí obou panelů má opacity 0.62.
+Oba používají vrstvu `bottom`: dlaždicová okna respektují vyhrazené místo,
+fullscreen video panely překryje. `desktop-taskbar-ready` čeká na povrch horního
+panelu; restart Waybaru obnoví oba panely ve správném pořadí.
+Černá tapeta s jemnými šedými vlnami: `~/.local/share/wallpapers/black-waves.png`.
 
 Podrobná mapa souborů, ovládání a zálohy: [WAYBAR-WAYPAPER.md](../../.local/state/desktop-setup/WAYBAR-WAYPAPER.md).
 

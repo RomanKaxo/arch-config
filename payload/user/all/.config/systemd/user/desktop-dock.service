@@ -1,13 +1,15 @@
 [Unit]
-Description=Compact dock with remembered manual visibility
-PartOf=graphical-session.target
-After=graphical-session.target
+Description=Left taskbar with reserved window space
+PartOf=graphical-session.target waybar.service
+Wants=waybar.service
+After=graphical-session.target waybar.service
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/nwg-dock-hyprland -r -l top -i 32 -p bottom -mb 14@DOCK_OUTPUT@ -s style.css -ico view-app-grid-symbolic -c "@HOME@/.local/bin/desktop-panel toggleLauncher"
+ExecStartPre=/usr/bin/python3 %h/.local/bin/desktop-taskbar-ready
+ExecStart=/usr/bin/waybar --config %h/.config/waybar/taskbar.jsonc --style %h/.config/waybar/taskbar.css
 ExecStartPost=%h/.local/bin/desktop-dock sync --settle
-# Dock-launched applications survive dock restarts.
+# Taskbar-launched applications survive panel restarts.
 KillMode=process
 Restart=on-failure
 RestartSec=2

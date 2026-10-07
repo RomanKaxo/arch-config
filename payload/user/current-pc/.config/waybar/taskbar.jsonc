@@ -1,0 +1,54 @@
+{
+  "include": "@HOME@/.config/waybar/config.jsonc",
+  "name": "taskbar",
+  "output": "DP-2",
+  "position": "left",
+  "layer": "bottom",
+  "width": 60,
+  "height": 0,
+  "margin-top": 0,
+  "margin-bottom": 8,
+  "margin-left": 8,
+  "margin-right": 0,
+  "spacing": 4,
+  "exclusive": true,
+  "start_hidden": true,
+  "on-sigusr1": "show",
+  "on-sigusr2": "hide",
+  "reload_style_on_change": true,
+  "modules-left": [
+    "image#launcher",
+    "hyprland/workspaces",
+    "custom/minimized",
+    "wlr/taskbar"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "idle_inhibitor",
+    "custom/notification",
+    "custom/lock",
+    "custom/power"
+  ],
+  "image#launcher": {
+    "path": "@HOME@/.config/waybar/arch-launcher.svg",
+    "size": 28,
+    "interval": "once",
+    "on-click": "@HOME@/.local/bin/desktop-panel toggleLauncher"
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by": "number",
+    "all-outputs": true,
+    "persistent-workspaces": {"*": 5}
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 28,
+    "justify": "center",
+    "all-outputs": true,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "active-first": false
+  }
+}

@@ -13,16 +13,16 @@ hl.env("QT_STYLE_OVERRIDE", "kvantum")
 hl.config({
     input = {kb_layout = "cz,us", kb_variant = ",", kb_options = "grp:alt_shift_toggle", numlock_by_default = true},
     general = {
-        gaps_in = 5, gaps_out = 10, border_size = 2, resize_on_border = true,
+        gaps_in = 4, gaps_out = 8, border_size = 2, resize_on_border = true,
     },
     decoration = {
         rounding = 16, active_opacity = 1.0, inactive_opacity = 0.98, fullscreen_opacity = 1.0,
-        blur = {enabled = true, size = 5, passes = 2, noise = 0.01, vibrancy = 0.06},
+        blur = {enabled = true, size = 10, passes = 2, noise = 0.01, vibrancy = 0.06},
         shadow = {enabled = true, range = 20, render_power = 3, color = "rgba(00000044)"},
     },
     animations = {enabled = true},
-    dwindle = {preserve_split = true},
-    misc = {disable_hyprland_logo = true, disable_splash_rendering = true},
+    dwindle = {preserve_split = true, use_active_for_splits = true},
+    misc = {disable_hyprland_logo = true, disable_splash_rendering = true, on_focus_under_fullscreen = 2},
 })
 -- Motion uses deciseconds: 1.6 = 160 ms. No overshoot or springs.
 hl.curve("desktop", {type = "bezier", points = {{0.22, 1}, {0.36, 1}}})
@@ -35,7 +35,7 @@ hl.animation({leaf = "fade", enabled = true, speed = 1.8, bezier = "desktop"})
 hl.animation({leaf = "border", enabled = true, speed = 1.6, bezier = "desktop"})
 hl.animation({leaf = "workspaces", enabled = true, speed = 2.6, bezier = "desktop", style = "slidefade 12%"})
 hl.animation({leaf = "layers", enabled = true, speed = 2.2, bezier = "desktop", style = "fade"})
-hl.layer_rule({name = "desktop-panel-blur", match = {namespace = "^(waybar|nwg-drawer|launcher|desktop-launcher|desktop-dashboard|desktop-control|desktop-wallpapers|desktop-switcher|nwg-dock|swaync-control-center|swaync-notification-window)$"}, blur = true, ignore_alpha = 0.2})
+hl.layer_rule({name = "desktop-panel-blur", match = {namespace = "^(waybar|taskbar|nwg-drawer|launcher|desktop-launcher|desktop-dashboard|desktop-control|desktop-wallpapers|desktop-switcher|swaync-control-center|swaync-notification-window)$"}, blur = true, ignore_alpha = 0.2})
 -- Custom panels animate their own geometry; avoid applying two fades at once.
 hl.layer_rule({name = "desktop-native-motion", match = {namespace = "^desktop-(launcher|dashboard|control|wallpapers|switcher)$"}, no_anim = true})
 hl.layer_rule({name = "notification-motion", match = {namespace = "^swaync-notification-window$"}, animation = "slide top"})
@@ -140,5 +140,6 @@ launch("XF86AudioPrev", "playerctl previous", {locked = true})
 launch("SUPER + M", "$HOME/.local/bin/desktop-window minimize")
 launch("SUPER + SHIFT + M", "$HOME/.local/bin/desktop-window restore")
 dofile(os.getenv("HOME") .. "/.config/hypr/titlebars.lua")
+dofile(os.getenv("HOME") .. "/.config/hypr/tiling.lua")
 
 dofile(os.getenv("HOME") .. "/.config/desktop/current/hypr.lua")

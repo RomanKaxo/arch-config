@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Remember manual dock visibility while temporarily hiding it under panels."""
+"""Remember taskbar visibility while temporarily hiding it under panels."""
 import argparse
 import fcntl
 import json
@@ -38,7 +38,7 @@ def signal_dock(visible):
             subprocess.run(['systemctl','--user','start','--no-block','desktop-dock.service'],check=True)
         return
     subprocess.run(['systemctl','--user','kill','--kill-whom=main',
-                    '--signal=RTMIN+2' if visible else '--signal=RTMIN+3',
+                      '--signal=USR1' if visible else '--signal=USR2',
                     'desktop-dock.service'],check=True,stdout=subprocess.DEVNULL)
 
 

@@ -36,23 +36,28 @@ def save(data):
     tmp.replace(state)
 
 
-def hide_minimized():
-    """Dock může otevřít odkládací plochu. Žluté tlačítko ji musí znovu skrýt."""
-    monitors = get("monitors")
-    previous = next((m for m in monitors if m.get("focused")), None)
-    for monitor in monitors:
-        if monitor.get("specialWorkspace", {}).get("name") != "special:minimized":
-            continue
-        dispatch("hl.dsp.focus({monitor=" + json.dumps(monitor["name"]) + "})")
-        dispatch('hl.dsp.workspace.toggle_special("minimized")')
-    if previous and any(
-        m.get("focused") != bool(m["name"] == previous["name"]) for m in get("monitors")
-    ):
-        dispatch("hl.dsp.focus({monitor=" + json.dumps(previous["name"]) + "})")
+def is_minimized(workspace):
+    # Keep windows parked by the old shared-workspace implementation recoverable.
+    return workspace == "special:minimized" or workspace.startswith("special:minimized-")
+
+
+def parking_workspace(window):
+    """Move only this window to an empty, hidden workspace; never hide a desktop."""
+    unavailable = {w["workspace"]["name"] for w in clients}
+    unavailable.update(
+        m.get("specialWorkspace", {}).get("name", "") for m in get("monitors")
+    )
+    base = "special:minimized-" + window["address"]
+    workspace = base
+    suffix = 0
+    while workspace in unavailable:
+        suffix += 1
+        workspace = base + "-" + str(suffix)
+    return workspace
 
 
 clients = get("clients")
-parked = [w for w in clients if w["workspace"]["name"] == "special:minimized"]
+parked = [w for w in clients if is_minimized(w["workspace"]["name"])]
 if action == "status":
     print(
         json.dumps(
@@ -118,26 +123,27 @@ with (runtime / "midnight-minimized.lock").open("w") as lock:
         if any(w["address"] == k and w["pid"] == v["pid"] for w in clients)
     }
     if action == "minimize":
-        # Okno už může být odložené, ale stále viditelné po aktivaci z docku.
-        # Původní návrat zde nechával žluté tlačítko bez jakéhokoli účinku.
-        if chosen["workspace"]["name"] == "special:minimized":
-            hide_minimized()
+        workspace = chosen["workspace"]["name"]
+        already_minimized = is_minimized(workspace)
+        if workspace.startswith("special:") and not already_minimized:
             raise SystemExit
-        if chosen["workspace"]["name"].startswith("special:"):
-            raise SystemExit
-        data[chosen["address"]] = {
-            "workspace": chosen["workspace"]["name"],
-            "pid": chosen["pid"],
-            "pinned": chosen["pinned"],
-        }
+        # A dock activation may show a parked window again. Preserve its origin,
+        # then move it away individually even if other parked windows are visible.
+        if not already_minimized or chosen["address"] not in data:
+            data[chosen["address"]] = {
+                "workspace": get("activeworkspace")["name"] if already_minimized else workspace,
+                "pid": chosen["pid"],
+                "pinned": chosen["pinned"],
+            }
         if chosen["pinned"]:
             dispatch("hl.dsp.window.pin({window=" + sel + ',action="disable"})')
         dispatch(
-            'hl.dsp.window.move({workspace="special:minimized",follow=false,window='
+            "hl.dsp.window.move({workspace="
+            + json.dumps(parking_workspace(chosen))
+            + ",follow=false,window="
             + sel
             + "})"
         )
-        hide_minimized()
     elif action == "restore":
         record = data.pop(chosen["address"], {})
         workspace = (

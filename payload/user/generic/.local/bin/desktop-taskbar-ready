@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Map the top bar before the left bar so their shared corner stays fixed."""
+import json
+import subprocess
+import time
+
+deadline = time.monotonic() + 5
+while time.monotonic() < deadline:
+    try:
+        pid = int(subprocess.check_output([
+            'systemctl', '--user', 'show', '--property=MainPID', '--value',
+            'waybar.service',
+        ], text=True, timeout=1).strip())
+        layers = json.loads(subprocess.check_output(
+            ['hyprctl', '-j', 'layers'], text=True, timeout=1))
+        if layers and all(any(
+                item.get('namespace') == 'waybar' and item.get('pid') == pid
+                and item.get('w', 0) > 0 and item.get('h', 0) > 0
+                for items in monitor.get('levels', {}).values() for item in items
+            ) for monitor in layers.values()):
+            raise SystemExit(0)
+    except (OSError, ValueError, subprocess.SubprocessError):
+        pass
+    time.sleep(0.05)
+raise SystemExit('Top Waybar did not map before taskbar startup')

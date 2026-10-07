@@ -8,14 +8,18 @@ import time
 from pathlib import Path
 
 
+def is_minimized(workspace):
+    return workspace == 'special:minimized' or workspace.startswith('special:minimized-')
+
+
 def snapshot(clients):
     windows = [w for w in clients if w.get('mapped', True)
                and (not w.get('workspace', {}).get('name', '').startswith('special:')
-                    or w['workspace']['name'] == 'special:minimized')]
+                    or is_minimized(w['workspace']['name']))]
     windows.sort(key=lambda w: (w.get('focusHistoryID', -1) < 0,
                                w.get('focusHistoryID', -1), w['address']))
     return [{'address': w['address'], 'pid': w['pid'], 'title': w.get('title', ''),
-             'app': w.get('class', ''), 'minimized': w.get('workspace', {}).get('name') == 'special:minimized'}
+             'app': w.get('class', ''), 'minimized': is_minimized(w.get('workspace', {}).get('name', ''))}
             for w in windows]
 
 
@@ -37,7 +41,7 @@ def activate(address, pid):
     chosen = next((w for w in clients() if w['address'] == address and w['pid'] == pid), None)
     if chosen is None:
         return False  # Closed windows and recycled addresses must not activate another app.
-    if chosen['workspace']['name'] == 'special:minimized':
+    if is_minimized(chosen['workspace']['name']):
         subprocess.run([str(Path.home() / '.local/bin/desktop-window'), 'restore', address], check=True)
     sel = json.dumps('address:' + address)
     # One compositor transaction prevents pointer refocus between activation and resize.

@@ -7,7 +7,7 @@ Manifest obsahuje přes 42 tisíc položek, převážně ikon a jejich symlinků
 ## Zahrnuto
 
 - Hyprland Lua, pravidla oken, klávesové zkratky, idle, lock, tapety a titlebars.
-- Quickshell panely, dock, Waybar včetně audiovln a aktualizací, Cava, SwayNC,
+- Quickshell panely, horní Waybar a levý taskbar včetně audiovln a aktualizací, Cava, SwayNC,
   Fuzzel, Nwg Drawer, Kitty, GTK, Kvantum, Qt, Fontconfig a Fastfetch.
 - Paletové šablony, definice všech palet a aktuálně aktivní vygenerovaná paleta.
   Historie starších náhodně pojmenovaných palet se nepřenáší.

@@ -2,10 +2,12 @@
 import json
 import os
 from pathlib import Path
+import runpy
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 SCRIPT=Path(__file__).resolve().parents[1]/'payload/user/all/.local/bin/desktop-dock'
 
@@ -39,5 +41,16 @@ class DockTests(unittest.TestCase):
     def test_restart_sync_preserves_hidden_preference(self):
         self.call('show');self.call('toggle');state=self.call('sync');self.assertFalse(state['visible'])
         persisted=json.loads((Path(self.tmp.name)/'.local/state/desktop/dock.json').read_text());self.assertFalse(persisted['enabled'])
+
+    def test_show_and_hide_signal_only_the_taskbar_main_process(self):
+        signal_dock = runpy.run_path(str(SCRIPT))['signal_dock']
+        manager = subprocess.CompletedProcess([], 0, stdout='123\n', stderr='')
+        for visible, signal in ((True, 'USR1'), (False, 'USR2')):
+            with self.subTest(visible=visible), mock.patch('subprocess.run', return_value=manager) as run:
+                signal_dock(visible)
+                self.assertEqual(run.call_args_list[1].args[0], [
+                    'systemctl', '--user', 'kill', '--kill-whom=main',
+                    '--signal=' + signal, 'desktop-dock.service',
+                ])
 
 if __name__=='__main__':unittest.main()
