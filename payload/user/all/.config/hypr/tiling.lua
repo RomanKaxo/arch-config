@@ -1,7 +1,22 @@
--- Dock activation restores parked windows into the visible desktop, then tiles.
+-- Deliberate activation restores parked windows into the visible desktop, then tiles.
 -- Alt-Tab can still explicitly maximize its selection after focusing it.
-hl.window_rule({name = "desktop-ignore-app-maximize", match = {class = ".*"}, suppress_event = "maximize"})
+hl.window_rule({
+    name = "desktop-window-behavior", match = {class = ".*"},
+    suppress_event = "maximize", focus_on_activate = false,
+})
 local arranging = false
+
+-- Hyprland 0.56.2: src/desktop/state/FocusState.hpp (eFocusReason).
+-- Forced foreign-toplevel activation from the taskbar uses desktop-state-change;
+-- app activation requests are kept from taking focus by the rule above.
+local deliberateFocus = {
+    [2] = true, -- keybind
+    [3] = true, -- focus-window dispatcher, including Alt-Tab / explicit restore
+    [5] = true, -- click
+    [7] = true, -- taskbar activation
+    [9] = true, -- hard switch-to-window
+}
+local specialWorkspaceFocus = 12
 
 local function isMinimized(workspace)
     return workspace and (workspace.name == "special:minimized"
@@ -56,5 +71,25 @@ local function arrange(window)
     if not ok then error(err) end
 end
 
-hl.on("window.active", arrange)
-hl.on("window.open", arrange)
+hl.on("window.active", function(window, reason)
+    if not window or not window.mapped then return end
+    if isMinimized(window.workspace) then
+        -- Activating a hidden parked window first opens its special workspace.
+        -- Only recover the selected window while that exact overlay is open.
+        local monitor = window.monitor
+        local overlay = monitor and monitor.active_special_workspace
+        if not overlay or overlay.name ~= window.workspace.name then return end
+        if reason ~= specialWorkspaceFocus and not deliberateFocus[reason] then return end
+    elseif not deliberateFocus[reason] then
+        -- Hover, workspace changes, layer dismissal and close fallback keep layout.
+        return
+    end
+    arrange(window)
+end)
+
+hl.on("window.open", function(window)
+    -- Background windows and children of parked apps must not reveal their peers.
+    if not window or not window.mapped or isMinimized(window.workspace) then return end
+    local active = hl.get_active_window()
+    if active and active.address == window.address then arrange(window) end
+end)

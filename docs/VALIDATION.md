@@ -1,5 +1,26 @@
 # Skutečně provedené ověření
 
+## Stabilní fokus oken — 8. října 2026
+
+- Prošlo všech 52 testů. Šest nových regresních testů pokrývá pasivní změny
+  fokusu, okna otevřená na pozadí, děti minimalizovaných aplikací a obnovu pouze
+  z odpovídající otevřené odkládací plochy. Rozšířené scénáře zachovávají
+  maximalizaci z Alt-Tab při pohybu myši a změně pracovní plochy; přímá aktivace
+  a obnova přes taskbar zůstávají funkční. Před opravou regresní scénáře selhávaly.
+- Číselné důvody fokusu ověřené proti nainstalovaným hlavičkám Hyprlandu 0.56.2
+  a [upstream enumu](https://github.com/hyprwm/Hyprland/blob/v0.56.2/src/desktop/state/FocusState.hpp).
+  Taskbar používá vynucenou foreign-toplevel aktivaci; u skrytého okna se může
+  nejprve otevřít speciální plocha a změnit důvod fokusu na její přepnutí.
+- `check` prošel pro `current-pc` i `generic`: 42 757 položek a 36 kontrol
+  syntaxe na profil. Audit: 20 640 souborů, 42 776 položek manifestu, 0 nálezů.
+- Upravený Lua soubor prošel `luac -p`; úplná aktivní konfigurace s připravenou
+  opravou prošla `hyprland --verify-config` s výsledkem `config ok`.
+- Oprava nasazená do aktivního `~/.config/hypr/tiling.lua` po záloze původního
+  souboru. Reload vrátil `ok`, `hyprctl configerrors` zůstal prázdný a stávající
+  okna zachovala své pracovní plochy i oba režimy fullscreen/maximalizace.
+  Regresní scénáře používají izolované Lua callbacky; živá kontrola ověřila
+  načtení konfigurace, dostupnost použitého API a zachování stavu oken.
+
 ## Levý taskbar a grafitová prezentace — 7. října 2026
 
 - Prošlo všech 46 testů správy oken, minimalizace, přepínače, screenshotů,

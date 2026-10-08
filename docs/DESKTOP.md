@@ -87,9 +87,13 @@ USR1 panel zobrazí, USR2 skryje. Signál míří pouze na hlavní proces této 
 nikoli na horní Waybar. Restart horní služby obnoví oba panely v tomto pořadí.
 `KillMode=process` zachová dříve spuštěné aplikace.
 
-Nová a obnovená okna se skládají vedle ostatních;
-maximalizace pracovních oken se při aktivaci druhého okna zruší. Plovoucí dialogy
-a výslovný fullscreen videa nebo hry si zachovají svůj režim.
+Nová okna otevřená do popředí a záměrně obnovená okna se skládají vedle ostatních.
+Klik v taskbaru nebo výslovné přepnutí okna může zrušit maximalizaci pracovních
+oken. Pouhý pohyb myši, přepnutí plochy a návrat fokusu po zavření okna nebo
+panelu zachovávají rozložení i maximalizaci. Okna otevíraná na pozadí a děti
+minimalizovaných aplikací nepřerovnávají ostatní okna. Plovoucí dialogy a výslovný
+fullscreen videa nebo hry si zachovají svůj režim. Aplikace mohou upozornit na
+novou událost, ale samy si nepřebírají fokus.
 
 Alt-Tab drží pořadí oken po celou dobu výběru. První Tab vybere poslední použité
 okno, další Taby pokračují seznamem, Shift + Tab jde opačně. Výběr zahrnuje okna
