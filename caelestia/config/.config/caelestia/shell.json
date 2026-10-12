@@ -1,0 +1,17 @@
+{
+  "general": {
+    "apps": {
+      "terminal": ["kitty"],
+      "audio": ["pavucontrol"],
+      "explorer": ["thunar"]
+    },
+    "idle": {
+      "timeouts": [
+        {"timeout": 600, "idleAction": "lock"},
+        {"timeout": 900, "idleAction": "dpms off", "returnAction": "dpms on"}
+      ]
+    }
+  },
+  "paths": {"wallpaperDir": "/home/roman/Pictures/Wallpapers"},
+  "services": {"gpuType": "Nvidia", "clockFormat": "TwentyFourHour", "weatherLocation": "Prague"}
+}

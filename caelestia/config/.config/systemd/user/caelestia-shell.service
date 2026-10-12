@@ -1,0 +1,18 @@
+[Unit]
+Description=Caelestia desktop shell
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+Wants=caelestia-clipboard-text.service caelestia-clipboard-image.service
+
+[Service]
+Environment=PATH=/home/roman/.local/bin:/usr/local/bin:/usr/bin
+Environment=QML_IMPORT_PATH=/home/roman/.local/lib/qt6/qml
+Environment=LD_LIBRARY_PATH=/home/roman/.local/lib
+Environment=CAELESTIA_LIB_DIR=/home/roman/.local/lib/caelestia
+ExecStart=/usr/bin/qs -c caelestia -n
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

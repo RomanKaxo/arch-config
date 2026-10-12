@@ -1806,5 +1806,13 @@
   {
     "path": ".local/bin/waypaper-sync",
     "sha256": "5c566318757e27cfaeff7ec02512d14d1f4397270050318772623b379cf49194"
+  },
+  {
+    "path": ".local/lib/hyprland/hyprbars.so",
+    "sha256": "40d5ad00ad7c35c62032ab2e2a412e4de8b39498b3d08726a5615d1a29295ba7"
+  },
+  {
+    "path": ".local/lib/hyprland/hyprbars.json",
+    "sha256": "a0734a152afd873eb4ae518394f61d69f7bb92f34344546a08af9a8b690792d8"
   }
 ]

@@ -1,3 +1,5 @@
+> **Aktuální plocha od 12. 10. 2026: [Caelestia Shell](caelestia/README.md).** Následující dokumentace a původní payload slouží jako archiv předchozího desktopu.
+
 <p align="center">
   <img src="docs/assets/arch-desktop.svg" alt="Arch. Po svém. — černý a grafitový desktop s levým taskbarem" width="1200">
 </p>

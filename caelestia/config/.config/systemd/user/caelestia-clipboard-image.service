@@ -1,0 +1,13 @@
+[Unit]
+Description=Caelestia clipboard image history
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/wl-paste --type image --watch cliphist store
+Environment=CLIPHIST_MAX_ITEMS=300
+UMask=0077
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

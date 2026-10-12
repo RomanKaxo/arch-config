@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
+export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct QT_STYLE_OVERRIDE=Fusion
+dbus-update-activation-environment --systemd XDG_DATA_DIRS WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE QT_QPA_PLATFORMTHEME QT_STYLE_OVERRIDE
+systemctl --user start caelestia-session.target
+systemctl --user start pipewire.socket pipewire-pulse.socket wireplumber.service hyprpolkitagent.service caelestia-shell.service
