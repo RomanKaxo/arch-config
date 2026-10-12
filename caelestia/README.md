@@ -22,6 +22,7 @@ nespouštěj jejich `install`/`activate`, pokud chceš ponechat Caelestia.
 | Super + L | Zámek |
 | Super + Shift + E | Nabídka napájení |
 | Super + Shift + V | Historie schránky |
+| Super + M / Super + Shift + M | Minimalizace / obnovení okna |
 | Alt + Tab / Alt + Shift + Tab | Nativní přepínání oken |
 | Print / Shift + Print | Výřez / screenshot |
 
@@ -29,6 +30,9 @@ Tapety: `~/Pictures/Wallpapers`. V launcheru napiš `>wallpaper`.
 Monitory DP-2 (2560×1440) a HDMI-A-1 (1920×1080) zůstávají na 180 Hz.
 Klávesnice: CZ/US, přepnutí Alt + Shift.
 Automatické zamknutí po 10 minutách a vypnutí monitorů po 15 minutách; bez automatického uspávání.
+Neaktivní okna mají 10% průhlednost. Kitty má trvale 15% průhlednost;
+pravidlo s `override` zabraňuje dalšímu zesílení efektu při ztrátě fokusu.
+Aktivní ostatní okna jsou neprůhledná. Rozmazání pozadí zůstává na původním nastavení.
 
 ## Instalované umístění
 
@@ -38,6 +42,10 @@ Automatické zamknutí po 10 minutách a vypnutí monitorů po 15 minutách; bez
 - CLI: `~/.local/share/caelestia/venv`, wrapper `~/.local/bin/caelestia`.
 - Start relace: `~/.local/bin/caelestia-session`, `caelestia-session.target` a `caelestia-shell.service`.
 - Schránka: `caelestia-clipboard-text.service` a `caelestia-clipboard-image.service`.
+- Traffic light tlačítka: oficiální plugin hyprbars v `~/.local/lib/caelestia/hyprbars.so`,
+  nastavení `~/.config/hypr/caelestia-titlebars.lua` a samostatné skripty
+  `caelestia-titlebars` / `caelestia-window`. Červené zavírá, žluté minimalizuje jednotlivé
+  okno a zelené přepíná maximalizaci. Obnovení minimalizovaných oken: Super + Shift + M.
 
 Systémové závislosti jsou nainstalované přes pacman. Rubik je v `~/.local/share/fonts`.
 Knihovny libcava a M3Shapes jsou sestavené z oficiálních zdrojů v `~/.local/src`.
@@ -73,4 +81,9 @@ Sestavení shellu, libcava a M3Shapes prošlo. `hyprctl configerrors` je prázdn
 Caelestia je aktivní a povolená; clipboard služby jsou aktivní a povolené.
 Launcher a dashboard odpovídají přes IPC; vlastníkem `org.freedesktop.Notifications`
 je proces Caelestia. Staré panely a služby neběží, konfigurace a lokální zálohy jsou odstraněné,
-plugin hyprbars je odpojený. Přihlášení po rebootu nebylo testované.
+Původní plugin hyprbars byl při migraci odpojený; na následný požadavek jsou traffic light
+tlačítka připojená samostatně s nastavením Caelestia. Akce zavření, maximalizace a jejího
+zrušení, minimalizace a obnovení byly ověřené na dočasném okně Kitty.
+Loader kontroluje checksum a ABI; po aktualizaci Hyprlandu je nutné plugin znovu sestavit
+ze zdrojů v `vendor/hyprbars`, jinak jej bezpečně přeskočí.
+Přihlášení po rebootu nebylo testované.

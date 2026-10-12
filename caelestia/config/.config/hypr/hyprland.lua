@@ -17,7 +17,7 @@ hl.config({
     input = {kb_layout = "cz,us", kb_variant = ",", kb_options = "grp:alt_shift_toggle", numlock_by_default = true},
     general = {gaps_in = 4, gaps_out = 8, border_size = 2, resize_on_border = true},
     decoration = {
-        rounding = 12, active_opacity = 1, inactive_opacity = 1,
+        rounding = 12, active_opacity = 1, inactive_opacity = 0.90,
         blur = {enabled = true, size = 10, passes = 2},
         shadow = {enabled = true, range = 20, render_power = 3, color = "rgba(00000044)"},
     },
@@ -25,6 +25,8 @@ hl.config({
     dwindle = {preserve_split = true, use_active_for_splits = true},
     misc = {disable_hyprland_logo = true, disable_splash_rendering = true, on_focus_under_fullscreen = 2},
 })
+-- Keep the terminal at 15% transparency even while another window has focus.
+hl.window_rule({name = "caelestia-terminal-glass", match = {class = "^(kitty|caelestia-controls-test)$"}, opacity = "0.85 override 0.85 override"})
 local schemeFile = os.getenv("HOME") .. "/.config/hypr/scheme/current.lua"
 local ok, colours = pcall(dofile, schemeFile)
 if ok and colours.primary then
@@ -39,6 +41,7 @@ hl.on("hyprland.start", function()
     hl.dsp.focus({monitor = "DP-2"})()
     hl.exec_cmd("xrandr --output DP-2 --primary")
     hl.exec_cmd("$HOME/.local/bin/caelestia-session")
+    hl.exec_cmd("$HOME/.local/bin/caelestia-titlebars")
 end)
 hl.on("hyprland.shutdown", function()
     hl.exec_cmd("systemctl --user stop caelestia-shell.service caelestia-clipboard-text.service caelestia-clipboard-image.service caelestia-session.target")
@@ -65,6 +68,8 @@ launch("SHIFT + Print", cli .. "screenshot")
 hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + V", hl.dsp.window.float({action = "toggle"}))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
+launch("SUPER + M", "$HOME/.local/bin/caelestia-window minimize")
+launch("SUPER + SHIFT + M", "$HOME/.local/bin/caelestia-window restore")
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
 hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({previous = true}))
 for _, direction in ipairs({"left", "right", "up", "down"}) do
@@ -87,3 +92,5 @@ launch("XF86MonBrightnessDown", "brightnessctl set 5%-", {locked = true, repeati
 launch("XF86AudioPlay", "playerctl play-pause", {locked = true})
 launch("XF86AudioNext", "playerctl next", {locked = true})
 launch("XF86AudioPrev", "playerctl previous", {locked = true})
+
+dofile(os.getenv("HOME") .. "/.config/hypr/caelestia-titlebars.lua")

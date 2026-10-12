@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+"""Load traffic lights only when the Hyprland ABI and plugin checksum match."""
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+
+plugin = Path.home() / '.local/lib/caelestia/hyprbars.so'
+meta = json.loads(plugin.with_suffix('.json').read_text())
+version = json.loads(subprocess.check_output(['hyprctl', '-j', 'version'], text=True))
+if version['abiHash'] != meta['abi'] or hashlib.sha256(plugin.read_bytes()).hexdigest() != meta['sha256']:
+    subprocess.run(['notify-send', '-a', 'Caelestia', 'Window controls need rebuilding', 'Hyprland version changed; the titlebar plugin was not loaded.'])
+    raise SystemExit(1)
+loaded = subprocess.check_output(['hyprctl', 'plugin', 'list'], text=True)
+if 'Plugin hyprbars ' not in loaded:
+    output = subprocess.check_output(['hyprctl', 'plugin', 'load', str(plugin)], text=True).strip()
+    if output != 'ok':
+        raise SystemExit(output)
+subprocess.run(['hyprctl', 'reload'], check=True)
