@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+import fcntl
+import json
+import os
+from pathlib import Path
+import subprocess
+import threading
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GLib
+GLib.set_prgname('desktop-brightness-popup')
+
+lock = open(Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / f"desktop-brightness-popup-{os.getuid()}.lock", "w")
+try:
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except BlockingIOError:
+    raise SystemExit(0)
+
+helper = str(Path.home() / ".local/bin/desktop-brightness")
+window = Gtk.Window(title="Jas monitorů")
+window.set_wmclass("desktop-brightness", "desktop-brightness")
+window.set_default_size(360, 180)
+window.set_resizable(False)
+window.set_keep_above(True)
+window.set_position(Gtk.WindowPosition.MOUSE)
+window.connect("destroy", Gtk.main_quit)
+window.connect("key-press-event", lambda w, e: w.destroy() if e.keyval == Gdk.KEY_Escape else False)
+box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+box.set_border_width(20)
+window.add(box)
+heading = Gtk.Label(label="Jas monitorů", xalign=0)
+box.pack_start(heading, False, False, 0)
+css = Gtk.CssProvider()
+css.load_from_data(b"window { background: #171717; color: #d4d4d4; } scale trough { background: #353535; } scale highlight { background: #aaaaaa; } scale slider { background: #eeeeee; min-width: 16px; min-height: 16px; border-radius: 8px; }")
+Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+def command(key, *args):
+    result = subprocess.run([helper, key, *args], capture_output=True, text=True, timeout=40)
+    return json.loads(result.stdout)
+
+def add_monitor(key, name):
+    label = Gtk.Label(label=f"{name} · načítám…", xalign=0)
+    box.pack_start(label, False, False, 0)
+    scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
+    scale.set_draw_value(False)
+    scale.set_sensitive(False)
+    box.pack_start(scale, False, False, 0)
+    condition = threading.Condition()
+    pending = [None]
+    timer = [None]
+
+    def show_result(data, initial=False):
+        if data.get("class") != "available":
+            label.set_text(f"{name} · jas není dostupný")
+            label.set_tooltip_text(data.get("tooltip", ""))
+            return False
+        if initial:
+            scale.set_value(data["percentage"])
+            scale.set_sensitive(True)
+            scale.connect("value-changed", changed)
+            label.set_text(f"{name} · {data['percentage']} %")
+        return False
+
+    def worker():
+        try:
+            GLib.idle_add(show_result, command(key, "status"), True)
+        except Exception:
+            GLib.idle_add(label.set_text, f"{name} · načtení selhalo")
+        last_written = None
+        while True:
+            with condition:
+                condition.wait_for(lambda: pending[0] is not None, timeout=0.5 if last_written is not None else None)
+                value = pending[0]
+                pending[0] = None
+            if value is None:
+                try:
+                    data = command(key, "refresh")
+                    GLib.idle_add(show_result, data)
+                    if data.get("class") == "available" and data["percentage"] != last_written:
+                        def mismatch(expected=last_written, actual=data["percentage"]):
+                            if round(scale.get_value()) == expected:
+                                label.set_text(f"{name} · monitor nastavil {actual} %")
+                            return False
+                        GLib.idle_add(mismatch)
+                except Exception:
+                    GLib.idle_add(label.set_text, f"{name} · ověření jasu selhalo")
+                last_written = None
+                continue
+            try:
+                GLib.idle_add(show_result, command(key, "set", str(value)))
+                last_written = value
+            except Exception:
+                GLib.idle_add(label.set_text, f"{name} · změna jasu selhala")
+
+    def send():
+        timer[0] = None
+        with condition:
+            pending[0] = round(scale.get_value())
+            condition.notify()
+        return False
+
+    def changed(widget):
+        label.set_text(f"{name} · {round(widget.get_value())} %")
+        if timer[0] is None:
+            timer[0] = GLib.timeout_add(120, send)
+
+    threading.Thread(target=worker, daemon=True).start()
+
+for key, name in [('aoc', 'AOC'), ('msi', 'MSI')]:
+    if subprocess.run([helper, key, 'configured'], capture_output=True).returncode == 0:
+        add_monitor(key, name)
+
+night_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
+night_label = Gtk.Label(label="Noční režim · teplejší barvy", xalign=0)
+night_switch = Gtk.Switch()
+night_sync = [False]
+night_switch.set_sensitive(False)
+night_row.pack_start(night_label, True, True, 0)
+night_row.pack_end(night_switch, False, False, 0)
+box.pack_start(night_row, False, False, 4)
+
+def night_status():
+    return subprocess.run(["systemctl", "--user", "is-active", "--quiet", "desktop-nightlight.service"], timeout=5).returncode == 0
+
+def initialize_night():
+    active = night_status()
+    def ready():
+        night_switch.set_active(active)
+        night_switch.set_sensitive(True)
+        night_switch.connect("state-set", toggle_night)
+        return False
+    GLib.idle_add(ready)
+
+def toggle_night(widget, active):
+    if night_sync[0]:
+        return False
+    widget.set_sensitive(False)
+    def apply():
+        try:
+            result = subprocess.run(["systemctl", "--user", "start" if active else "stop", "desktop-nightlight.service"], capture_output=True, text=True, timeout=10)
+            actual = night_status()
+            error = result.stderr.strip() if result.returncode else ""
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            actual, error = not active, str(exc)
+        def done():
+            night_sync[0] = True
+            widget.set_state(actual)
+            widget.set_active(actual)
+            night_sync[0] = False
+            widget.set_sensitive(True)
+            night_label.set_text("Noční režim · teplejší barvy" if not error else "Noční režim · přepnutí selhalo")
+            night_label.set_tooltip_text(error or "Teplota 4000 K na obou monitorech")
+            return False
+        GLib.idle_add(done)
+    threading.Thread(target=apply, daemon=True).start()
+    return True
+
+threading.Thread(target=initialize_night, daemon=True).start()
+window.show_all()
+Gtk.main()

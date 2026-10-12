@@ -1,0 +1,5 @@
+{
+  "logo": {"type":"small", "source":"arch", "color":{"1":"#c5aa84","2":"#c5aa84"},"padding":{"right":3}},
+  "display": {"separator":"  ","color":{"keys":"#c5aa84","title":"#c5aa84"}},
+  "modules": ["title", {"type":"os","key":"OS"}, {"type":"wm","key":"Desktop"},"kernel","uptime",{"type":"cpu","key":"CPU","showPeCoreCount":false}, {"type":"gpu","key":"GPU","hideType":"integrated"},"memory","shell","terminal"]
+}

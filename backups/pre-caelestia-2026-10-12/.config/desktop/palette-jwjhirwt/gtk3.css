@@ -1,0 +1,24 @@
+/* Generated desktop palette. */
+@define-color theme_bg_color #10121c;
+@define-color theme_fg_color #e6e7ef;
+@define-color theme_base_color #090a10;
+@define-color theme_text_color #e6e7ef;
+@define-color theme_selected_bg_color #202239;
+@define-color theme_selected_fg_color #e6e7ef;
+@define-color selected_bg_color #202239;
+@define-color selected_fg_color #e6e7ef;
+@define-color accent_color #9283bd;
+@define-color accent_bg_color #9283bd;
+@define-color accent_fg_color #090a10;
+
+@define-color window_bg_color #090a10;
+@define-color headerbar_bg_color #10121c;
+@define-color view_bg_color #090a10;
+@define-color borders #303245;
+window.background { background-color: #090a10; color: #e6e7ef; }
+headerbar, menubar, toolbar { background-color: #10121c; color: #e6e7ef; }
+.thunar .view, .thunar treeview.view { background-color: #090a10; color: #e6e7ef; }
+.thunar .sidebar { background-color: #10121c; }
+.view:selected, treeview.view:selected { background-color: #202239; color: #e6e7ef; }
+button { border-radius: 8px; }
+entry { border-radius: 12px; }

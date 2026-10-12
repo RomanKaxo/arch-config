@@ -1,0 +1,37 @@
+* {
+    font-family: "Inter Variable", "JetBrainsMono Nerd Font", "Noto Color Emoji";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+window#waybar {
+    background: rgba(9, 10, 16, 0.91);
+    color: #e6e7ef;
+    border: 1px solid rgba(146, 131, 189, 0.18);
+    border-radius: 14px;
+}
+tooltip { background: #10121c; border: 1px solid #303245; border-radius: 10px; }
+tooltip label { color: #e6e7ef; }
+#workspaces { margin: 4px 6px; }
+#workspaces button { padding: 0 10px; margin: 1px 2px; color: #959bae; border-radius: 8px; }
+#workspaces button.active { background: #202239; color: #f0eff7; }
+#workspaces button.urgent { background: #d183a2; color: #10121c; }
+#workspaces button:hover { background: #303245; box-shadow: none; }
+#custom-launcher { color: #9283bd; font-size: 13px; padding: 0 14px; }
+#clock { font-weight: 500; padding: 0 14px; }
+#tray, #network, #wireplumber, #bluetooth, #language, #idle_inhibitor, #custom-notification, #custom-lock {
+    padding: 0 11px; margin: 5px 0; border-radius: 8px;
+}
+#custom-lock { margin-right: 8px; color: #9283bd; }
+#language { color: #959bae; font-weight: 500; }
+#network.disconnected, #wireplumber.muted { color: #959bae; }
+#idle_inhibitor.activated { color: #d2b987; }
+#bluetooth.connected { color: #9283bd; }
+#custom-notification:hover, #custom-lock:hover, #network:hover, #wireplumber:hover, #bluetooth:hover, #language:hover, #idle_inhibitor:hover { background: #202239; }
+
+#custom-microphone, #memory { padding: 0 10px; margin: 5px 0; border-radius: 8px; }
+#custom-microphone.muted { color: #959bae; }
+
+#custom-power { padding: 0 12px; margin-right: 6px; color: #959bae; }
+#workspaces button.active { box-shadow: inset 0 0 0 1px rgba(146, 131, 189, .4); }

@@ -1,0 +1,38 @@
+/* Extend the installed SwayNC stylesheet, preserving widget behaviour. */
+:root {
+ --cc-bg: rgba({{bg_rgb}}, 0.95);
+ --noti-bg: {{surface_rgb}};
+ --noti-bg-alpha: 0.96;
+ --noti-bg-darker: #{{bg}};
+ --noti-bg-hover: #{{selection}};
+ --noti-bg-focus: #{{border}};
+ --noti-border-color: rgba({{accent_rgb}}, 0.20);
+ --noti-close-bg: #{{selection}};
+ --noti-close-bg-hover: #{{border}};
+ --text-color: #{{text}};
+ --text-color-disabled: #{{muted}};
+ --bg-selected: #{{accent}};
+ --border-radius: 16px;
+ --font-size-body: 14px;
+ --font-size-summary: 15px;
+}
+* { font-family: "Inter Variable", "JetBrainsMono Nerd Font", "Noto Color Emoji"; }
+.control-center { border: 1px solid rgba({{accent_rgb}}, 0.20); border-radius: 24px; padding: 16px; }
+.widget-title { font-weight: 500; }
+.widget-title > button, .widget-dnd > switch { border-radius: 8px; }
+.widget-dnd > switch:checked { background: #{{accent}}; }
+.notification { border-radius: 14px; }
+
+.widget-buttons-grid { padding: 8px 0; }
+.widget-buttons-grid > flowbox > flowboxchild > button { background: #{{surface}}; color: #{{text}}; border: 1px solid #{{border}}; border-radius: 10px; min-height: 38px; font-size: 12px; margin: 3px; }
+.widget-buttons-grid > flowbox > flowboxchild > button:hover { background: #{{selection}}; }
+.widget-volume { padding: 10px; border-radius: 12px; background: #{{surface}}; }
+scale trough { background: #{{border}}; border-radius: 6px; }
+scale highlight { background: #{{accent}}; border-radius: 6px; }
+
+:root { --notification-icon-size: 40px; --font-size-body: 13px; --font-size-summary: 14px; --notification-shadow: 0 4px 16px rgba(0,0,0,.25); }
+.notification-default-action { padding: 12px; }
+.notification-content { padding: 8px; }
+.notification .summary { font-weight: 500; }
+.notification-row .notification-background { padding: 6px 8px; }
+.widget-title, .widget-dnd, .widget-mpris { margin: 8px; }

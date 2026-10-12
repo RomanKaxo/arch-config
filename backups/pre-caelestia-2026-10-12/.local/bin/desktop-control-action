@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+"""Bounded control-center actions. JSON result; no shell or user-provided commands."""
+import json
+import subprocess
+import sys
+
+
+def run(args):
+    result = subprocess.run(args, capture_output=True, text=True, timeout=12)
+    if result.returncode:
+        raise RuntimeError((result.stderr or result.stdout).strip()[:240] or 'Příkaz se nezdařil.')
+    return result.stdout.strip()
+
+
+def main(args):
+    if not args:
+        raise ValueError('Chybí akce.')
+    action, *params = args
+    if action == 'volume' and len(params) == 1:
+        value = int(params[0])
+        if not 0 <= value <= 100:
+            raise ValueError('Hlasitost musí být 0–100 %.')
+        run(['wpctl', 'set-volume', '-l', '1', '@DEFAULT_AUDIO_SINK@', f'{value}%'])
+    elif action in ('mute', 'mic-mute') and not params:
+        node = '@DEFAULT_AUDIO_SOURCE@' if action == 'mic-mute' else '@DEFAULT_AUDIO_SINK@'
+        run(['wpctl', 'set-mute', node, 'toggle'])
+    elif action == 'output' and len(params) == 2:
+        ident, serial = map(int, params)
+        objects = json.loads(run(['pw-dump']))
+        valid = any(obj.get('id') == ident
+                    and obj.get('info', {}).get('props', {}).get('media.class') == 'Audio/Sink'
+                    and obj['info']['props'].get('object.serial') == serial for obj in objects)
+        if not valid:
+            raise ValueError('Zařízení se odpojilo. Vyber dostupný výstup znovu.')
+        run(['wpctl', 'set-default', str(ident)])
+    elif action == 'wifi' and params in (['on'], ['off']):
+        run(['nmcli', 'radio', 'wifi', params[0]])
+        enabled = run(['nmcli', 'radio', 'wifi']) == 'enabled'
+        if enabled != (params[0] == 'on'):
+            raise RuntimeError('Wi-Fi se nepodařilo přepnout.')
+    elif action == 'bluetooth' and params in (['on'], ['off']):
+        run(['bluetoothctl', 'power', params[0]])
+        enabled = 'Powered: yes' in run(['bluetoothctl', 'show'])
+        if enabled != (params[0] == 'on'):
+            raise RuntimeError('Bluetooth se nepodařilo přepnout. Zkontroluj adaptér.')
+    elif action == 'night' and params in (['on'], ['off']):
+        run(['systemctl', '--user', 'start' if params[0] == 'on' else 'stop', 'desktop-nightlight.service'])
+    elif action == 'dnd' and not params:
+        run(['swaync-client', '-d', '-sw'])
+    elif action == 'dismiss' and len(params) == 1:
+        ident = int(params[0])
+        if not 0 < ident < 2**32:
+            raise ValueError('Neplatná notifikace.')
+        run(['busctl', '--user', 'call', 'org.erikreider.swaync.cc', '/org/erikreider/swaync/cc',
+             'org.erikreider.swaync.cc', 'CloseNotification', 'u', str(ident)])
+    elif action == 'clear' and not params:
+        run(['swaync-client', '--close-all', '-sw'])
+    else:
+        raise ValueError('Neznámá akce nebo neplatné argumenty.')
+
+
+if __name__ == '__main__':
+    try:
+        main(sys.argv[1:])
+        print(json.dumps({'ok': True}))
+    except (ValueError, RuntimeError, OSError, subprocess.TimeoutExpired) as error:
+        print(json.dumps({'ok': False, 'error': str(error)[:280]}))
+        sys.exit(1)

@@ -1,0 +1,19 @@
+/* Generated desktop palette, including libadwaita semantic colors. */
+@define-color accent_color #bcbcbc;
+@define-color accent_bg_color #bcbcbc;
+@define-color accent_fg_color #0d0d0d;
+@define-color window_bg_color #0d0d0d;
+@define-color window_fg_color #dedede;
+@define-color view_bg_color #181818;
+@define-color view_fg_color #dedede;
+@define-color headerbar_bg_color #181818;
+@define-color headerbar_fg_color #dedede;
+@define-color card_bg_color #303030;
+@define-color dialog_bg_color #181818;
+:root {
+ --accent-color: #bcbcbc; --accent-bg-color: #bcbcbc; --accent-fg-color: #0d0d0d;
+ --window-bg-color: #0d0d0d; --window-fg-color: #dedede;
+ --view-bg-color: #181818; --view-fg-color: #dedede;
+ --headerbar-bg-color: #181818; --headerbar-fg-color: #dedede;
+ --card-bg-color: #303030; --dialog-bg-color: #181818;
+}

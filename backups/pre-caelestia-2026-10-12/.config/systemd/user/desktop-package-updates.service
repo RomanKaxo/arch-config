@@ -1,0 +1,9 @@
+[Unit]
+Description=Check Arch and Flatpak package updates for Waybar
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/desktop-package-updates check
+TimeoutStartSec=4min
+Nice=10

@@ -1,0 +1,7 @@
+[Unit]
+DefaultDependencies=no
+Description=Roman's Hyprland desktop session
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+Before=graphical-session.target

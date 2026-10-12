@@ -1,0 +1,1810 @@
+[
+  {
+    "path": ".config/Kvantum/Desktop/Desktop.kvconfig",
+    "link": "/home/roman/.config/desktop/current/Desktop.kvconfig"
+  },
+  {
+    "path": ".config/Kvantum/Desktop/Desktop.svg",
+    "link": "/home/roman/.config/desktop/current/Desktop.svg"
+  },
+  {
+    "path": ".config/desktop/.theme.lock",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": ".config/desktop/README.md",
+    "sha256": "f1cb0d332e92ce5a3aefb5cad7aece0b40f8dddfb6ba6ffffea20e80b902d2ec"
+  },
+  {
+    "path": ".config/desktop/active-tokens.json",
+    "sha256": "f29da5e881840682febd77fd9e3ca71baa17e423b6b6a7a71f443b70e4a53628"
+  },
+  {
+    "path": ".config/desktop/brightness-monitors.json",
+    "sha256": "ec0894a8029fa7cf0f99d9639f72f249757a9ced65d8717b68afcf5548edc510"
+  },
+  {
+    "path": ".config/desktop/current",
+    "link": "palette-k96uwx5z"
+  },
+  {
+    "path": ".config/desktop/hyprland-pending.lua",
+    "sha256": "592c7dc8999a30caf5ca65a8e6d9e84c2b3edc531b9274c7025c29ccc7bd1f62"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/Desktop.kvconfig",
+    "sha256": "e833a76282d294c2e6b16797d198400cc2c80a2472c13996c24713e6a3009fc0"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/Desktop.svg",
+    "sha256": "cc51aa84f74aed1d4f1ca74382720679292c8177bf3a478b2ff470991cbd3760"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/fastfetch.jsonc",
+    "sha256": "3b83e19767b05fb60725d55480d5c55d4fcc5420cd8266e606c1f7f66f25ba58"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/fuzzel.ini",
+    "sha256": "7db84909ecc598a02a59abc70314c04ed5355f1ccbcc7fe2aaedea039ace5a9d"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/gtk3.css",
+    "sha256": "906f35718d6e6b0b2d768822f9e36534b24c2772c3e6b65a7cd0a1bea3ed5d13"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/gtk4.css",
+    "sha256": "845e951f21fb9e649596dadf6b34d1099d6121363705bd2e23cd8b67516b5eee"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/hypr.lua",
+    "sha256": "d1e90799fe3e14e80240c6450defac4e7db840adb05e77268136472827883f93"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/hyprlock.conf",
+    "sha256": "9617b7a617dd3aad37460fa1bd267d43f965a7eb5795d8676f161f6c88be7f02"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/kitty.conf",
+    "sha256": "3fd002408914fa5785c8568c455029e1c2700ade537c3a061b918de51c4d5b9c"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/nwg-drawer.css",
+    "sha256": "611247a4a62fd7591898fcefcf3274130c970baf5f799055d55fec090d408395"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/prompt.bash",
+    "sha256": "0274779e673508e379ced4159c3b9d97e1765715b9ed3c29187d8c414ac0c8e1"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/swaync.css",
+    "sha256": "c0f671d993ba875f53dc6af170c28e3e0e52deae77f8162d47b1d2d8b32c7799"
+  },
+  {
+    "path": ".config/desktop/palette-17gvzdnz/waybar.css",
+    "sha256": "fa9c26ef8dbd3f0af6f3979dda0cbe9c789253b1df42c8ab3bb6b73748864ae7"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/Desktop.kvconfig",
+    "sha256": "708f5980d1afa290f4f9a67102169fb169c6eeadf87a147e2c893993a1cbe83b"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/Desktop.svg",
+    "sha256": "c568f9e725901dfcd6d1d148fc6ca3fbcc3828bcee5ac1df5b430a66f0c20247"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/fastfetch.jsonc",
+    "sha256": "1aadc1de8f2c2d91b525e4f988dadc08821a8e0193b0fc4ff4aa9bc6a5b3c6fb"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/fuzzel.ini",
+    "sha256": "6f9151dc0aeee23bf75129b5dca0fe2ce784fd254e2763c312d7736a65c7fa39"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/gtk3.css",
+    "sha256": "e3f7977aa12990826fcb1797baacf37bbd5886ab914a8574fa680f25dde2dc20"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/gtk4.css",
+    "sha256": "73640cb1a7f4c65e91147a65c33e032ac1d65a9619e7cbb9270cb3265362c945"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/hypr.lua",
+    "sha256": "169340ab5c9f535e72e152f9ca3e2da51e2b8a52edc244507b271639df54200f"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/hyprlock.conf",
+    "sha256": "d653c336ea7635c15c25eb7655d56cd0dd687cce37f2c09c3dfa35dafd26ed1d"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/kitty.conf",
+    "sha256": "2ac954b67b767a045adbcd2adae96d42d4a73bf599cc788278cae90d86b828f9"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/prompt.bash",
+    "sha256": "c39c4a75b47b4d202c597d3ebdcb7d36d319d50324f315dc47c72f5b8aa265e0"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/swaync.css",
+    "sha256": "f8d12a3e812391af101ac74738e90ecd832e5cb7f2e59e464c180da8a609acfc"
+  },
+  {
+    "path": ".config/desktop/palette-26_u0rfh/waybar.css",
+    "sha256": "4c78988969a5e3d3ed54287cc25462758a9e7db38e5833a542b44f34f37bfde9"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/Desktop.kvconfig",
+    "sha256": "a6916c89edd7b4a20cc71edccf18ff5ad35e09ae9d06a3b36882ef6fe03d3fe0"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/Desktop.svg",
+    "sha256": "0ad68d21ba7de8a75a3a030ddd55e98adc9daf5fc3c2ef167f2144ab12dfb822"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/fastfetch.jsonc",
+    "sha256": "7d95d039f0b2f2cef2dbaf4f896af53a443010e43cf15f2cffb599508a3acee8"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/fuzzel.ini",
+    "sha256": "ce292de2139849edaad0c42eeeefd5ab1ba6949c948f49c81755f29852b7ed3b"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/gtk3.css",
+    "sha256": "925c9ba6eefe3cde51cdb4e12e2fa0064e121c761972abc553b2f7b2b0e8ceaa"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/gtk4.css",
+    "sha256": "eaa46ed38aea090e34a8254477357da01dc8d8b7bedaf9bca72e885fc3e22b23"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/hypr.lua",
+    "sha256": "d7d46cc99341dd17686611ad3c1e11164e7eb2c131bd27c08d11e982c46b918a"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/hyprlock.conf",
+    "sha256": "34fc2ea4cfab08c9050462aee9a587d58235344c518b65c09da98ac64f5e0b9d"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/kitty.conf",
+    "sha256": "d4c49aa090dc25daaef8e5633534bfca7d5cc98f97f44df1ddf4547c336d8bc4"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/name",
+    "sha256": "ce09a8385e23f753c6c70fe35f87f19d71b67f2382d64c00a72d930646dc2355"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/prompt.bash",
+    "sha256": "5cf2cbcda9143910f05f34ce26ae9f1415be7f4d05c91a310384235714ab39cb"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/swaync.css",
+    "sha256": "7a4e66dde01111338c1247b1a513063f6e43f12c880f25448e2d6ab30019dfa9"
+  },
+  {
+    "path": ".config/desktop/palette-2p4owazb/waybar.css",
+    "sha256": "44adba18e229cd64cc9c772c484de32b8ff9b0b0ac7c30b66b0e2290137632d6"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/Desktop.kvconfig",
+    "sha256": "708f5980d1afa290f4f9a67102169fb169c6eeadf87a147e2c893993a1cbe83b"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/Desktop.svg",
+    "sha256": "c568f9e725901dfcd6d1d148fc6ca3fbcc3828bcee5ac1df5b430a66f0c20247"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/fastfetch.jsonc",
+    "sha256": "1aadc1de8f2c2d91b525e4f988dadc08821a8e0193b0fc4ff4aa9bc6a5b3c6fb"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/fuzzel.ini",
+    "sha256": "6f9151dc0aeee23bf75129b5dca0fe2ce784fd254e2763c312d7736a65c7fa39"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/gtk3.css",
+    "sha256": "e3f7977aa12990826fcb1797baacf37bbd5886ab914a8574fa680f25dde2dc20"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/gtk4.css",
+    "sha256": "73640cb1a7f4c65e91147a65c33e032ac1d65a9619e7cbb9270cb3265362c945"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/hypr.lua",
+    "sha256": "169340ab5c9f535e72e152f9ca3e2da51e2b8a52edc244507b271639df54200f"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/hyprlock.conf",
+    "sha256": "d653c336ea7635c15c25eb7655d56cd0dd687cce37f2c09c3dfa35dafd26ed1d"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/kitty.conf",
+    "sha256": "2ac954b67b767a045adbcd2adae96d42d4a73bf599cc788278cae90d86b828f9"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/prompt.bash",
+    "sha256": "c39c4a75b47b4d202c597d3ebdcb7d36d319d50324f315dc47c72f5b8aa265e0"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/swaync.css",
+    "sha256": "f8d12a3e812391af101ac74738e90ecd832e5cb7f2e59e464c180da8a609acfc"
+  },
+  {
+    "path": ".config/desktop/palette-782q0scx/waybar.css",
+    "sha256": "4c78988969a5e3d3ed54287cc25462758a9e7db38e5833a542b44f34f37bfde9"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/Desktop.kvconfig",
+    "sha256": "258d7d4448b053923da9e237d8e304a9fdf7d5ab8557bc8856e73450d54219cb"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/Desktop.svg",
+    "sha256": "29ff8c5071ce1aa838164cf5099ac9c518c44f634d87f5b138e8dbc2b6b4733e"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/fastfetch.jsonc",
+    "sha256": "41adf80873088d3b46d5072741acefbfa0c9e85a04ccc419c628c11f1af82ac6"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/fuzzel.ini",
+    "sha256": "e5e29c2ca0097a7fe258dedfdf6d9787fe256e63195d8da292e7d760106605f9"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/gtk3.css",
+    "sha256": "9c431baeeefd2c123924d826f727fe31d3387c1492efad0c96cb9dd542eb876c"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/gtk4.css",
+    "sha256": "ef933e969266fe1f2a49d98261d06ec5ce5dfa30536e31015aef54f8813a7f2a"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/hypr.lua",
+    "sha256": "9b920cbb6c1376bfed275a4fe0d814803e01ebfc690c180b8b9bd90565daa229"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/hyprlock.conf",
+    "sha256": "e8b07ef7631dabe0c98625af1a9a20b3e26f22d67c37cd787f4c6931ce0ed4d5"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/kitty.conf",
+    "sha256": "ffe46c0f7448acdd682f0bc7ce69902bed07c79899350a071fa658bcd39e4b24"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/name",
+    "sha256": "88c53f20497c10001268f039b3c10d3cc0398dbfae3c020855010947509a0f0d"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/prompt.bash",
+    "sha256": "88634452a5f980b575a606d80f126a323fa036c32d8245664a361579eae1d6f8"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/swaync.css",
+    "sha256": "3774c7ca5194c48cf72e81ff61c70c7ac764059877391dd6261a9afe45d54d53"
+  },
+  {
+    "path": ".config/desktop/palette-ci8xttnk/waybar.css",
+    "sha256": "7676f0c065a85d7072bfadd4b18de0875099f695e5e19c0ebb3e22e1513d8787"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/fuzzel.ini",
+    "sha256": "a0451a2d444b3ac7cbfa60957bfc4b6f748fd392e4654c31891144d1653af0a6"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/gtk3.css",
+    "sha256": "4ed2c49de6821d85632b5bcaaf161ab0a6325287f90f4fc62dcd262aaa2f771d"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/hyprlock.conf",
+    "sha256": "b904579d4092782d44ae1fa07cb2ff432c66edbe0509e55b26c75bc89832f95e"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-d4qk_q88/waybar.css",
+    "sha256": "308f13c5f7d2a9f408b7cd4cbc3452d102d2bef611a2df9ce8335f35ea5dd8bf"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/Desktop.kvconfig",
+    "sha256": "e833a76282d294c2e6b16797d198400cc2c80a2472c13996c24713e6a3009fc0"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/Desktop.svg",
+    "sha256": "cc51aa84f74aed1d4f1ca74382720679292c8177bf3a478b2ff470991cbd3760"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/fastfetch.jsonc",
+    "sha256": "3b83e19767b05fb60725d55480d5c55d4fcc5420cd8266e606c1f7f66f25ba58"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/fuzzel.ini",
+    "sha256": "7db84909ecc598a02a59abc70314c04ed5355f1ccbcc7fe2aaedea039ace5a9d"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/gtk3.css",
+    "sha256": "906f35718d6e6b0b2d768822f9e36534b24c2772c3e6b65a7cd0a1bea3ed5d13"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/gtk4.css",
+    "sha256": "845e951f21fb9e649596dadf6b34d1099d6121363705bd2e23cd8b67516b5eee"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/hypr.lua",
+    "sha256": "d1e90799fe3e14e80240c6450defac4e7db840adb05e77268136472827883f93"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/hyprlock.conf",
+    "sha256": "e69ecc00f99537cadd7605540a13d20ec54c080f76012743a946b48e7513f821"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/kitty.conf",
+    "sha256": "3fd002408914fa5785c8568c455029e1c2700ade537c3a061b918de51c4d5b9c"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/nwg-drawer.css",
+    "sha256": "611247a4a62fd7591898fcefcf3274130c970baf5f799055d55fec090d408395"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/prompt.bash",
+    "sha256": "0274779e673508e379ced4159c3b9d97e1765715b9ed3c29187d8c414ac0c8e1"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/swaync.css",
+    "sha256": "c0f671d993ba875f53dc6af170c28e3e0e52deae77f8162d47b1d2d8b32c7799"
+  },
+  {
+    "path": ".config/desktop/palette-d68908hs/waybar.css",
+    "sha256": "37054b33b21305f3a3922fbfcd66930a4a04a4661cd2ac464881e45217c5620a"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/fuzzel.ini",
+    "sha256": "b1c56b0bace685745b3cd2f99228f73675eba39aac26c758c8f91339b35be452"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/gtk3.css",
+    "sha256": "90b375c8ba9b63f27dc672cad78d2ff830b6a099cc2b8fbfd738ee2ae3b9dcc6"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/hyprlock.conf",
+    "sha256": "30b9d2fd7b5089928bffe21865c31c27912644b99fa9599aeb26157f6320d0df"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/swaync.css",
+    "sha256": "286594063f6589ba2dc9e5d4fa0d0b6da768a967d1c02f8c6958d43251f21705"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-ebomopnu/waybar.css",
+    "sha256": "3d1e83094c0675e6e03753bde0ba4a210a0f142c2ec01cae7d72d4b86f40967c"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/Desktop.kvconfig",
+    "sha256": "e833a76282d294c2e6b16797d198400cc2c80a2472c13996c24713e6a3009fc0"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/Desktop.svg",
+    "sha256": "cc51aa84f74aed1d4f1ca74382720679292c8177bf3a478b2ff470991cbd3760"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/fastfetch.jsonc",
+    "sha256": "3b83e19767b05fb60725d55480d5c55d4fcc5420cd8266e606c1f7f66f25ba58"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/fuzzel.ini",
+    "sha256": "7db84909ecc598a02a59abc70314c04ed5355f1ccbcc7fe2aaedea039ace5a9d"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/gtk3.css",
+    "sha256": "906f35718d6e6b0b2d768822f9e36534b24c2772c3e6b65a7cd0a1bea3ed5d13"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/gtk4.css",
+    "sha256": "845e951f21fb9e649596dadf6b34d1099d6121363705bd2e23cd8b67516b5eee"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/hypr.lua",
+    "sha256": "d1e90799fe3e14e80240c6450defac4e7db840adb05e77268136472827883f93"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/hyprlock.conf",
+    "sha256": "ba05cf25bb88ade38c58f3c87ade92052f4e268e208bc7e64646249e4699c50a"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/kitty.conf",
+    "sha256": "3fd002408914fa5785c8568c455029e1c2700ade537c3a061b918de51c4d5b9c"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/nwg-drawer.css",
+    "sha256": "611247a4a62fd7591898fcefcf3274130c970baf5f799055d55fec090d408395"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/prompt.bash",
+    "sha256": "0274779e673508e379ced4159c3b9d97e1765715b9ed3c29187d8c414ac0c8e1"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/swaync.css",
+    "sha256": "c0f671d993ba875f53dc6af170c28e3e0e52deae77f8162d47b1d2d8b32c7799"
+  },
+  {
+    "path": ".config/desktop/palette-emgef1sm/waybar.css",
+    "sha256": "5c6f5cb01f201b3583c49686f2b7046bbafd7d545a95b2e5433ebd0469198c24"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/Desktop.kvconfig",
+    "sha256": "708f5980d1afa290f4f9a67102169fb169c6eeadf87a147e2c893993a1cbe83b"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/Desktop.svg",
+    "sha256": "c568f9e725901dfcd6d1d148fc6ca3fbcc3828bcee5ac1df5b430a66f0c20247"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/fastfetch.jsonc",
+    "sha256": "1aadc1de8f2c2d91b525e4f988dadc08821a8e0193b0fc4ff4aa9bc6a5b3c6fb"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/fuzzel.ini",
+    "sha256": "6f9151dc0aeee23bf75129b5dca0fe2ce784fd254e2763c312d7736a65c7fa39"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/gtk3.css",
+    "sha256": "e3f7977aa12990826fcb1797baacf37bbd5886ab914a8574fa680f25dde2dc20"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/gtk4.css",
+    "sha256": "73640cb1a7f4c65e91147a65c33e032ac1d65a9619e7cbb9270cb3265362c945"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/hypr.lua",
+    "sha256": "169340ab5c9f535e72e152f9ca3e2da51e2b8a52edc244507b271639df54200f"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/hyprlock.conf",
+    "sha256": "d653c336ea7635c15c25eb7655d56cd0dd687cce37f2c09c3dfa35dafd26ed1d"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/kitty.conf",
+    "sha256": "2ac954b67b767a045adbcd2adae96d42d4a73bf599cc788278cae90d86b828f9"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/prompt.bash",
+    "sha256": "c39c4a75b47b4d202c597d3ebdcb7d36d319d50324f315dc47c72f5b8aa265e0"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/swaync.css",
+    "sha256": "f8d12a3e812391af101ac74738e90ecd832e5cb7f2e59e464c180da8a609acfc"
+  },
+  {
+    "path": ".config/desktop/palette-ggbino87/waybar.css",
+    "sha256": "4c78988969a5e3d3ed54287cc25462758a9e7db38e5833a542b44f34f37bfde9"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/fuzzel.ini",
+    "sha256": "b1c56b0bace685745b3cd2f99228f73675eba39aac26c758c8f91339b35be452"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/gtk3.css",
+    "sha256": "90b375c8ba9b63f27dc672cad78d2ff830b6a099cc2b8fbfd738ee2ae3b9dcc6"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/hyprlock.conf",
+    "sha256": "30b9d2fd7b5089928bffe21865c31c27912644b99fa9599aeb26157f6320d0df"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/swaync.css",
+    "sha256": "286594063f6589ba2dc9e5d4fa0d0b6da768a967d1c02f8c6958d43251f21705"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-ivz2cfsz/waybar.css",
+    "sha256": "3d1e83094c0675e6e03753bde0ba4a210a0f142c2ec01cae7d72d4b86f40967c"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/fuzzel.ini",
+    "sha256": "b1c56b0bace685745b3cd2f99228f73675eba39aac26c758c8f91339b35be452"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/gtk3.css",
+    "sha256": "90b375c8ba9b63f27dc672cad78d2ff830b6a099cc2b8fbfd738ee2ae3b9dcc6"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/hyprlock.conf",
+    "sha256": "30b9d2fd7b5089928bffe21865c31c27912644b99fa9599aeb26157f6320d0df"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-jwjhirwt/waybar.css",
+    "sha256": "50ba5ac0ee761f6ca39f8dd85e63483a1a23f27d2a78d08d545f0107e08dfdb3"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/Desktop.kvconfig",
+    "sha256": "39f3794ee5c33e89a83c8ae65acfdc6700e629463a55f0cf873f6e88c94b1f62"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/Desktop.svg",
+    "sha256": "613c8da4760028bfc69d925174582cddb3e6e722873b4e750941161d488e1678"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/dock.css",
+    "sha256": "98412803fb45329b0e18a09a069bdc6d10a3a85505b7378fc2f5ada168c0a3cf"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/fastfetch.jsonc",
+    "sha256": "1738c5382ef20e4acc8eaf6b5205de3da3a673aaad7db5af63c34fb352bfb1a5"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/fuzzel.ini",
+    "sha256": "0bf0f910ecfa6c323b3ed7df9fae9ba38283f8725bc8f6c08950fe7e73652ddd"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/gtk3.css",
+    "sha256": "f1fc2dc325fe0698748bd773dbd61e0878d319456c060f5b79f5f49d973381e0"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/gtk4.css",
+    "sha256": "aa0acb44b615142e3462f644c6bc0484e516a2535d324ad94010a22040fdd2f3"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/hypr.lua",
+    "sha256": "ed5c47fa087ea5f4afad1d50fd99405d87e6a732a207da04e9772d16e030a585"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/hyprlock.conf",
+    "sha256": "2731d0ec93af464b96db903b5ae5d94e4c57862f4582c1a98c365d81284128a5"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/kitty.conf",
+    "sha256": "d0928a8dff0cb91e1c0d00cdbcdfee48d13e4b3c5811ab8b5b9b8261e26857b1"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/name",
+    "sha256": "9bc1b3957a59a5195ba03a83d9d3a722bc00cad57624282ab1c786dfbacef88c"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/nwg-drawer.css",
+    "sha256": "710273244fe27ed5a255f9d899f74fed2017f1367990fe28bc5f3b3b7f288ee4"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/prompt.bash",
+    "sha256": "a8d2e43e778f58b712890d80984fe124577bd1344664f00942e180b0aedf4478"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/swaync.css",
+    "sha256": "0f881afe818f179dbdedfd641e39050bed087c35064ae3ccb7a8114e1095e2d7"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/tokens.json",
+    "sha256": "f29da5e881840682febd77fd9e3ca71baa17e423b6b6a7a71f443b70e4a53628"
+  },
+  {
+    "path": ".config/desktop/palette-k96uwx5z/waybar.css",
+    "sha256": "13337ae2843979db4c85ad255a9ab13c764a4ab1d8a76e301b933dede3cc2afc"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/Desktop.kvconfig",
+    "sha256": "ff98338564061352e47b690d619521ed36022975dc9e0e907cddf2e263841360"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/Desktop.svg",
+    "sha256": "2d6051113975957607c79020891e484033ddb2ed21592dbb0f588564e80e4b37"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/fastfetch.jsonc",
+    "sha256": "c7d7d7f3af11b4dc8f638d12244d8a844468202cb2bf620eb8dfe6d37e127d77"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/fuzzel.ini",
+    "sha256": "071aff67c6c2f6d149f2aac8d1f6150abf17b46b426857241e397d3d4c62ae16"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/gtk3.css",
+    "sha256": "0966ae07efea1c3d97a2ca6b607ea165800fefce5b312e858860f2960ee6d0bc"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/gtk4.css",
+    "sha256": "546174729180a79119e5408566d02bde8f9b2545b4fc7f303eab00bfcb09bd2c"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/hypr.lua",
+    "sha256": "3c8f0e668da05b3e3cdd3e147f0a63d45aeab7b9adfe754de3a17a0d3e62d5fb"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/hyprlock.conf",
+    "sha256": "2a1461827559822a9c5c142d470ad977d03998142ebcab0a50d0ef4d00efa3b3"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/kitty.conf",
+    "sha256": "dcf46832f95eba57fab9d164e58d6a6f36563fbf1f0902a1296385e28c0a5b64"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/name",
+    "sha256": "bc5c9e912443f49322897614d0c96f631c577320ae0b9dd9944190b4b26518c8"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/prompt.bash",
+    "sha256": "bf7ea019d1d0494992e65f43ba95fa88c46033b43b0f344187a89377378d0710"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/swaync.css",
+    "sha256": "a11ecb62d841656683437bd1f71688bf14a02e165db26767e681b4240c599572"
+  },
+  {
+    "path": ".config/desktop/palette-nhpo5bwv/waybar.css",
+    "sha256": "fa936d485c0721e21521d441f7f33ceff06ef146bceb1751d2b38621cc7c2af8"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/fuzzel.ini",
+    "sha256": "a0451a2d444b3ac7cbfa60957bfc4b6f748fd392e4654c31891144d1653af0a6"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/gtk3.css",
+    "sha256": "4ed2c49de6821d85632b5bcaaf161ab0a6325287f90f4fc62dcd262aaa2f771d"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/hypr.lua",
+    "sha256": "635016b0f0977269f655ce17f1acd4b383e4e119efad33d8dfacbb78681913ee"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/hyprlock.conf",
+    "sha256": "b904579d4092782d44ae1fa07cb2ff432c66edbe0509e55b26c75bc89832f95e"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-o8hb4kw1/waybar.css",
+    "sha256": "c7aba658a439d772fa3ae26127ea3bac7efa15e246b1fbab6ad3cb1f6710fa67"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/Desktop.kvconfig",
+    "sha256": "708f5980d1afa290f4f9a67102169fb169c6eeadf87a147e2c893993a1cbe83b"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/Desktop.svg",
+    "sha256": "c568f9e725901dfcd6d1d148fc6ca3fbcc3828bcee5ac1df5b430a66f0c20247"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/fastfetch.jsonc",
+    "sha256": "1aadc1de8f2c2d91b525e4f988dadc08821a8e0193b0fc4ff4aa9bc6a5b3c6fb"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/fuzzel.ini",
+    "sha256": "6f9151dc0aeee23bf75129b5dca0fe2ce784fd254e2763c312d7736a65c7fa39"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/gtk3.css",
+    "sha256": "e3f7977aa12990826fcb1797baacf37bbd5886ab914a8574fa680f25dde2dc20"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/gtk4.css",
+    "sha256": "73640cb1a7f4c65e91147a65c33e032ac1d65a9619e7cbb9270cb3265362c945"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/hypr.lua",
+    "sha256": "169340ab5c9f535e72e152f9ca3e2da51e2b8a52edc244507b271639df54200f"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/hyprlock.conf",
+    "sha256": "d653c336ea7635c15c25eb7655d56cd0dd687cce37f2c09c3dfa35dafd26ed1d"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/kitty.conf",
+    "sha256": "f5f10b5d4f85f37748bbf54957d65be5cf3d42c6242cabf9d559619307809a18"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/prompt.bash",
+    "sha256": "c39c4a75b47b4d202c597d3ebdcb7d36d319d50324f315dc47c72f5b8aa265e0"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/swaync.css",
+    "sha256": "f8d12a3e812391af101ac74738e90ecd832e5cb7f2e59e464c180da8a609acfc"
+  },
+  {
+    "path": ".config/desktop/palette-og5xgfna/waybar.css",
+    "sha256": "4c78988969a5e3d3ed54287cc25462758a9e7db38e5833a542b44f34f37bfde9"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/fuzzel.ini",
+    "sha256": "b1c56b0bace685745b3cd2f99228f73675eba39aac26c758c8f91339b35be452"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/gtk3.css",
+    "sha256": "90b375c8ba9b63f27dc672cad78d2ff830b6a099cc2b8fbfd738ee2ae3b9dcc6"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/hyprlock.conf",
+    "sha256": "b904579d4092782d44ae1fa07cb2ff432c66edbe0509e55b26c75bc89832f95e"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-oqtwua0_/waybar.css",
+    "sha256": "50ba5ac0ee761f6ca39f8dd85e63483a1a23f27d2a78d08d545f0107e08dfdb3"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/Desktop.kvconfig",
+    "sha256": "f197866906d50fcce3a153dc623c3e246b10aa3750290e89801dc4f3fc7df8d8"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/Desktop.svg",
+    "sha256": "7a61be0cf3b4fc48277cd8058aa15371e978b0d7d9e6548217ee4dd2f3e03ae4"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/fastfetch.jsonc",
+    "sha256": "2256ba7a3776e818ce996d533db4be84d815c15838917e933e8971c03d4a8e38"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/fuzzel.ini",
+    "sha256": "289259fcebff01d23ec43267cc00c1e29c6b0086a6cb3543f76d6f6112ec3d94"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/gtk3.css",
+    "sha256": "31c9d7e3430ecb32aa30aedffba71f774aafa8a193cd4d98b9c7529c752bb4d0"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/gtk4.css",
+    "sha256": "90cf2353fdda35d2a5756dc1358d1aaa92b7d63863e9dcffc0c0d949009640ff"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/hypr.lua",
+    "sha256": "6a0360fd1a97c6c9258b7b7b0c34fd04fb441fc97dc051f6a99e97580f5c99dc"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/hyprlock.conf",
+    "sha256": "9c44dfee11fb000629199d13e83d3dc82f7688960f8cdd4303de81e32e8a0814"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/kitty.conf",
+    "sha256": "e53ee1b7d214455f94052089a2f0b0c58b9367a54602cac91c5587679be06f32"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/name",
+    "sha256": "4533fb0ec5c8807f27f7a4a893112505eb764d25106f4a9624fbf306fbadd559"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/prompt.bash",
+    "sha256": "a9c6655e885157d402b3b342fe0a6cb420b48245c4b7ae940d0cdc61276317b0"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/swaync.css",
+    "sha256": "3625fc5b7bbc68df883c22b58d1a4ff0af4455f61c0f06255ac737a4b5ffdd37"
+  },
+  {
+    "path": ".config/desktop/palette-stwwywr2/waybar.css",
+    "sha256": "049097b46b96661eb91f13ebaa4fb30de8670b6ae5cca30e70a35c61a35ed397"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/Desktop.kvconfig",
+    "sha256": "71ac4a5d2ef830be80b94a2962922ef76eadcd33b2468ee2ab7175f89b63b259"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/Desktop.svg",
+    "sha256": "f15e2766ffc96957b6faf03d4fb50e83b5957b86c1881bc22079c00fbe97a405"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/fastfetch.jsonc",
+    "sha256": "3ee98bce11d5330be9a42820058e65a1dfc2d9ceab7832439954bd98745e83e4"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/fuzzel.ini",
+    "sha256": "f78bef5e79c011b053f8eae949133473991cd0f97d57f187ec5490ad0422e27a"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/gtk3.css",
+    "sha256": "20953dcc3ef753eaf95a89f399f90e22eb9a14168b3f3402b7c5a5c1088d86ef"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/gtk4.css",
+    "sha256": "6e7109549baefc27575b1f0f667a62f19fedcc4089b7559614798e5827109bd6"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/hypr.lua",
+    "sha256": "76a707fdf709a3369b08c678631c0c74bc20060f470fa77829f1b37b233eb6c8"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/hyprlock.conf",
+    "sha256": "a277f58a095e4a465dba44d0cc5cfe4b26bb814f0faab56ec70de46a33e4e080"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/kitty.conf",
+    "sha256": "ed1d4899678db5f79783419b6bf1b21e10367dc2aa32563b1f734b76e58ea494"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/name",
+    "sha256": "9586c96cdc99b70d53252f0e8f07d0f30b25380f3e711074c76c9f11109cba84"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/prompt.bash",
+    "sha256": "e05f1dbfa5490b829fbf8d2731cda501192269039bd9b2e0e4047cdd87484782"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/swaync.css",
+    "sha256": "fd144648d18a0f8c75fb3ea55e6d0cb3603890eafcc684bdb7b6ec7e5e5456fa"
+  },
+  {
+    "path": ".config/desktop/palette-uh49tcdj/waybar.css",
+    "sha256": "5ab144539d917890ecddbe0cd227f9b114ccb86a761a765ec5e25039f4f37c81"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/Desktop.kvconfig",
+    "sha256": "f9be8e4586ff4d17416d57b6bb76ba07d9336321e971a39cd45a92b8fc63c97c"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/Desktop.svg",
+    "sha256": "e18f4a206bfa8bfb49d5e4f8ea5c19fc54c8f6baa29990970dafe0c63979fdaf"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/fastfetch.jsonc",
+    "sha256": "788f7049d26999baae4394ab35d2c8c53ea95de30d65cbcec94cf3a76b6d2a8f"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/fuzzel.ini",
+    "sha256": "e44ae3ea3be76f4e3ca8bced16236faa237c43a160c08c4697c229811c68caad"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/gtk3.css",
+    "sha256": "8c233cc03a5523daab2f3d83ca9b0a22c7d23df6ff54ab143a1d8941fadd3555"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/gtk4.css",
+    "sha256": "1bac45d6cfa9a61b146dff67ce726cfb5e40f0cef7e49d61568975a5e66c6ab6"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/hypr.lua",
+    "sha256": "690f2dc19edfe8009e7c171f59a553d02b7e1258c349b1d70e10244c92356a98"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/hyprlock.conf",
+    "sha256": "4b29a3dc688e2b705cc3e0557efe4a579ec97fd61d079ede5c5bb898fceb838b"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/kitty.conf",
+    "sha256": "65735260d241c5434693b364ead76ba717a94ac0ddee577f0dd6f556c1acb19b"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/name",
+    "sha256": "cb7668bc31169df8cbcbae759842ad225feff5f84dab2a3c550727c57f7d7132"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/prompt.bash",
+    "sha256": "65b262a7b7c5e1c9b3d7feeb809c18cf38e977f7d4c84605bb0f08521b4e36e7"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/swaync.css",
+    "sha256": "213667714b83fbf299a7820555e22219e0cd7a771b587faf758a9c9d99bf601a"
+  },
+  {
+    "path": ".config/desktop/palette-wjlbzqul/waybar.css",
+    "sha256": "6d80b56eb449eebaf648f16276ff48820793aa40317233274090865ab77dcd75"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/fuzzel.ini",
+    "sha256": "a0451a2d444b3ac7cbfa60957bfc4b6f748fd392e4654c31891144d1653af0a6"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/gtk3.css",
+    "sha256": "4ed2c49de6821d85632b5bcaaf161ab0a6325287f90f4fc62dcd262aaa2f771d"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/hyprlock.conf",
+    "sha256": "b904579d4092782d44ae1fa07cb2ff432c66edbe0509e55b26c75bc89832f95e"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-wl0gbii5/waybar.css",
+    "sha256": "50ba5ac0ee761f6ca39f8dd85e63483a1a23f27d2a78d08d545f0107e08dfdb3"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/Desktop.kvconfig",
+    "sha256": "708f5980d1afa290f4f9a67102169fb169c6eeadf87a147e2c893993a1cbe83b"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/Desktop.svg",
+    "sha256": "c568f9e725901dfcd6d1d148fc6ca3fbcc3828bcee5ac1df5b430a66f0c20247"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/fastfetch.jsonc",
+    "sha256": "1aadc1de8f2c2d91b525e4f988dadc08821a8e0193b0fc4ff4aa9bc6a5b3c6fb"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/fuzzel.ini",
+    "sha256": "6f9151dc0aeee23bf75129b5dca0fe2ce784fd254e2763c312d7736a65c7fa39"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/gtk3.css",
+    "sha256": "e3f7977aa12990826fcb1797baacf37bbd5886ab914a8574fa680f25dde2dc20"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/gtk4.css",
+    "sha256": "73640cb1a7f4c65e91147a65c33e032ac1d65a9619e7cbb9270cb3265362c945"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/hypr.lua",
+    "sha256": "169340ab5c9f535e72e152f9ca3e2da51e2b8a52edc244507b271639df54200f"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/hyprlock.conf",
+    "sha256": "d653c336ea7635c15c25eb7655d56cd0dd687cce37f2c09c3dfa35dafd26ed1d"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/kitty.conf",
+    "sha256": "2ac954b67b767a045adbcd2adae96d42d4a73bf599cc788278cae90d86b828f9"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/nwg-drawer.css",
+    "sha256": "00652f63fdca12b350c3bda4a7658e4d257fbee9cbc20d710301120f2e203158"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/prompt.bash",
+    "sha256": "c39c4a75b47b4d202c597d3ebdcb7d36d319d50324f315dc47c72f5b8aa265e0"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/swaync.css",
+    "sha256": "f8d12a3e812391af101ac74738e90ecd832e5cb7f2e59e464c180da8a609acfc"
+  },
+  {
+    "path": ".config/desktop/palette-xpzhlzrx/waybar.css",
+    "sha256": "4c78988969a5e3d3ed54287cc25462758a9e7db38e5833a542b44f34f37bfde9"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/Desktop.kvconfig",
+    "sha256": "bc4da7540fd88b9eb4450e5382714ca793e3d28118bec5d9b5bfc957de451a90"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/Desktop.svg",
+    "sha256": "0a7443dfdb3a59dd55415a55af609428f42e95aed1d6b1d46f1ce21b1a0f4682"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/dock.css",
+    "sha256": "538083e887675f8d7de50355d74b76c82eef9bcf7222bd54bd51a8a5a096b0fb"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/fastfetch.jsonc",
+    "sha256": "ec5016cb337f8eca231ec806bc111d2776d1d01c8f48990f5dd224748fd3f00f"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/fuzzel.ini",
+    "sha256": "b1c56b0bace685745b3cd2f99228f73675eba39aac26c758c8f91339b35be452"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/gtk3.css",
+    "sha256": "4ed2c49de6821d85632b5bcaaf161ab0a6325287f90f4fc62dcd262aaa2f771d"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/gtk4.css",
+    "sha256": "89e4afac725814a5ea9ab33dda58bdd064e5d51eb9bf4b764d630f0304ddac50"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/hypr.lua",
+    "sha256": "cc51b0a8aedc5b3fa495e97244fc23b9152b8a1cf8d21cecac342c3275e616a8"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/hyprlock.conf",
+    "sha256": "b904579d4092782d44ae1fa07cb2ff432c66edbe0509e55b26c75bc89832f95e"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/kitty.conf",
+    "sha256": "40efb79d87947f63a697a5aa71049f1fcfcb526333225d2bc706f8db9f0d2455"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/name",
+    "sha256": "5fa9d3249cb22e9e297b01c81b6a4d6a26ff4e6ad4487fa4fc466041e2a12e83"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/nwg-drawer.css",
+    "sha256": "6093cedbbb76e74af3d0bc31c45ea8bd4dee5586ede8b07133f922e705894e2f"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/prompt.bash",
+    "sha256": "faf1ef4640b7a321e44204be3a84d2ece428f14ad53b0e2c04a48d1eb06556df"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/swaync.css",
+    "sha256": "7a101f374ec7f0892a14d150afecd2139ec3a05b4e56f675c1ba5c119e6422bd"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/tokens.json",
+    "sha256": "ba8b082750054ee4797d2d735883145bc3265ab3fcf8990358e69791e1913c68"
+  },
+  {
+    "path": ".config/desktop/palette-yadnkgse/waybar.css",
+    "sha256": "50ba5ac0ee761f6ca39f8dd85e63483a1a23f27d2a78d08d545f0107e08dfdb3"
+  },
+  {
+    "path": ".config/desktop/palettes.json",
+    "sha256": "8c5ad021b267253105a66f40ea97b9bf276f26047dda771960886bd878decb73"
+  },
+  {
+    "path": ".config/desktop/templates/Desktop.kvconfig",
+    "sha256": "b81577fe732bfc483f15e48156d38659b99ca6dad5f7b3550267feebf785873b"
+  },
+  {
+    "path": ".config/desktop/templates/Desktop.svg",
+    "sha256": "68ee3c4f3006f7857d1fb474923597c83dc075d30e58e7036ec7fbe571768a40"
+  },
+  {
+    "path": ".config/desktop/templates/dock.css",
+    "sha256": "b58495cc71ee1a69bcee4864704153e53734647695f6be23c0d1328bc215e068"
+  },
+  {
+    "path": ".config/desktop/templates/fastfetch.jsonc",
+    "sha256": "bb33ac99faefe0ee21cbaebd8469191722de038460aa25a385ee58355b69ae47"
+  },
+  {
+    "path": ".config/desktop/templates/fuzzel.ini",
+    "sha256": "e26a59a5534bf6ad9c2991062019cde0f844c2ac6a178f4e7358ee6803c49809"
+  },
+  {
+    "path": ".config/desktop/templates/gtk3.css",
+    "sha256": "6993bcd433fec5776f5335d8040eeb53b3997bcbedca9ccdfd56635d91f765ae"
+  },
+  {
+    "path": ".config/desktop/templates/gtk4.css",
+    "sha256": "9600951f94d0fbf883df42d5f592cb5fb51db7052febdd57a8e691791b557a8c"
+  },
+  {
+    "path": ".config/desktop/templates/hypr.lua",
+    "sha256": "71eb6aa6577348236c19522430cb0c373853d964ccf2dd2ed7281daf390cdf61"
+  },
+  {
+    "path": ".config/desktop/templates/hyprlock.conf",
+    "sha256": "c93173112d9d9f0097a9415e52d0cee9400f967eccf9d6d851ea05c75fbbe59b"
+  },
+  {
+    "path": ".config/desktop/templates/kitty.conf",
+    "sha256": "5cadd06eb26ec085ba3fdddc7f56c300a7923b5ec72074f56f27b87571db9004"
+  },
+  {
+    "path": ".config/desktop/templates/nwg-drawer.css",
+    "sha256": "a5ffa2baf4cdac3ac693e902d3023583049dbc54517d3026cc09074fb24a605c"
+  },
+  {
+    "path": ".config/desktop/templates/prompt.bash",
+    "sha256": "01e47d42787f35a42a44b7e9290410057fece3f304a8dfe2dd1489625a86284f"
+  },
+  {
+    "path": ".config/desktop/templates/swaync.css",
+    "sha256": "3079f5118d64ec0f4817958fa9ecf8906d1171ab525cb8c69f90fad9cfa6cdc8"
+  },
+  {
+    "path": ".config/desktop/templates/tokens.json",
+    "sha256": "34790176964fc4f4b97049a93987d74b3465459cc5ad42f9a2f786c6e8039bf8"
+  },
+  {
+    "path": ".config/desktop/templates/waybar.css",
+    "sha256": "13337ae2843979db4c85ad255a9ab13c764a4ab1d8a76e301b933dede3cc2afc"
+  },
+  {
+    "path": ".config/desktop/wallpapers.json",
+    "sha256": "44fa02de0995557ecf932296427b8ee0ce7d3f20d86cbb8ca8a81ed5c39dd81b"
+  },
+  {
+    "path": ".config/fastfetch/config.jsonc",
+    "link": "/home/roman/.config/desktop/current/fastfetch.jsonc"
+  },
+  {
+    "path": ".config/fuzzel/fuzzel.ini",
+    "link": "/home/roman/.config/desktop/current/fuzzel.ini"
+  },
+  {
+    "path": ".config/gtk-3.0/gtk.css",
+    "link": "/home/roman/.config/desktop/current/gtk3.css"
+  },
+  {
+    "path": ".config/gtk-4.0/gtk.css",
+    "link": "/home/roman/.config/desktop/current/gtk4.css"
+  },
+  {
+    "path": ".config/hypr/DESKTOP.md",
+    "sha256": "68f6e814cf76844ddabcab5692a4189922ac2fe71867bfa9de9317713afb6cd4"
+  },
+  {
+    "path": ".config/hypr/hypridle.conf",
+    "sha256": "0421e75ae83864306d313fad23c3055b51bbb259d747376cda234d2431a16cc1"
+  },
+  {
+    "path": ".config/hypr/hyprland.lua",
+    "sha256": "46e178f1301af02b1f44d99f9ea22616cb77b03d2242e0053910cdbb4ae6b57e"
+  },
+  {
+    "path": ".config/hypr/hyprlock.conf",
+    "link": "/home/roman/.config/desktop/current/hyprlock.conf"
+  },
+  {
+    "path": ".config/hypr/hyprpaper.conf",
+    "sha256": "60feb5b070cd8f6d7c5e879393a175e9e5079b9da970e85111c29b8a8616d5d6"
+  },
+  {
+    "path": ".config/hypr/tiling.lua",
+    "sha256": "a7b0615f5e2520945c91f208c2c0a1aa1f36b5277b402e3708396e3419647226"
+  },
+  {
+    "path": ".config/hypr/titlebars.lua",
+    "sha256": "256986677dbf92dc0d844178b8f6b42086e56dca7b4209035d4fec826424544d"
+  },
+  {
+    "path": ".config/kitty/kitty.conf",
+    "link": "/home/roman/.config/desktop/current/kitty.conf"
+  },
+  {
+    "path": ".config/nwg-dock-hyprland/style.css",
+    "link": "/home/roman/.config/desktop/current/dock.css"
+  },
+  {
+    "path": ".config/nwg-drawer/drawer.css",
+    "link": "/home/roman/.config/desktop/current/nwg-drawer.css"
+  },
+  {
+    "path": ".config/quickshell/reference/ControlCenter.qml",
+    "sha256": "e8fab989f253d78de14877e0cddf1abd7865fe5eeb925d9273dfe114a5ae2f71"
+  },
+  {
+    "path": ".config/quickshell/reference/Design.qml",
+    "sha256": "e9c1b8636c1e2a59f7f954afc40047d6296fba56aa95e6abd88a12c38aa622b6"
+  },
+  {
+    "path": ".config/quickshell/reference/WindowSwitcher.qml",
+    "sha256": "b3228606a8da3ba232a2d2b50c4c3ece8a476305499c56911609f5b3a87a8e25"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/ICON-SOURCES.txt",
+    "sha256": "46a2d2a3efd39ce4a23bf535bea5d5f0131c912783076f1d207b99b7a34ff5e8"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/bell.svg",
+    "sha256": "53ba275430af122dd8331626b600d736d08ce06201dd4cd3030029ddd0a004d6"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/bluetooth.svg",
+    "sha256": "4b0b0aac76bb3c38e8810eb0530ec3db5a6848713eb239e6436d8e03650d6a11"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/calendar.svg",
+    "sha256": "14ec7cffb3bc4fba1a47b4849b5c950d2bb13042340134ac15f067e825e8d138"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/chevron.svg",
+    "sha256": "512c545c61184d76d1969fe8e9187c60085142db9147a5560f245ab81a8b14a6"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/close.svg",
+    "sha256": "e181d0737f412de4f34a15c3ebed7e1515b524ccf6d82aff5d0d56ff18ff4e2e"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/cloud.svg",
+    "sha256": "87b41d5027e27db67bb1fe67e0be22115dccd5d089d565df8962720f8b3d261b"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/control-reference.png",
+    "sha256": "9211753d9887e36f1493b072fc8012671b2bf100efa2fd8e6c38dd7187e4870a"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/discord-badge.svg",
+    "sha256": "5273947af70b24ee9d6b8dd4c989c8a9d43a2f7b382d3873c0d3440b59164c19"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/gear.svg",
+    "sha256": "2a97583b33aca889d96685f636f4cc75f4dea0c10345432c9aeab13754829111"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/lock.svg",
+    "sha256": "ff3ccf272e9151b04dc8ada103382e6979df4ec5717c810a860392fbdbeab2ea"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/mic-off.svg",
+    "sha256": "ee1da1ad0b6552fd0cb4fb2c8e77696edc73452e47d4c675d21f0c661a635a48"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/mic.svg",
+    "sha256": "4e361c8fce2f163492f30292857e2a6aa4a83acaf2bcbd5c2d5dcb978530a927"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/moon.svg",
+    "sha256": "39cd8e9cc2f6a096ed7e7c4bc6f6872086f6ac83e150c4db90b98da238ec99a6"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/more.svg",
+    "sha256": "93857665a3ffcab7d85adf58fe2f5e6bfb8d1fe27b703ac74ac1aac14926940b"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/music.svg",
+    "sha256": "09323c5cbca1495e4745a007b5be340ee7bec6ca295da3f9b017d113a32a8de8"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/next.svg",
+    "sha256": "28350e1eeb7b9f57bd23bcabf9e4d24abfc21b23402c45bef0ffe1108c8cfeb3"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/pause.svg",
+    "sha256": "59e2a39ebb1f8ce474b492b39a2e2299efe660521f279249c88cf32de3a00518"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/pin.svg",
+    "sha256": "097bae25d952fa136ecf184efd2b0d83eec43fcff29b9253864869d885dae520"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/play.svg",
+    "sha256": "b81a3d9ac49e3d350a724e2466fb1a84c749b686448ab8e7276b847cd5e2d7cc"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/power.svg",
+    "sha256": "0a7746bcc542237c1b5fa4754ab4085507ec8f4d5fa22ee86ffabe4d8464dbb3"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/previous.svg",
+    "sha256": "568aa3166c90dfe067c305b09f6cb36d7a46781f2a9a62cbc889a897471f1eaf"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/rain.svg",
+    "sha256": "140b1e08119a8130991042949edd233a9f540b841b0467b8aa4dbb75f2218c87"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/snow.svg",
+    "sha256": "915c87317e112ed8b27d56ef60ac3e870379692320d78d1d3504493dd5b18cd3"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/spotify-badge.svg",
+    "sha256": "79c47311778bb286d1aa714b18b479a06f1efbdb2cd9cb08da6c5bf3381b71cd"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/storm.svg",
+    "sha256": "4dc6e8082a61bdc6c275de25800a4a55810950867681b4c8cff4ce2a0d40d81e"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/sun.svg",
+    "sha256": "2d2e2d0dcf625b31b321727b89c313d28eb3cc312f847a9865ad255162235a57"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/volume-off.svg",
+    "sha256": "6476fbf568da7af6d8f3b836f5418f753bd4cc96474b58960ab480f65cead17c"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/volume.svg",
+    "sha256": "523e7a183f97fe27c5cebf084469268001552b1718b6807ffe8a3f7c001b1ff3"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/weather-night.svg",
+    "sha256": "a40340571b912f604037a15c27f1f5c2b625b6099fa88d514525788202ad74fc"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/weather.svg",
+    "sha256": "2e811e3c352a7426091598b3a9a43dbd79d0703c125f46905feee617a60e3702"
+  },
+  {
+    "path": ".config/quickshell/reference/assets/wifi.svg",
+    "sha256": "9d5f535a793c07d25dff9ed99e590e1079b23da86b47f025404499da5be544a9"
+  },
+  {
+    "path": ".config/quickshell/reference/qmldir",
+    "sha256": "d6277acd77ba2d0e06a99ac7962acbe72eb1d2fdc243a467d3a1b09b13c1d50e"
+  },
+  {
+    "path": ".config/quickshell/reference/shell.qml",
+    "sha256": "65ae99398814c7616bb03dfc1b8fd7dec18aaf8e936ca81c5ec36f06a19f4375"
+  },
+  {
+    "path": ".config/swaync/config.json",
+    "sha256": "33cb67c3b842b0aeed6a2c14c596752b69104aa69f55b79c5e5aa49809a4a072"
+  },
+  {
+    "path": ".config/swaync/style.css",
+    "link": "/home/roman/.config/desktop/current/swaync.css"
+  },
+  {
+    "path": ".config/systemd/user/desktop-bluetooth.service",
+    "sha256": "9824509660d4a087e71de9441d46023834172e6f2c0f5fd8f69a28317e3b2b33"
+  },
+  {
+    "path": ".config/systemd/user/desktop-clipboard-image.service",
+    "sha256": "a4fd026434c87af9612e9c0928682b775d6bc0c1f5e07fcc321b8a61dabb895a"
+  },
+  {
+    "path": ".config/systemd/user/desktop-clipboard-text.service",
+    "sha256": "8f13d62fb5bfae1263de082fdd2483422387f87681f0606024e32727c92b98ac"
+  },
+  {
+    "path": ".config/systemd/user/desktop-dock.service",
+    "sha256": "525c0272a40f20d88dec9ee434b7ff245e0e33af7fe8d01d2827709abc37a96c"
+  },
+  {
+    "path": ".config/systemd/user/desktop-files.service",
+    "sha256": "298329bb0691c15b56c49450b0bfc6e6cd96a1b6fe66026d3cb2c473472a1c61"
+  },
+  {
+    "path": ".config/systemd/user/desktop-network.service",
+    "sha256": "931efcf28b9f59df39c4a543a18ed5b9bf2dd180c63ffcf3534ed140807636f8"
+  },
+  {
+    "path": ".config/systemd/user/desktop-nightlight.service",
+    "sha256": "cca3f293f48990b6b668d755ec85f53e5b9bf6d2938ffd3640d8cfc4182e90cf"
+  },
+  {
+    "path": ".config/systemd/user/desktop-package-updates.service",
+    "sha256": "80da2d9995086da9952b87949621ea884cfdd23591929670c10f06801730bc18"
+  },
+  {
+    "path": ".config/systemd/user/desktop-package-updates.timer",
+    "sha256": "c524a65e8ba9eebbd2bcd54a987dd6f7a8bd4b86cd9d264eb93fc0048c1967a1"
+  },
+  {
+    "path": ".config/systemd/user/desktop-session.target",
+    "sha256": "70871f8ca5e96d5ef761ec68831566483c68cc327d2ff6106cdc11bbe474113d"
+  },
+  {
+    "path": ".config/systemd/user/desktop-session.target.wants/waypaper-restore.service",
+    "link": "/home/roman/.config/systemd/user/waypaper-restore.service"
+  },
+  {
+    "path": ".config/systemd/user/desktop-shell.service",
+    "sha256": "69f6be1e350dd2a69a6f09ab023057592d4f8839588e36ba0e1bbe76295e28fe"
+  },
+  {
+    "path": ".config/systemd/user/waypaper-restore.service",
+    "sha256": "23f4b3f91bca5535b6f786c7ea2368342e84bb17cab3fbdf18e682fa7e3d4d50"
+  },
+  {
+    "path": ".config/waybar/arch-launcher.svg",
+    "sha256": "0e5f7c5b21dedb791680889ec5818e6090c6c2d6ed90826708ad4e63c4b29949"
+  },
+  {
+    "path": ".config/waybar/config.jsonc",
+    "sha256": "5a2c49f704e0a2fa22edbaa400eb5797e39fff351548e0a513c47e718438639b"
+  },
+  {
+    "path": ".config/waybar/extras.css",
+    "sha256": "330aaf632382b6909056e9214d2c8655c494655aab82ec3ebf512991c374171a"
+  },
+  {
+    "path": ".config/waybar/style.css",
+    "link": "/home/roman/.config/desktop/current/waybar.css"
+  },
+  {
+    "path": ".config/waybar/taskbar.css",
+    "sha256": "bb8617908cc89eea48b6f1333d4e885ca54877489541922d9b0c8a0b232744fa"
+  },
+  {
+    "path": ".config/waybar/taskbar.jsonc",
+    "sha256": "417676f0777512b31da686c96be52d042a7756fc89da45c672462dbf3fb879a2"
+  },
+  {
+    "path": ".local/bin/desktop-audio",
+    "sha256": "927ff75e2d61369feda0789c920f7ca4c6c8f0a6cf47030196c931489f0088a2"
+  },
+  {
+    "path": ".local/bin/desktop-audiowaves",
+    "sha256": "25b33ff0cc72b8d3360ea458cbc89ce2d035d45419abdc192d5faf032374ad3a"
+  },
+  {
+    "path": ".local/bin/desktop-brightness",
+    "sha256": "b2cf061bef5cf746edfb3fb600115048beebb413ff79de216e9d3d590ad3952d"
+  },
+  {
+    "path": ".local/bin/desktop-brightness-popup",
+    "sha256": "3e2d62488b7b8e4c63526d509bb0daca2f851f7afac4fc6d29790ebd53791d56"
+  },
+  {
+    "path": ".local/bin/desktop-brightness-setup",
+    "sha256": "6fe8a4af8b53c6006a1373789f9e01ba30c2c625983722a371cd0569d1e4d17d"
+  },
+  {
+    "path": ".local/bin/desktop-clipboard",
+    "sha256": "5d014039dcb24f0b8aa1239923293b6d7ed0f4aaa31fbca6ea01227b1c2c7ed0"
+  },
+  {
+    "path": ".local/bin/desktop-control-action",
+    "sha256": "9cc7d92c78b7e9aff517a647bf99c283617bda6012bf7424e6bb1f1b39f35825"
+  },
+  {
+    "path": ".local/bin/desktop-dock",
+    "sha256": "a9ee78d06afc80ffc444d13f2c3a150011bd80ac558da33b0dbd34271c360a2b"
+  },
+  {
+    "path": ".local/bin/desktop-gpu",
+    "sha256": "af33af99eae03a0cc5975e563ac91473f743442c330589ffc75fc4617e489f9c"
+  },
+  {
+    "path": ".local/bin/desktop-lock",
+    "sha256": "1bc7b4691f524f649fa0fa13bc21ad753bf7fe3703ce3db7e0782a235ee475b6"
+  },
+  {
+    "path": ".local/bin/desktop-notification-feed",
+    "sha256": "e7783ffe3a0479fee03c987d6033479ef1b21f82f1af37e805ce2434146c7072"
+  },
+  {
+    "path": ".local/bin/desktop-package-updates",
+    "sha256": "53894b268d0a44795362e0137cc570e44419dfb743ca5680d8853e5b49015304"
+  },
+  {
+    "path": ".local/bin/desktop-panel",
+    "sha256": "c8d19808a3cf5cf81e06454c2b64d136584fe042856806da4b67b2a079315b08"
+  },
+  {
+    "path": ".local/bin/desktop-panel-state",
+    "sha256": "ed6a32cea0e3f6c0f2a279603a1b16cd866b88d804cfba0e72571f22e5ba31ee"
+  },
+  {
+    "path": ".local/bin/desktop-power",
+    "sha256": "4abdf7ab4c3401db06f2b50ecd55bd29aa2ee7bb115ebca0fd41703d07fe1177"
+  },
+  {
+    "path": ".local/bin/desktop-screenshot",
+    "sha256": "1645e49428e13038b17eb85477322b18918710213086bfaa950058ea003efedf"
+  },
+  {
+    "path": ".local/bin/desktop-session",
+    "sha256": "5ff123057eb17c3d8d6e73252774ff3a590efd1544370db437f22a0595a1cfc6"
+  },
+  {
+    "path": ".local/bin/desktop-sound-control",
+    "sha256": "16c2535d2d5b1997b2f89e18c7e904fcc5db38a9a767bac51708f6c80963c5f5"
+  },
+  {
+    "path": ".local/bin/desktop-switcher",
+    "sha256": "367bff902b02581239c21532c6520e4777f0227045095c413ad110c1782e57b8"
+  },
+  {
+    "path": ".local/bin/desktop-taskbar-ready",
+    "sha256": "3a7bd58e0d0b2c4c1726f3d8c421dc4aef1e21c85befd8a1ef7120f5c2640f46"
+  },
+  {
+    "path": ".local/bin/desktop-theme",
+    "sha256": "127224a8133668bb58afe441656dda425dd0c59573d51993bd7bba4f4850600a"
+  },
+  {
+    "path": ".local/bin/desktop-titlebars",
+    "sha256": "b868c93614e83e8fea93993006cd29ae67ecbc2328769892c83fd952dd9e96cb"
+  },
+  {
+    "path": ".local/bin/desktop-weather",
+    "sha256": "804f3566a5c387571875149c580b15aa8626abb75da7894c5c86a2cac68d4826"
+  },
+  {
+    "path": ".local/bin/desktop-window",
+    "sha256": "853381fdb724dd7b26736dddce1719ff54289337438f67f87d7e6197bea961c4"
+  },
+  {
+    "path": ".local/bin/waypaper",
+    "link": "/home/roman/.local/share/waypaper-venv/bin/waypaper"
+  },
+  {
+    "path": ".local/bin/waypaper-sync",
+    "sha256": "5c566318757e27cfaeff7ec02512d14d1f4397270050318772623b379cf49194"
+  }
+]

@@ -1,0 +1,35 @@
+* {
+    font-family: "Noto Sans", "JetBrainsMono Nerd Font", "Noto Color Emoji";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+window#waybar {
+    background: rgba(11, 12, 22, 0.91);
+    color: #eef0ff;
+    border: 1px solid rgba(149, 134, 255, 0.18);
+    border-radius: 14px;
+}
+tooltip { background: #131629; border: 1px solid #373457; border-radius: 10px; }
+tooltip label { color: #eef0ff; }
+#workspaces { margin: 4px 6px; }
+#workspaces button { padding: 0 10px; margin: 1px 2px; color: #a3a8c5; border-radius: 8px; }
+#workspaces button.active { background: #1d2140; color: #eef0ff; }
+#workspaces button.urgent { background: #d183a2; color: #131629; }
+#workspaces button:hover { background: #373457; box-shadow: none; }
+#custom-launcher { color: #9586ff; font-size: 19px; padding: 0 14px; }
+#clock { font-weight: 600; padding: 0 14px; }
+#tray, #network, #wireplumber, #bluetooth, #language, #idle_inhibitor, #custom-notification, #custom-lock {
+    padding: 0 11px; margin: 5px 0; border-radius: 8px;
+}
+#custom-lock { margin-right: 8px; color: #9586ff; }
+#language { color: #a3a8c5; font-weight: 600; }
+#network.disconnected, #wireplumber.muted { color: #a3a8c5; }
+#idle_inhibitor.activated { color: #d2b987; }
+#bluetooth.connected { color: #9586ff; }
+#custom-notification:hover, #custom-lock:hover, #custom-power:hover, #network:hover, #wireplumber:hover, #bluetooth:hover, #language:hover, #idle_inhibitor:hover { background: #1d2140; }
+#custom-power { margin-right: 8px; color: #c4b4ff; padding: 0 11px; }
+
+#custom-microphone, #memory { padding: 0 10px; margin: 5px 0; border-radius: 8px; }
+#custom-microphone.muted { color: #a3a8c5; }

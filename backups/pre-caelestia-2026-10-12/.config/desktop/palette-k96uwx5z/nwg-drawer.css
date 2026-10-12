@@ -1,0 +1,75 @@
+/* The application's icon grid is the primary launcher. Keep the whole screen
+ * quiet, with a restrained palette card grid and clearly focused selection. */
+window {
+    background-color: rgba(13, 13, 13, 0.96);
+    color: #dedede;
+    border: 1px solid rgba(188, 188, 188, 0.28);
+    border-radius: 20px;
+}
+
+entry {
+    color: #dedede;
+    caret-color: #bcbcbc;
+    background-color: rgba(24, 24, 24, 0.98);
+    border: 1px solid #3b3b3b;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin: 12px 12px 16px;
+    font-size: 17px;
+    box-shadow: none;
+}
+
+entry:focus {
+    border-color: #bcbcbc;
+}
+
+button {
+    color: #dedede;
+    background-color: rgba(24, 24, 24, 0.48);
+    border: 1px solid rgba(59, 59, 59, 0.55);
+    border-radius: 14px;
+    padding: 10px 8px;
+    margin: 4px;
+    box-shadow: none;
+    transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+button:hover, button:focus {
+    color: #dedede;
+    background-color: rgba(48, 48, 48, 0.94);
+    border-color: rgba(188, 188, 188, 0.62);
+    outline: none;
+}
+
+#category-button {
+    color: #999999;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 9px;
+    margin: 2px;
+    padding: 8px 12px;
+}
+
+#category-button:hover, #category-button:focus {
+    color: #dedede;
+    background-color: #303030;
+}
+
+#pinned-box {
+    border-bottom: 1px solid rgba(59, 59, 59, 0.58);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+#files-box {
+    background-color: #181818;
+    border: 1px solid #3b3b3b;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+#math-label {
+    color: #bcbcbc;
+    font-weight: 600;
+    font-size: 16px;
+}

@@ -1,0 +1,201 @@
+{
+  "layer": "bottom",
+  "position": "top",
+  "height": 40,
+  "margin-top": 8,
+  "margin-left": 8,
+  "margin-right": 8,
+  "spacing": 2,
+  "modules-left": [
+    "clock"
+  ],
+  "modules-center": [
+    "custom/audiowaves"
+  ],
+  "modules-right": [
+    "memory",
+    "custom/gpu",
+    "custom/package-updates",
+    "hyprland/language",
+    "network",
+    "bluetooth",
+    "custom/brightness-aoc",
+    "custom/brightness-msi",
+    "wireplumber",
+    "tray"
+  ],
+  "custom/launcher": {
+    "format": "  Hyprland",
+    "tooltip-format": "Applications · Super+Space",
+    "on-click": "/home/roman/.local/bin/desktop-panel toggleLauncher"
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "all-outputs": true,
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "clock": {
+    "format": "{:%a %d %b  ·  %H:%M}",
+    "format-alt": "{:%A, %d %B %Y  ·  %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "hyprland/language": {
+    "format": "{}",
+    "format-cs": "CZ",
+    "format-en": "US",
+    "on-click": "hyprctl switchxkblayout all next",
+    "keyboard-name": "logitech-g515-tkl"
+  },
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip-format": "{ifname} · {ipaddr}\nClick to edit connections; right-click for network selection",
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}",
+    "on-click": "nm-connection-editor",
+    "on-click-right": "kitty -e nmtui"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-connected": " {num_connections}",
+    "format-disabled": "󰂲",
+    "tooltip-format": "Bluetooth · {status}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "on-click": "blueman-manager"
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "max-volume": 100,
+    "scroll-step": 5,
+    "on-click": "/home/roman/.local/bin/desktop-sound-control",
+    "on-click-right": "/home/roman/.local/bin/desktop-audio mute",
+    "tooltip-format": "{node_name}",
+    "on-scroll-up": "/home/roman/.local/bin/desktop-audio up",
+    "on-scroll-down": "/home/roman/.local/bin/desktop-audio down"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip-format-activated": "Stay awake enabled · click to restore idle locking",
+    "tooltip-format-deactivated": "Idle locking enabled · click to stay awake"
+  },
+  "custom/notification": {
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "/home/roman/.local/bin/desktop-panel toggleControl",
+    "on-click-right": "swaync-client -d -sw",
+    "tooltip": false,
+    "on-click-middle": "swaync-client -t -sw"
+  },
+  "custom/lock": {
+    "format": "",
+    "tooltip-format": "Lock · Super+L",
+    "on-click": "~/.local/bin/desktop-lock"
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip-format": "Power options",
+    "on-click": "~/.local/bin/desktop-power"
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+  "custom/microphone": {
+    "exec": "/home/roman/.local/bin/desktop-audio mic-status",
+    "return-type": "json",
+    "interval": 3,
+    "on-click": "/home/roman/.local/bin/desktop-audio mic-mute",
+    "on-click-right": "/home/roman/.local/bin/desktop-sound-control"
+  },
+  "memory": {
+    "format": "RAM {avail:0.1f}G",
+    "tooltip-format": "Dostupná RAM: {avail:0.1f} GiB\nVyužitá RAM: {used:0.1f} / {total:0.1f} GiB",
+    "interval": 3
+  },
+  "custom/minimized": {
+    "exec": "/home/roman/.local/bin/desktop-window status",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "/home/roman/.local/bin/desktop-window restore",
+    "escape": true
+  },
+  "custom/audiowaves": {
+    "exec": "/home/roman/.local/bin/desktop-audiowaves",
+    "return-type": "json",
+    "format": "{}",
+    "restart-interval": 3,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "/home/roman/.local/bin/desktop-sound-control",
+    "exec-on-event": false,
+    "expand": true,
+    "align": 0.5,
+    "tooltip": false
+  },
+  "custom/package-updates": {
+    "exec": "/home/roman/.local/bin/desktop-package-updates status",
+    "return-type": "json",
+    "interval": 30,
+    "format": "{}",
+    "on-click": "/home/roman/.local/bin/desktop-package-updates show",
+    "on-click-right": "systemctl --user start --no-block desktop-package-updates.service",
+    "exec-on-event": true
+  },
+  "fixed-center": false,
+  "custom/gpu": {
+    "exec": "/home/roman/.local/bin/desktop-gpu",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 3
+  },
+  "custom/brightness-aoc": {
+    "exec": "/home/roman/.local/bin/desktop-brightness aoc status",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 15,
+    "on-scroll-up": "/home/roman/.local/bin/desktop-brightness aoc up",
+    "on-scroll-down": "/home/roman/.local/bin/desktop-brightness aoc down",
+    "on-click": "/home/roman/.local/bin/desktop-brightness-popup",
+    "on-click-right": "/home/roman/.local/bin/desktop-brightness-popup",
+    "exec-on-event": true,
+    "smooth-scrolling-threshold": 1,
+    "exec-if": "/home/roman/.local/bin/desktop-brightness aoc configured"
+  },
+  "custom/brightness-msi": {
+    "exec": "/home/roman/.local/bin/desktop-brightness msi status",
+    "return-type": "json",
+    "format": "{}",
+    "interval": 15,
+    "on-scroll-up": "/home/roman/.local/bin/desktop-brightness msi up",
+    "on-scroll-down": "/home/roman/.local/bin/desktop-brightness msi down",
+    "on-click": "/home/roman/.local/bin/desktop-brightness-popup",
+    "on-click-right": "/home/roman/.local/bin/desktop-brightness-popup",
+    "exec-on-event": true,
+    "smooth-scrolling-threshold": 1,
+    "exec-if": "/home/roman/.local/bin/desktop-brightness msi configured"
+  }
+}

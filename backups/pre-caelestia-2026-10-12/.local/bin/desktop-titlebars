@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+"""Load the official, locally built hyprbars only into its matching Hyprland ABI."""
+import hashlib,json,subprocess
+from pathlib import Path
+p=Path.home()/'.local/lib/hyprland/hyprbars.so'
+meta=json.loads(p.with_suffix('.json').read_text())
+v=json.loads(subprocess.check_output(['hyprctl','-j','version']))
+if v['abiHash']!=meta['abi'] or hashlib.sha256(p.read_bytes()).hexdigest()!=meta['sha256']:
+ subprocess.run(['notify-send','-a','Window controls','Title bars need rebuilding','Hyprland changed. The incompatible plugin was not loaded.'])
+ raise SystemExit(1)
+loaded=subprocess.check_output(['hyprctl','plugin','list'],text=True)
+if 'hyprbars' not in loaded:
+ subprocess.run(['hyprctl','plugin','load',str(p)],check=True)

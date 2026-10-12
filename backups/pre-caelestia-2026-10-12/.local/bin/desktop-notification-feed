@@ -1,0 +1,126 @@
+#!/usr/bin/env python
+"""Mirror SwayNC notification events to the local UI without owning its bus name.
+
+Only notification/CC traffic is observed. Bounded data stays in the user's private
+runtime directory (RAM), never in persistent logs. SwayNC retains all actions.
+"""
+import html
+import json
+import os
+import re
+import sys
+import time
+from pathlib import Path
+from gi.repository import Gio, GLib
+
+NOTIFY = 'org.freedesktop.Notifications'
+CC = 'org.erikreider.swaync.cc'
+cache = Path(os.environ['XDG_RUNTIME_DIR']) / 'midnight-notification-preview.json'
+control = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+owner = control.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus',
+    'org.freedesktop.DBus', 'GetNameOwner', GLib.Variant('(s)', (NOTIFY,)),
+    GLib.VariantType.new('(s)'), Gio.DBusCallFlags.NONE, 2000, None).unpack()[0]
+items = []
+pending = {}
+monitoring = False
+try:
+    saved = json.loads(cache.read_text())
+    if saved.get('owner') == owner:
+        items = saved['items'][:50]
+except (OSError, ValueError, KeyError):
+    pass
+
+
+def publish():
+    global items
+    items = items[:50]
+    snapshot = dict(owner=owner, items=items)
+    tmp = cache.with_suffix('.tmp')
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, 'w') as f:
+        json.dump(snapshot, f)
+    os.replace(tmp, cache)
+    print(json.dumps(dict(items=items)), flush=True)
+
+
+def plain(value):
+    return html.unescape(re.sub(r'<[^>]*>', '', str(value)))[:1500]
+
+
+def consume(message):
+    global owner, items
+    interface, member = message.get_interface(), message.get_member()
+    body = message.get_body()
+    if body is None:
+        return False
+    # Read only selected fields from Notify; skip raw image-data payloads.
+    if interface == NOTIFY and member == 'Notify':
+        hints = body.get_child_value(6)
+        transient = hints.lookup_value('transient', None)
+        if transient and transient.unpack():
+            return False
+        app, replacement, icon, summary, text = [body.get_child_value(i).unpack() for i in range(5)]
+        desktop = hints.lookup_value('desktop-entry', None)
+        entry = dict(app=plain(app) or 'System', summary=plain(summary), body=plain(text),
+                     icon=icon if not re.match(r'https?://', icon) else '',
+                     desktop=desktop.unpack() if desktop else '', timestamp=int(time.time()))
+        pending[(message.get_sender(), message.get_serial())] = entry
+        if len(pending) > 128:
+            pending.pop(next(iter(pending)))
+    elif message.get_message_type() == Gio.DBusMessageType.METHOD_RETURN:
+        entry = pending.pop((message.get_destination(), message.get_reply_serial()), None)
+        if entry:
+            entry['id'] = body.unpack()[0]
+            items = [entry] + [item for item in items if item['id'] != entry['id']]
+            publish()
+    elif interface == NOTIFY and member == 'NotificationClosed':
+        notification_id, reason = body.unpack()
+        if reason != 1:
+            items = [item for item in items if item['id'] != notification_id]
+            publish()
+    elif interface == CC:
+        if member == 'CloseAllNotifications':
+            items = []
+            publish()
+        elif member == 'CloseNotification':
+            notification_id = body.unpack()[0]
+            items = [item for item in items if item['id'] != notification_id]
+            publish()
+        elif member in ('Subscribe', 'SubscribeV2') and body.unpack()[0] == 0:
+            items = []
+            publish()
+    elif interface == 'org.freedesktop.DBus' and member == 'NameOwnerChanged':
+        name, old, new = body.unpack()
+        if name == NOTIFY and old == owner:
+            items = []
+            publish()
+            # Exit so the UI reconnects with the new owner's reply filter.
+            loop.quit()
+    return False
+
+
+def filter_message(connection, message, incoming, data):
+    if incoming:
+        GLib.idle_add(consume, message.copy())
+    return None if monitoring and incoming else message
+
+
+address = Gio.dbus_address_get_for_bus_sync(Gio.BusType.SESSION, None)
+monitor = Gio.DBusConnection.new_for_address_sync(address,
+    Gio.DBusConnectionFlags.AUTHENTICATION_CLIENT | Gio.DBusConnectionFlags.MESSAGE_BUS_CONNECTION,
+    None, None)
+monitor.add_filter(filter_message, None)
+rules = [
+    "interface='org.freedesktop.Notifications'",
+    "interface='org.erikreider.swaync.cc'",
+    "type='method_return',sender='" + owner + "'",
+    "type='signal',interface='org.freedesktop.DBus',member='NameOwnerChanged',arg0='org.freedesktop.Notifications'",
+]
+monitor.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus',
+    'org.freedesktop.DBus.Monitoring', 'BecomeMonitor', GLib.Variant('(asu)', (rules, 0)),
+    None, Gio.DBusCallFlags.NONE, 2000, None)
+monitoring = True
+loop = GLib.MainLoop()
+monitor.connect('closed', lambda *args: loop.quit())
+publish()
+loop.run()

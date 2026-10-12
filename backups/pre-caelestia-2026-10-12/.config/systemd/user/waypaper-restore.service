@@ -1,0 +1,13 @@
+[Unit]
+Description=Restore wallpapers selected in Waypaper
+PartOf=desktop-session.target
+After=hyprpaper.service
+Requires=hyprpaper.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/waypaper --restore
+RemainAfterExit=yes
+
+[Install]
+WantedBy=desktop-session.target

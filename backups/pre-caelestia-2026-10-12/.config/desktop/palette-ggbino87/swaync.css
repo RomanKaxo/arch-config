@@ -1,0 +1,31 @@
+/* Extend the installed SwayNC stylesheet, preserving widget behaviour. */
+:root {
+ --cc-bg: rgba(13, 17, 25, 0.95);
+ --noti-bg: 21, 27, 38;
+ --noti-bg-alpha: 0.96;
+ --noti-bg-darker: #0d1119;
+ --noti-bg-hover: #1e2939;
+ --noti-bg-focus: #303e52;
+ --noti-border-color: rgba(138, 180, 214, 0.20);
+ --noti-close-bg: #1e2939;
+ --noti-close-bg-hover: #303e52;
+ --text-color: #d8e1ec;
+ --text-color-disabled: #98a7ba;
+ --bg-selected: #8ab4d6;
+ --border-radius: 14px;
+ --font-size-body: 14px;
+ --font-size-summary: 15px;
+}
+* { font-family: "Noto Sans", "JetBrainsMono Nerd Font", "Noto Color Emoji"; }
+.control-center { border: 1px solid rgba(138, 180, 214, 0.20); border-radius: 16px; padding: 12px; }
+.widget-title { font-weight: 600; }
+.widget-title > button, .widget-dnd > switch { border-radius: 8px; }
+.widget-dnd > switch:checked { background: #8ab4d6; }
+.notification { border-radius: 14px; }
+
+.widget-buttons-grid { padding: 8px 0; }
+.widget-buttons-grid > flowbox > flowboxchild > button { background: #151b26; color: #d8e1ec; border: 1px solid #303e52; border-radius: 10px; min-height: 38px; font-size: 12px; margin: 3px; }
+.widget-buttons-grid > flowbox > flowboxchild > button:hover { background: #1e2939; }
+.widget-volume { padding: 10px; border-radius: 12px; background: #151b26; }
+scale trough { background: #303e52; border-radius: 6px; }
+scale highlight { background: #8ab4d6; border-radius: 6px; }

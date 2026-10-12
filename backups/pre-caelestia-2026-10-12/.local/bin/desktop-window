@@ -1,0 +1,168 @@
+#!/usr/bin/env python
+"""Window buttons and recoverable minimization for Hyprland's Lua dispatchers."""
+
+import fcntl, json, os, re, subprocess, sys
+from pathlib import Path
+
+runtime = Path(os.environ["XDG_RUNTIME_DIR"])
+state = runtime / "midnight-minimized.json"
+action = sys.argv[1] if len(sys.argv) > 1 else "restore"
+
+
+def get(kind):
+    return json.loads(subprocess.check_output(["hyprctl", "-j", kind], text=True))
+
+
+def dispatch(expression):
+    result = subprocess.check_output(
+        ["hyprctl", "dispatch", expression], text=True
+    ).strip()
+    if result != "ok":
+        raise RuntimeError(result)
+
+
+def selector(w):
+    return json.dumps("address:" + w["address"])
+
+
+def clean(text):
+    return re.sub(r"[\x00-\x1f\x7f]", " ", text)
+
+
+def save(data):
+    tmp = state.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data))
+    tmp.chmod(0o600)
+    tmp.replace(state)
+
+
+def is_minimized(workspace):
+    # Keep windows parked by the old shared-workspace implementation recoverable.
+    return workspace == "special:minimized" or workspace.startswith("special:minimized-")
+
+
+def parking_workspace(window):
+    """Move only this window to an empty, hidden workspace; never hide a desktop."""
+    unavailable = {w["workspace"]["name"] for w in clients}
+    unavailable.update(
+        m.get("specialWorkspace", {}).get("name", "") for m in get("monitors")
+    )
+    base = "special:minimized-" + window["address"]
+    workspace = base
+    suffix = 0
+    while workspace in unavailable:
+        suffix += 1
+        workspace = base + "-" + str(suffix)
+    return workspace
+
+
+clients = get("clients")
+parked = [w for w in clients if is_minimized(w["workspace"]["name"])]
+if action == "status":
+    print(
+        json.dumps(
+            {
+                "text": ("󰖰 " + str(len(parked))) if parked else "",
+                "tooltip": "Minimized windows — click to restore\nSuper+Shift+M",
+                "class": "active" if parked else "empty",
+            }
+        )
+    )
+    raise SystemExit
+if action == "restore" and not parked:
+    raise SystemExit
+if action == "restore":
+    if len(sys.argv) > 2:
+        chosen = next((w for w in parked if w["address"] == sys.argv[2]), None)
+    else:
+        options = "\n".join(clean(w["class"] + " — " + w["title"]) for w in parked)
+        result = subprocess.run(
+            ["fuzzel", "--dmenu", "--index", "--prompt", "Restore window ❯ "],
+            input=options,
+            text=True,
+            capture_output=True,
+        )
+        if result.returncode:
+            raise SystemExit
+        try:
+            chosen = parked[int(result.stdout.strip())]
+        except (ValueError, IndexError):
+            raise SystemExit(1)
+    if chosen is None:
+        raise SystemExit(1)
+else:
+    chosen = (
+        get("activewindow")
+        if len(sys.argv) < 3
+        else next((w for w in clients if w["address"] == sys.argv[2]), None)
+    )
+    if not chosen:
+        raise SystemExit
+sel = selector(chosen)
+if action in ("close", "maximize", "fullscreen"):
+    expr = (
+        "hl.dsp.window.close({window=" + sel + "})"
+        if action == "close"
+        else "hl.dsp.window.fullscreen({window="
+        + sel
+        + ",mode="
+        + json.dumps("maximized" if action == "maximize" else "fullscreen")
+        + ',layout_aware=false,action="toggle"})'
+    )
+    dispatch(expr)
+    raise SystemExit
+with (runtime / "midnight-minimized.lock").open("w") as lock:
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    try:
+        data = json.loads(state.read_text())
+    except (OSError, ValueError):
+        data = {}
+    data = {
+        k: v
+        for k, v in data.items()
+        if any(w["address"] == k and w["pid"] == v["pid"] for w in clients)
+    }
+    if action == "minimize":
+        workspace = chosen["workspace"]["name"]
+        already_minimized = is_minimized(workspace)
+        if workspace.startswith("special:") and not already_minimized:
+            raise SystemExit
+        # A dock activation may show a parked window again. Preserve its origin,
+        # then move it away individually even if other parked windows are visible.
+        if not already_minimized or chosen["address"] not in data:
+            data[chosen["address"]] = {
+                "workspace": get("activeworkspace")["name"] if already_minimized else workspace,
+                "pid": chosen["pid"],
+                "pinned": chosen["pinned"],
+            }
+        if chosen["pinned"]:
+            dispatch("hl.dsp.window.pin({window=" + sel + ',action="disable"})')
+        dispatch(
+            "hl.dsp.window.move({workspace="
+            + json.dumps(parking_workspace(chosen))
+            + ",follow=false,window="
+            + sel
+            + "})"
+        )
+    elif action == "restore":
+        record = data.pop(chosen["address"], {})
+        workspace = (
+            record.get("workspace")
+            if record.get("pid") == chosen["pid"]
+            else get("activeworkspace")["name"]
+        )
+        if not workspace or workspace.startswith("special:"):
+            workspace = "1"
+        dispatch(
+            "hl.dsp.window.move({workspace="
+            + json.dumps(workspace)
+            + ",follow=true,window="
+            + sel
+            + "})"
+        )
+        dispatch("hl.dsp.focus({window=" + sel + "})")
+        if record.get("pinned"):
+            dispatch("hl.dsp.window.pin({window=" + sel + ',action="enable"})')
+    else:
+        raise SystemExit("Unknown action")
+    save(data)

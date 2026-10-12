@@ -1,0 +1,127 @@
+#!/usr/bin/env python
+"""Render shared palettes and atomically switch the desktop's color generation."""
+
+import fcntl, json, os, re, subprocess, sys, tempfile
+from pathlib import Path
+
+home = Path.home()
+root = home / ".config/desktop"
+palettes = json.loads((root / "palettes.json").read_text())
+outputs = {
+    "dock.css": "nwg-dock-hyprland/style.css",
+    "waybar.css": "waybar/style.css",
+    "swaync.css": "swaync/style.css",
+    "fuzzel.ini": "fuzzel/fuzzel.ini",
+    "kitty.conf": "kitty/kitty.conf",
+    "hyprlock.conf": "hypr/hyprlock.conf",
+    "gtk3.css": "gtk-3.0/gtk.css",
+    "gtk4.css": "gtk-4.0/gtk.css",
+    "fastfetch.jsonc": "fastfetch/config.jsonc",
+    "nwg-drawer.css": "nwg-drawer/drawer.css",
+    "Desktop.svg": "Kvantum/Desktop/Desktop.svg",
+    "Desktop.kvconfig": "Kvantum/Desktop/Desktop.kvconfig",
+}
+
+
+def call(args):
+    return subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+def render(name, dest):
+    p = palettes[name].copy()
+    for key, value in list(p.items()):
+        if not re.fullmatch("[0-9a-fA-F]{6}", value):
+            raise ValueError("Invalid color " + key)
+        rgb = [str(int(value[i : i + 2], 16)) for i in (0, 2, 4)]
+        p[key + "_rgb"] = ", ".join(rgb)
+        p[key + "_semicolon"] = ";".join(rgb)
+    dest.mkdir(parents=True, exist_ok=True)
+    for template in (root / "templates").iterdir():
+        text = re.sub(r"\{\{(\w+)\}\}", lambda m: p[m[1]], template.read_text())
+        (dest / template.name).write_text(text)
+    subprocess.run(
+        ["fuzzel", "--check-config", "--config", str(dest / "fuzzel.ini")], check=True
+    )
+    json.loads((dest / "fastfetch.jsonc").read_text())
+    (dest / "name").write_text(name + "\n")
+
+
+if "--list" in sys.argv:
+    print("\n".join(palettes))
+    raise SystemExit
+if "--check-all" in sys.argv:
+    with tempfile.TemporaryDirectory(prefix="desktop-palettes-") as t:
+        for name in palettes:
+            render(name, Path(t) / name)
+
+            # WCAG luminance check for small text on the darkest UI surface.
+            def luminance(hx):
+                v = [int(hx[i : i + 2], 16) / 255 for i in (0, 2, 4)]
+                v = [
+                    x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4
+                    for x in v
+                ]
+                return sum(a * b for a, b in zip(v, [0.2126, 0.7152, 0.0722]))
+
+            p = palettes[name]
+            ratio = (luminance(p["text"]) + 0.05) / (luminance(p["surface"]) + 0.05)
+            if ratio < 7:
+                raise ValueError(name + " has insufficient contrast")
+            print(f"{name}: templates valid, text contrast {ratio:.1f}:1")
+    raise SystemExit
+if len(sys.argv) > 1:
+    name = " ".join(sys.argv[1:])
+else:
+    call(["swaync-client", "-cp", "-sw"])
+    result = subprocess.run(
+        ["fuzzel", "--dmenu", "--prompt=Theme ❯ "],
+        input="\n".join(palettes),
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode:
+        raise SystemExit
+    name = result.stdout.strip()
+if name not in palettes:
+    raise SystemExit("Unknown palette: " + name)
+with (root / ".theme.lock").open("w") as lock:
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    generation = Path(tempfile.mkdtemp(prefix="palette-", dir=root))
+    render(name, generation)
+    pending = root / ".current-next"
+    pending.unlink(missing_ok=True)
+    pending.symlink_to(generation.name)
+    os.replace(pending, root / "current")
+    for filename, target in outputs.items():
+        target = home / ".config" / target
+        target.parent.mkdir(parents=True, exist_ok=True)
+        wanted = root / "current" / filename
+        if target.is_symlink() and target.readlink() == wanted:
+            continue
+        nextpath = target.with_name(target.name + ".palette-next")
+        nextpath.unlink(missing_ok=True)
+        nextpath.symlink_to(wanted)
+        os.replace(nextpath, target)
+    (root / "active-tokens.json").write_text((generation / "tokens.json").read_text())
+    (home / ".config/Kvantum/kvantum.kvconfig").write_text("[General]\ntheme=Desktop\n")
+    if os.environ.get("HYPRLAND_INSTANCE_SIGNATURE"):
+        call(["hyprctl", "reload"])
+        call(["systemctl", "--user", "reload", "waybar.service"])
+        call(["systemctl", "--user", "try-restart", "desktop-dock.service"])
+        call(["swaync-client", "-rs", "-sw"])
+        call(["pkill", "-USR1", "-u", str(os.getuid()), "-x", "kitty"])
+        # GTK applications re-read style settings after the theme notification.
+        call(
+            ["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", "adw-gtk3"]
+        )
+        call(
+            [
+                "gsettings",
+                "set",
+                "org.gnome.desktop.interface",
+                "gtk-theme",
+                "adw-gtk3-dark",
+            ]
+        )
+        call(["notify-send", "-a", "Desktop theme", "Theme applied", name])
+    print("Applied " + name)

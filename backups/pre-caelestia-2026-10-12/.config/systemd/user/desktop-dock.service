@@ -1,0 +1,19 @@
+[Unit]
+Description=Left taskbar with reserved window space
+PartOf=graphical-session.target waybar.service
+Wants=waybar.service
+After=graphical-session.target waybar.service
+Requisite=graphical-session.target
+
+[Service]
+ExecStartPre=/usr/bin/python3 %h/.local/bin/desktop-taskbar-ready
+ExecStart=/usr/bin/waybar --config %h/.config/waybar/taskbar.jsonc --style %h/.config/waybar/taskbar.css
+ExecStartPost=%h/.local/bin/desktop-dock sync --settle
+# Taskbar-launched applications survive panel restarts.
+KillMode=process
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=5
+
+[Install]
+WantedBy=graphical-session.target
