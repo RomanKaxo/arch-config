@@ -23,7 +23,7 @@ nespouštěj jejich `install`/`activate`, pokud chceš ponechat Caelestia.
 | Super + Shift + E | Nabídka napájení |
 | Super + Shift + V | Historie schránky |
 | Super + M / Super + Shift + M | Minimalizace / obnovení okna |
-| Alt + Tab / Alt + Shift + Tab | Nativní přepínání oken |
+| Alt + Tab / Alt + Shift + Tab | Přehled oken s náhledy / opačný směr |
 | Print / Shift + Print | Výřez / screenshot |
 
 Tapety: `~/Pictures/Wallpapers`. V launcheru napiš `>wallpaper`.
@@ -36,7 +36,7 @@ Aktivní ostatní okna jsou neprůhledná. Rozmazání pozadí zůstává na pů
 
 ## Instalované umístění
 
-- Shell: `~/.config/quickshell/caelestia` (oficiální zdroje, bez místních úprav).
+- Shell: `~/.config/quickshell/caelestia` (oficiální zdroje + místní modul `modules/switcher`, zapojený v `shell.qml`).
 - Nastavení: `~/.config/caelestia/shell.json`.
 - C++ a QML moduly: `~/.local/lib`, `~/.local/lib/qt6/qml`.
 - CLI: `~/.local/share/caelestia/venv`, wrapper `~/.local/bin/caelestia`.
@@ -50,6 +50,39 @@ Aktivní ostatní okna jsou neprůhledná. Rozmazání pozadí zůstává na pů
 Systémové závislosti jsou nainstalované přes pacman. Rubik je v `~/.local/share/fonts`.
 Knihovny libcava a M3Shapes jsou sestavené z oficiálních zdrojů v `~/.local/src`.
 Quickshell 0.3.2 byl ověřen živým načtením Caelestia 2.5.0.
+
+## Alt + Tab
+
+Drž Alt a opakovaným Tab procházej okna v pořadí posledního použití.
+Shift + Tab jde zpět; puštění Altu nebo Enter aktivuje vybrané okno, Escape výběr zruší.
+Karty mají ikonu a název aplikace, titulek konkrétního okna, pracovní plochu a náhled.
+Na kartu lze také kliknout. Přehled se otevře na aktivním monitoru; delší seznam se posouvá.
+Minimalizované okno se při výběru obnoví na původní plochu.
+
+Barvy a průhlednost přebírá z `Colours`, písmo, rozestupy, zaoblení a animace z `Tokens`
+Caelestie včetně nastavení aktivního monitoru. Změna motivu se projeví také zde.
+Vybraná karta má živý náhled; ostatní ukazují snímek, aby se zbytečně nezatěžovala GPU.
+
+Chování upravuje `~/.config/caelestia/switcher.json`, načítaný bez restartu:
+
+| Volba | Výchozí hodnota | Význam |
+| --- | --- | --- |
+| `enabled` | `true` | Přehled; při `false` se používá nativní cyklování |
+| `allWorkspaces` | `true` | Okna ze všech ploch; `false` omezuje přehled na aktuální plochu a připnutá okna |
+| `includeMinimized` | `true` | Zahrnout a obnovovat minimalizovaná okna |
+| `previews` | `true` | Zobrazovat náhledy obsahu oken |
+| `cardWidth` | `260` | Šířka karty v px (180–400) |
+| `maxVisible` | `5` | Počet současně viditelných karet (1–7), další se posouvají |
+
+Při aktualizaci shellu znovu zkopíruj `config/.config/quickshell/caelestia/modules/switcher`
+a přidej do nové verze `shell.qml` import `"modules/switcher"` a `Switcher {}` uvnitř `ShellRoot`.
+Přiložený `shell.qml` je pro tag v2.5.0; nepřepisuj jím bez kontroly novější shell.
+Upstream soubor `shell.qml` používá licenci GPL-3.0 z oficiálního shellu (`LICENSE` vedle něj).
+
+Kontrola logiky: `node tests/test_caelestia_switcher.cjs`.
+Ověřeno živě: vykreslení názvů aplikací, titulků a náhledů, nativní globální akce
+pro oba směry a potvrzení výběru, fokus vybraného okna i obnovení dočasného
+minimalizovaného okna na původní plochu. `hyprctl configerrors` zůstává prázdný.
 
 ## Obnova a aktualizace
 

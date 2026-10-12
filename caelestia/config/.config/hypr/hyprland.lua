@@ -70,8 +70,12 @@ hl.bind("SUPER + V", hl.dsp.window.float({action = "toggle"}))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
 launch("SUPER + M", "$HOME/.local/bin/caelestia-window minimize")
 launch("SUPER + SHIFT + M", "$HOME/.local/bin/caelestia-window restore")
-hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
-hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({previous = true}))
+hl.bind("ALT + Tab", hl.dsp.global("caelestia:switcherNext"), {repeating = true})
+hl.bind("ALT + SHIFT + Tab", hl.dsp.global("caelestia:switcherPrevious"), {repeating = true})
+-- Modifier release also works for a very quick Alt-Tab before the overlay maps.
+for _, key in ipairs({"Alt_L", "Alt_R"}) do
+    hl.bind(key, hl.dsp.global("caelestia:switcherAccept"), {release = true, ignore_mods = true, non_consuming = true})
+end
 for _, direction in ipairs({"left", "right", "up", "down"}) do
     hl.bind("SUPER + " .. direction, hl.dsp.focus({direction = direction}))
 end

@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "allWorkspaces": true,
+  "includeMinimized": true,
+  "previews": true,
+  "cardWidth": 260,
+  "maxVisible": 5
+}
